@@ -7,16 +7,27 @@ public class HurtboxController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-	void OnTriggerEnter2D(Collider2D other)
+    public void UpdateScale(float x, float y)
+    {
+        transform.localScale = new Vector3(x, y, 1.0f);
+    }
+
+    public void Move(Vector3 vector)
+    {
+        transform.position = transform.position + vector;
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
 	{
         //Hurt enemy!
 		if (other.tag == "PHitbox" && gameObject.tag == "EHurtbox")

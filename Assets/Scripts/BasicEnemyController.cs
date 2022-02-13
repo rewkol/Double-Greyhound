@@ -150,7 +150,7 @@ public class BasicEnemyController : MonoBehaviour
 
     private void Punch()
     {
-        cooldown = 50;
+        cooldown = 500;
         HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(2.2f * (facingLeft ? 1 : -1), 0.63f, 0.0f), transform.rotation);
         hit.SetX(1.2f);
         hit.SetY(1.8f);
