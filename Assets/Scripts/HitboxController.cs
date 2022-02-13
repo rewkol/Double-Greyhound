@@ -27,6 +27,11 @@ public class HitboxController : MonoBehaviour
         }
     }
 
+    public void SetParent(Transform parent)
+    {
+        transform.parent = parent;
+    }
+
     public void SetTtl(int ttl)
     {
         this.ttl = ttl;
@@ -62,5 +67,13 @@ public class HitboxController : MonoBehaviour
     public int GetDamage()
     {
         return damage;
+    }
+
+    public void Kill()
+    {
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }
