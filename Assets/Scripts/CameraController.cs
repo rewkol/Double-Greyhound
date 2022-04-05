@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public PlayerController player;
+    public ParallaxBGController parallax;
 
     private Transform transform;
 
@@ -29,6 +30,13 @@ public class CameraController : MonoBehaviour
                 dist = 0.1f;
             }
             transform.position = transform.position + new Vector3(dist, 0.0f, 0.0f);
+            parallax.Move(dist, transform.position.x);
         }
+    }
+
+    // WHen someone else controls the camera the parallax can get broken
+    public void ForceUpdate(float dist)
+    {
+        parallax.Move(dist, transform.position.x);
     }
 }

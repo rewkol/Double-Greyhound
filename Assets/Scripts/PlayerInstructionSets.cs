@@ -10,8 +10,8 @@ using UnityEngine;
 //syntax highlighting and mathematical operations.
 public class PlayerInstructionSets
 {
-    private static float DEFAULT_HURTBOX_X = 1.408832f;
-    private static float DEFAULT_HURTBOX_Y = 3.9772f;
+    private static float DEFAULT_HURTBOX_X = 1.408832f / 6.0f;
+    private static float DEFAULT_HURTBOX_Y = 3.9772f / 6.0f;
 
     //The Jumping Attack flight program
     public static List<FlightInstruction> GetJumpInstructions(bool facingLeft)
@@ -27,13 +27,13 @@ public class PlayerInstructionSets
         //Use comments to denote what each part of the instruction set is doing
 
         //Stay stationary through crouch animation/Shrink hurtbox
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * -0.125f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.75f));
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * -0.75f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.75f));
         for (int i = 0; i < 7; i++)
         {
             instructions.Add(new FlightInstruction().AddInstruction("Wait"));
         }
         //Regrow hurtbox then jump into air
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.125f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y)
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.75f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y)
             .AddInstruction("Move", new Vector3(directionModifier * 0.020f, 0.40f, 0.0f)));
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.020f, 0.40f, 0.0f)));
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.020f, 0.39f, 0.0f)));
@@ -54,7 +54,7 @@ public class PlayerInstructionSets
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.018f, 0.05f, 0.0f)));
 
         //Shrink hurtbox again and start flattening out at apex of jump
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.125f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.75f)
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.75f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.75f)
             .AddInstruction("Move", new Vector3(directionModifier * 0.013f, 0.03f, 0.0f)));
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.010f, 0.03f, 0.0f)));
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.006f, 0.02f, 0.0f)));
@@ -67,7 +67,7 @@ public class PlayerInstructionSets
         }
 
         //Shrink hurtbox further and create hitbox/move down
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.2f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.40f)
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 1.2f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.40f)
             .AddInstruction("Move", new Vector3(directionModifier * 0.07f, -0.6f, 0.0f))
             .AddInstruction("Hitbox", new Vector3(directionModifier * 0.175f, -0.8f, 0.0f), 0.45f, 2.0f, 110)
             .AddInstruction("Hitbox", new Vector3(directionModifier * -0.25f, -0.2f, 0.0f), 1.1f, 1.3f, 110));
@@ -78,7 +78,7 @@ public class PlayerInstructionSets
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.07f, -0.68f, 0.0f)));
 
         //Move hurtbox down to crouching position and create shortlived impact hitbox
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * -0.525f, 0.0f), DEFAULT_HURTBOX_X * 1.3f, DEFAULT_HURTBOX_Y * 0.6f)
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * -3.15f, 0.0f), DEFAULT_HURTBOX_X * 1.3f, DEFAULT_HURTBOX_Y * 0.6f)
             .AddInstruction("Hitbox2", new Vector3(0.0f, DEFAULT_HURTBOX_Y * -0.33f, 0.0f), DEFAULT_HURTBOX_X * 1.5f, 1.2f, 20)
             .AddInstruction("Move", new Vector3(directionModifier * 0.07f, -0.70f, 0.0f)));
 
@@ -89,7 +89,7 @@ public class PlayerInstructionSets
         }
 
         //Adjust hurtbox for standing up pose
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.075f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.85f));
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.45f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y * 0.85f));
 
         //Wait until finished
         for (int i = 0; i < 2; i++)
@@ -98,7 +98,7 @@ public class PlayerInstructionSets
         }
 
         //Return hurtbox to normal
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.125f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y ));
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", new Vector3(0.0f, DEFAULT_HURTBOX_Y * 0.75f, 0.0f), DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y ));
 
         return instructions;
     }
@@ -116,33 +116,34 @@ public class PlayerInstructionSets
 
         //Shrink the hurtbox to 0,0 so no one can hurt him
         instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", DEFAULT_HURTBOX_X * 0.0f, DEFAULT_HURTBOX_Y * 0.0f)
-            .AddInstruction("Move", new Vector3(directionModifier * 0.17f, 0.35f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.18f, 0.30f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.20f, 0.25f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.21f, 0.21f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.21f, 0.17f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.20f, 0.13f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.18f, 0.10f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.17f, 0.07f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.15f, 0.05f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.13f, 0.03f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.11f, 0.02f, 0.0f)));
+            .AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.35f, 0.0f))
+            .AddInstruction("Ignore"));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.30f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.25f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.21f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.17f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.13f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.10f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.07f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.05f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.03f, 0.0f)));
         instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.02f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.05f, 0.01f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.02f, 0.01f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, 0.01f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, 0.0f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, 0.0f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, 0.0f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.01f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.06f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.12f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.20f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.34f, 0.0f)));
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.42f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.02f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.01f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.00f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.00f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, 0.0f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.01f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.03f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.04f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.12f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.18f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.33f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.47f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.08f, -0.60f, 0.0f)));
 
         //Biggest drop because this masks the transition to the grounded state
-        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.58f, 0.0f)));
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * 0.0f, -0.78f, 0.0f)));
 
         //Force the player to appreciate the fact they've been hit
         for (int i = 0; i < 12; i++)
@@ -157,15 +158,35 @@ public class PlayerInstructionSets
     public static List<FlightInstruction> GetStandingInstructions()
     {
         List<FlightInstruction> instructions = new List<FlightInstruction>();
+        instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(0.0f, 0.85f, 0.0f)));
 
         //Wait for the animation to play
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 14; i++)
         {
             instructions.Add(new FlightInstruction().AddInstruction("Wait"));
         }
 
         //Finally, return his hurtbox to normal
-        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y));
+        instructions.Add(new FlightInstruction().AddInstruction("Hurtbox", DEFAULT_HURTBOX_X, DEFAULT_HURTBOX_Y).AddInstruction("PayAttention"));
+
+        return instructions;
+    }
+
+    //Stun mini blowback instruction set
+    public static List<FlightInstruction> GetStunInstructions(bool facingLeft)
+    {
+        List<FlightInstruction> instructions = new List<FlightInstruction>();
+
+        float directionModifier = 1.0f;
+        if (facingLeft)
+        {
+            directionModifier = -1.0f;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            instructions.Add(new FlightInstruction().AddInstruction("Move", new Vector3(directionModifier * -0.05f, 0.0f, 0.0f)));
+        }
 
         return instructions;
     }

@@ -7,10 +7,13 @@ public class SpawnerController : MonoBehaviour
     public int distance;
     public int number;
     public GameObject enemyType;
+
+    private GameObject[] enemies;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemies = new GameObject[number];
     }
 
     // Update is called once per frame
@@ -21,9 +24,23 @@ public class SpawnerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        for(int i = 0; i < number; i++)
+        if (other.tag == "PHurtbox")
         {
-            Instantiate(enemyType, transform.position + new Vector3(distance, 0.0f, 0.0f), transform.rotation);
+            for (int i = 0; i < number; i++)
+            {
+                enemies[i] = Instantiate(enemyType, transform.position + new Vector3(distance, 0.0f, 0.0f), transform.rotation);
+            }
+
+            StartCoroutine(ResetSpawnRoutine());
+        }
+    }
+
+    private IEnumerator ResetSpawnRoutine()
+    {
+        yield return new WaitForFixedUpdate();
+        for (int i = 0; i < number; i++)
+        {
+            enemies[i].SendMessage("SpawnRandom");
         }
 
         Destroy(gameObject);

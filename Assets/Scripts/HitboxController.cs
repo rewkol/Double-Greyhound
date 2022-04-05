@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HitboxController : MonoBehaviour
 {
-    public int ttl;
+    public long ttl;
     public int damage;
     public float x;
     public float y;
@@ -18,7 +18,7 @@ public class HitboxController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        int delta = (int) (Time.fixedDeltaTime * 1000);
+        long delta = (long) (Time.fixedDeltaTime * 1000);
 
         ttl -= delta;
         if (ttl < 0)
@@ -32,7 +32,7 @@ public class HitboxController : MonoBehaviour
         transform.parent = parent;
     }
 
-    public void SetTtl(int ttl)
+    public void SetTtl(long ttl)
     {
         this.ttl = ttl;
     }

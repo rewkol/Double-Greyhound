@@ -10,6 +10,8 @@ TagManager:
   - EHurtbox
   - Enemy
   - Boss
+  - UITextBox
+  - UIStatus
   layers:
   - Default
   - TransparentFX
