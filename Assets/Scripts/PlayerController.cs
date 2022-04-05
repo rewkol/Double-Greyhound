@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float limitYTop;
     public float limitYBottom;
-    public Text debugText;
 
     //Private variables
     // - - - - - - - - - - - 
+
+    //Other objects
+    private UIController ui;
 
     //Components
     private Transform transform;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private float limitXLeft;
     private float limitXRight;
     private bool facingLeft;
+    private bool downed;
 
     //Timers/Flags
     private int cooldown;
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
     //Character information
     private int health;
     private int special;
+    private float comboCounter;
     private List<FlightInstruction> flightProgram;
     private List<HitboxController> activeHitboxes;
 
@@ -45,20 +49,24 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //Get components
+        ui = GameObject.FindObjectsOfType<UIController>()[0];
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
+        transform.position = new Vector3(transform.position.x, limitYTop, -1.0f);
 
         //Initialize all the flags, timers, etc.
         facingLeft = false;
+        downed = false;
         special = 0;
         cooldown = 0;
         punchPushed = false;
+        comboCounter = 0.0f;
         //Special cooldown is so that specials with projectiles (axes/halos) can't be spammed. Only allowing one on screen by the player at a time
         specialCooldown = 0;
         specialPushed = false;
         specialChangePushed = false;
         stun = 0;
-        health = 3;
+        health = 20;
         flightProgram = new List<FlightInstruction>();
         activeHitboxes = new List<HitboxController>();
 
@@ -70,6 +78,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(!ui.GameActive())
+        {
+            animator.SetTrigger("Idle");
+            return;
+        }
+
         if (flightProgram.Count > 0)
         {
             //If Program Queue has data, perform those actions instead of accepting User Input
@@ -109,12 +123,12 @@ public class PlayerController : MonoBehaviour
             if (moveHorizontal > 0)
             {
                 facingLeft = false;
-                transform.localScale = new Vector3(1.0f, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
             }
             else if (moveHorizontal < 0)
             {
                 facingLeft = true;
-                transform.localScale = new Vector3(-1.0f, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
             }
         }
 
@@ -153,6 +167,10 @@ public class PlayerController : MonoBehaviour
             stun--;
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
+        if (comboCounter > 0.0f)
+        {
+            comboCounter -= 0.017f;
+        }
 
         //If currently moving and not in walking state, move to walking state!
         if (movement != new Vector3(0.0f, 0.0f, 0.0f) && animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
@@ -181,7 +199,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Jump") > 0 && specialChangePushed == false)
         {
             special = (special + 1) % 4;
-            debugText.text = "Special: "+ special;
             specialChangePushed = true;
         }
         if (Input.GetAxis("Jump") == 0)
@@ -190,7 +207,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Attack code
-        if (cooldown == 0 && stun == 0 && !punchPushed && Input.GetAxis("Fire1") > 0)
+        if (cooldown == 0 && stun == 0 && !downed && !punchPushed && Input.GetAxis("Fire1") > 0)
         {
             Punch();
             punchPushed = true;
@@ -215,7 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         cooldown = 14;
         animator.SetTrigger("Punch");
-        CreateHitbox(new Vector3(1.1f, 0.63f, 0.0f), 1.2f, 1.8f, 280, 1);
+        CreateHitbox(new Vector3(1.1f, 0.63f, 0.0f), 1.2f, 0.8f, 200, 1);
     }
 
     public void CreateHitbox(Vector3 vector, float x, float y, int ttl, int damage)
@@ -249,28 +266,47 @@ public class PlayerController : MonoBehaviour
         //Testing out Flight Instructions
         if (flightProgram.Count == 0)
         {//Activate specials
-            //animator.SetTrigger("Jump");
+            animator.SetTrigger("Jump");
             cooldown = 1;
-            //flightProgram.AddRange(PlayerInstructionSets.GetJumpInstructions(facingLeft));
-            animator.SetTrigger("Knockback");
-            flightProgram.AddRange(PlayerInstructionSets.GetKnockbackInstructions(facingLeft));
+            flightProgram.AddRange(PlayerInstructionSets.GetJumpInstructions(facingLeft));
         }
     }
 
-    public void Hurt(int damage)
+    public void Hurt(DamagePacket packet)
     {
         if (stun == 0)
         {
+            int damage = packet.getDamage();
+            facingLeft = packet.getDirection();
+            transform.localScale = new Vector3((facingLeft ? -1.0f : 1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
+
             //Clear the Flight Program so player doesn't continue previous action
             flightProgram.Clear();
 
             //Destroy all active hitboxes
-            activeHitboxes.ForEach(hit => hit.Kill());
+            foreach(HitboxController hitbox in activeHitboxes)
+            {
+                if (hitbox != null)
+                {
+                    hitbox.Kill();
+                }
+            }
             activeHitboxes.Clear();
 
-            //TODO: Should make stun do more if you got hurt more or do knockback instead if hurt too much
-            animator.SetTrigger("Stun");
-            stun = 20;
+            comboCounter += damage;
+            if (comboCounter >= 3.0f)
+            {
+                animator.SetTrigger("Knockback");
+                flightProgram.AddRange(PlayerInstructionSets.GetKnockbackInstructions(facingLeft));
+                cooldown = 1;
+                comboCounter = 0.0f;
+            }
+            else
+            {
+                animator.SetTrigger("Stun");
+                stun = 15;
+                flightProgram.AddRange(PlayerInstructionSets.GetStunInstructions(facingLeft));
+            }
             //Clear cooldown so user can act immediately out of stun in case they used a move with huge cooldown before being stunned
             cooldown = 0;
             health -= damage;
@@ -279,7 +315,22 @@ public class PlayerController : MonoBehaviour
                 //TODO: This should tell GameController that the player lost
                 Destroy(gameObject);
             }
+            else 
+            {
+                StartCoroutine(BlinkRoutine());
+            }
+            ui.PlayerHealthBar(health);
         }
+    }
+
+    private IEnumerator BlinkRoutine()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(255.0f, 0.0f, 0.0f, 1.0f);
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);
     }
 
     public void HandleInstruction(FlightInstruction instruction, int index)
@@ -333,6 +384,16 @@ public class PlayerController : MonoBehaviour
                 CreateHitbox(vector, x, y, ttl, 2);
                 break;
             }
+            case "Ignore":
+            {
+                downed = true;
+                break;
+            }
+            case "PayAttention":
+            {
+                downed = false;
+                break;
+            }
             case "Wait":
             {
                 //Do nothing this frame
@@ -345,8 +406,16 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+    }
 
+    public bool StopChasing()
+    {
+        return downed;
+    }
 
+    public bool IsDead()
+    {
+        return health <= 0;
     }
 
     public Vector3 GetPosition()

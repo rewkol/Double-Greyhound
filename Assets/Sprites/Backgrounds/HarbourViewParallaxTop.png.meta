@@ -1,0 +1,2676 @@
+fileFormatVersion: 2
+guid: 430f2d1af60aee94392d7ce06aa268f3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d33a7aec5bf284649b3aa6d46390dbed
+      internalID: -1022138761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9cd49b45e072a1409db09369a8892e0
+      internalID: -644922616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_2
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a68ed2ecb4dbc8049bc18b662c0e6d4c
+      internalID: -330144514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13cc14ace4093a44c8b2a9e1770fb503
+      internalID: -1590327128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_4
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d60d34c45981fac44948220893062c3e
+      internalID: -1927746527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_5
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc184b218dbc6c459523b2ca77a0f19
+      internalID: 140036575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_6
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb8f258b02910e94c8566f4ccea73def
+      internalID: 973243839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_7
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 132eda986665e074da5cba329a43fbfe
+      internalID: 1021248995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_8
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dcf23ede97229c4da896710cb3a8a36
+      internalID: -1433563749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_9
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 568d84522614ced4ebed285cf7faa2aa
+      internalID: 94917370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_10
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b8c7bb59b39f3045898b12573b15188
+      internalID: -1301625891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_11
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b9eedc956b69d847bf662cf16090512
+      internalID: 1608146259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_12
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b213ff96e6d3c243b19fb57649ec73c
+      internalID: 1599006661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_13
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be30c0b6bd8f5ca4b8481c3cea327a81
+      internalID: -1728181555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_14
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce9f3a51237591b4da8ce1a1e8cddc1a
+      internalID: 64317201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_15
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9b708005e0ea6e4883f8eeebba1eefe
+      internalID: 614693295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_16
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e1e98248a95bf146b687d47be3d5d20
+      internalID: -1530296935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_17
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b918cd80e5973841b7f8b52055f4654
+      internalID: 1396246759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_18
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 286c32b34ff4b9f46a6f4f21edca582b
+      internalID: 606823086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_19
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9675b57ee9757f489cad10fb63a9f9f
+      internalID: -52208005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_20
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 967725d5f47e96d4f924a09325e697cb
+      internalID: -1391055045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_21
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2efda7f6281e8040896c9822ac9ed85
+      internalID: -1854375928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_22
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1278f9c5754d4443b63918fc7427f67
+      internalID: 387234079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa7b66788e1811e4da4ff7131bb3111d
+      internalID: 171662994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_24
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539864fc1265c11438b612a51541d647
+      internalID: -1948413210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_25
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f79de699a2a6a6419d7954265ed20e8
+      internalID: -1742842908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_26
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2efae0e22ed56a45b95f2a1a721d094
+      internalID: 1621142038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_27
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d92796fadc10efd44820abe6e04369b7
+      internalID: -1621192402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_28
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc52c2025e102c44a8fa067049dc5427
+      internalID: 1751328320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_29
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce367d2a42cf13e47a95c6b54a09e495
+      internalID: 1080207095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_30
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8169ba9fc5f61948b67eef989e2d1e1
+      internalID: -37860517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_31
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd84b229cc958149985cdd9ae805c6a
+      internalID: 411081230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_32
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 507bf9e3a9504144ebe31b1420a9ed16
+      internalID: -1338729041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_33
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e258105eb363b4296723c431ccced4
+      internalID: -1477276353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_34
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aacc90ed195d079408256717b192be6c
+      internalID: -123759568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_35
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 883eb1e174654074494ebe4d25b325e0
+      internalID: -557775271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_36
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ca1abb09bc7b5b46b8a3694af0a5caa
+      internalID: -347328310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_37
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf6f85292916be458f9f13f60a235dd
+      internalID: -598865514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_38
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd4aa5a6dc87692459877405d6976595
+      internalID: 811217758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_39
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83a6ec33cc2a20640aedea782bc18fac
+      internalID: -880902682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_40
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9678596e75bf6644a16d8451f9c9c60
+      internalID: 1089910584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_41
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e00a9415426ec4c89ef39a430fb4d5
+      internalID: -2018297726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_42
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e07926dbf563f34d9dbf904b30fcb33
+      internalID: -1906272520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_43
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b95d5fbfc610614a8abc75053548cf0
+      internalID: -1028929133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_44
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb00a25a82002a94bbefa2d6b338ee87
+      internalID: -760873582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_45
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1465ddac8aeb4e42acdb77d027f043b
+      internalID: 1913072634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ea03b3ac441fd64ba2e23ea3a1e5e9b
+      internalID: -1854306251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_47
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfbcaa2832cba08488d0df4da7e626cb
+      internalID: 1493903854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_48
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ff039b76b3e2304e9552c6d875e99e1
+      internalID: 1132395833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_49
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9c51a6720fe5284c9a00f989951af95
+      internalID: -2009571362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_50
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ff8402a313cbc44b835e566077aa63
+      internalID: -1682682428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_51
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6adae4cbac51a0b41970d37fec588790
+      internalID: -1630401969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_52
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09ece3078201089469fdafc719d041e2
+      internalID: 599195047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_53
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f2e330c4c579f438dfa321801a2a61
+      internalID: -857824093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_54
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc5904f573a1d6b41951172b876e2fdf
+      internalID: -1106363063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_55
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c1b4f2a6d5c774c8052d680297f068
+      internalID: 1393302464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_56
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 082e94973d2f7e9479dbda36f761950b
+      internalID: 893020895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_57
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ad895564e3c604b83e3a60127ddae0
+      internalID: 2006702035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_58
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 890ac6277ba3d10448aa9ee3ac1c5d66
+      internalID: 852826961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_59
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7834743b0df33449e1d767cdc2859f
+      internalID: -557257723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_60
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028065473952a694685184569165a9ad
+      internalID: 1102381252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_61
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba509e7be9c39c44c989400e6cec1508
+      internalID: 336202283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_62
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7230f1ac15898014d842e0b11bb1e02d
+      internalID: -747964206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_63
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7db3752a1360eab4ebfb159d3ddcbaeb
+      internalID: -1255160849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_64
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e68ee8fa4318e044a0eabb7cc477b1d
+      internalID: -1508320505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_65
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52061004c69423b4aa3af195836566f9
+      internalID: -202412001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_66
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33269a2eaeea3c642a612a88c7aaa91e
+      internalID: 1879342147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_67
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aad85fec1b426e4c8f8f2deceac237e
+      internalID: -2070409672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_68
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d042c4ee07d554d43b0a806198676e38
+      internalID: -989720649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_69
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f555f2ba7028504ea37122107c09ddb
+      internalID: 360291746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_70
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ba9c61f02f2e24458a8d403bac7c2f6
+      internalID: 1158590778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_71
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45dfdd8f09f2b464c9f6ffeeffcae2f2
+      internalID: 191251335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_72
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12dc246444c7faf4680fa01974a88012
+      internalID: -392445712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_73
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224a0ff3e05a88948aed1fc91eb7afd6
+      internalID: -660896515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_74
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4fc659c6c7a0b543b05f317368855b2
+      internalID: 1933743108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_75
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f52cbff3de08543a0b893e9d485c3c
+      internalID: 626848903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_76
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e48fabe814018e4494427e89b28bb6a
+      internalID: -1695736239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_77
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef5be5bc61adc984a958cab8febf6881
+      internalID: -1489739955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_78
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bdb154499a2dee4f9d0ddf344329ecc
+      internalID: 990978698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_79
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f7fa5c30a77e2b419d852dc159b8486
+      internalID: 341883376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_80
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8cada318e2fc3b4e89715e5598e3089
+      internalID: 1473031799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_81
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ad841973e2b874c806e670c7c8145a
+      internalID: 1793989363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_82
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e31e5c4869e560245b3f07a6d0a661c1
+      internalID: 1341400332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_83
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5ec0ab5c076c6f4aa97097ff4d06527
+      internalID: -1930587661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_84
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 825ac679401c44549bb60a590b436124
+      internalID: 612984017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_85
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c9aa86f1e786d4da1fd477f551d435
+      internalID: -692314758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_86
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a8c91dc477b3248a32bcb4c4a5fa56
+      internalID: 940051257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_87
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b82707add4f980346b4a3ff8a3fe32f9
+      internalID: -1394816442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_88
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61ac71bf21c6dc94fae20dc2cf8ca9c3
+      internalID: 606428139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_89
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b12aa16cf441675439c0cadbdc450bc5
+      internalID: 429066410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_90
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 080b2b474ca10ff4a83d21d2cb8d785a
+      internalID: -717168806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_91
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ace7643d14b0e446b1d77e86dc5f8fe
+      internalID: 595412539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02eb59b6dbfac7145bc4f1f41c0ce430
+      internalID: -849076963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_93
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b28ee96589e1f43b8e7e371f61373d
+      internalID: -908164396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_94
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37e081cff3fc8f9458946d7db05332b0
+      internalID: 878033890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_95
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a049bcf3932a8244489dd237613a28d0
+      internalID: 1455159977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_96
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 855fa20c922cf4745afd68b3fa46e8fd
+      internalID: 661420407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_97
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02046d63d94bb94cb5c21f98b59f44f
+      internalID: 1894265355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_98
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b918b1c3cf89afb4ba381b9b30d4e9c8
+      internalID: -1552654209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_99
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7ce41fd9484f94f8146ad8c806cc19
+      internalID: 1473810625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_100
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88467940133649d4c8aedf1370b55cc1
+      internalID: -46688270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_101
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1efd58e85a01a498cfb83daa5f84a4
+      internalID: 1041670260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_102
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30011372d5e379342bd772c132d03d53
+      internalID: -1887357661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_103
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e042313d2b653a4caca14a94a64d8f3
+      internalID: 1568246673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_104
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a17f89ccbafa94393f4f73d446901c
+      internalID: -326060710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_105
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a47de2d8034a7a40a5d6ceb88016a33
+      internalID: -2021187955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_106
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c9c04a43d928e46a1c6f9c9f21d9d6
+      internalID: -267824020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_107
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25ac4a0446fca774e90bb13368744f58
+      internalID: 722723022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_108
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd80f2c4de8aec418ef13482bf1f643
+      internalID: 516317656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_109
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 427c30f4be38e7d4db52b91fabae99c2
+      internalID: -833790452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_110
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82baca87417a159409f4e2bd220c8967
+      internalID: -1380613906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_111
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43bc64769cd47da4a944fe91f4d80f3f
+      internalID: 675120056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_112
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ec1b1739b71ebb4dac12cd4c84c7e29
+      internalID: -970576232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_113
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0d4ad5278db4f4b83498f3836538b7
+      internalID: 55376937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HarbourViewParallaxTop_114
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a0b43d8dda35d4478fd8d96a6adf850
+      internalID: -95597126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      HarbourViewParallaxTop_30: -37860517
+      HarbourViewParallaxTop_37: -598865514
+      HarbourViewParallaxTop_27: -1621192402
+      HarbourViewParallaxTop_110: -1380613906
+      HarbourViewParallaxTop_3: -1590327128
+      HarbourViewParallaxTop_63: -1255160849
+      HarbourViewParallaxTop_101: 1041670260
+      HarbourViewParallaxTop_80: 1473031799
+      HarbourViewParallaxTop_36: -347328310
+      HarbourViewParallaxTop_100: -46688270
+      HarbourViewParallaxTop_99: 1473810625
+      HarbourViewParallaxTop_14: 64317201
+      HarbourViewParallaxTop_82: 1341400332
+      HarbourViewParallaxTop_92: -849076963
+      HarbourViewParallaxTop_43: -1028929133
+      HarbourViewParallaxTop_108: 516317656
+      HarbourViewParallaxTop_49: -2009571362
+      HarbourViewParallaxTop_83: -1930587661
+      HarbourViewParallaxTop_113: 55376937
+      HarbourViewParallaxTop_89: 429066410
+      HarbourViewParallaxTop_1: -644922616
+      HarbourViewParallaxTop_44: -760873582
+      HarbourViewParallaxTop_79: 341883376
+      HarbourViewParallaxTop_86: 940051257
+      HarbourViewParallaxTop_45: 1913072634
+      HarbourViewParallaxTop_23: 171662994
+      HarbourViewParallaxTop_9: 94917370
+      HarbourViewParallaxTop_19: -52208005
+      HarbourViewParallaxTop_107: 722723022
+      HarbourViewParallaxTop_56: 893020895
+      HarbourViewParallaxTop_105: -2021187955
+      HarbourViewParallaxTop_51: -1630401969
+      HarbourViewParallaxTop_38: 811217758
+      HarbourViewParallaxTop_71: 191251335
+      HarbourViewParallaxTop_50: -1682682428
+      HarbourViewParallaxTop_59: -557257723
+      HarbourViewParallaxTop_97: 1894265355
+      HarbourViewParallaxTop_11: 1608146259
+      HarbourViewParallaxTop_16: -1530296935
+      HarbourViewParallaxTop_106: -267824020
+      HarbourViewParallaxTop_76: -1695736239
+      HarbourViewParallaxTop_111: 675120056
+      HarbourViewParallaxTop_18: 606823086
+      HarbourViewParallaxTop_95: 1455159977
+      HarbourViewParallaxTop_33: -1477276353
+      HarbourViewParallaxTop_60: 1102381252
+      HarbourViewParallaxTop_64: -1508320505
+      HarbourViewParallaxTop_109: -833790452
+      HarbourViewParallaxTop_81: 1793989363
+      HarbourViewParallaxTop_32: -1338729041
+      HarbourViewParallaxTop_47: 1493903854
+      HarbourViewParallaxTop_70: 1158590778
+      HarbourViewParallaxTop_24: -1948413210
+      HarbourViewParallaxTop_66: 1879342147
+      HarbourViewParallaxTop_103: 1568246673
+      HarbourViewParallaxTop_87: -1394816442
+      HarbourViewParallaxTop_61: 336202283
+      HarbourViewParallaxTop_26: 1621142038
+      HarbourViewParallaxTop_7: 1021248995
+      HarbourViewParallaxTop_39: -880902682
+      HarbourViewParallaxTop_53: -857824093
+      HarbourViewParallaxTop_34: -123759568
+      HarbourViewParallaxTop_8: -1433563749
+      HarbourViewParallaxTop_42: -1906272520
+      HarbourViewParallaxTop_48: 1132395833
+      HarbourViewParallaxTop_91: 595412539
+      HarbourViewParallaxTop_10: -1301625891
+      HarbourViewParallaxTop_12: 1599006661
+      HarbourViewParallaxTop_55: 1393302464
+      HarbourViewParallaxTop_0: -1022138761
+      HarbourViewParallaxTop_114: -95597126
+      HarbourViewParallaxTop_2: -330144514
+      HarbourViewParallaxTop_41: -2018297726
+      HarbourViewParallaxTop_54: -1106363063
+      HarbourViewParallaxTop_6: 973243839
+      HarbourViewParallaxTop_35: -557775271
+      HarbourViewParallaxTop_77: -1489739955
+      HarbourViewParallaxTop_46: -1854306251
+      HarbourViewParallaxTop_112: -970576232
+      HarbourViewParallaxTop_22: 387234079
+      HarbourViewParallaxTop_85: -692314758
+      HarbourViewParallaxTop_5: 140036575
+      HarbourViewParallaxTop_31: 411081230
+      HarbourViewParallaxTop_57: 2006702035
+      HarbourViewParallaxTop_67: -2070409672
+      HarbourViewParallaxTop_102: -1887357661
+      HarbourViewParallaxTop_25: -1742842908
+      HarbourViewParallaxTop_104: -326060710
+      HarbourViewParallaxTop_75: 626848903
+      HarbourViewParallaxTop_29: 1080207095
+      HarbourViewParallaxTop_17: 1396246759
+      HarbourViewParallaxTop_72: -392445712
+      HarbourViewParallaxTop_58: 852826961
+      HarbourViewParallaxTop_73: -660896515
+      HarbourViewParallaxTop_28: 1751328320
+      HarbourViewParallaxTop_52: 599195047
+      HarbourViewParallaxTop_69: 360291746
+      HarbourViewParallaxTop_84: 612984017
+      HarbourViewParallaxTop_13: -1728181555
+      HarbourViewParallaxTop_20: -1391055045
+      HarbourViewParallaxTop_15: 614693295
+      HarbourViewParallaxTop_98: -1552654209
+      HarbourViewParallaxTop_96: 661420407
+      HarbourViewParallaxTop_78: 990978698
+      HarbourViewParallaxTop_40: 1089910584
+      HarbourViewParallaxTop_62: -747964206
+      HarbourViewParallaxTop_65: -202412001
+      HarbourViewParallaxTop_74: 1933743108
+      HarbourViewParallaxTop_21: -1854375928
+      HarbourViewParallaxTop_94: 878033890
+      HarbourViewParallaxTop_90: -717168806
+      HarbourViewParallaxTop_4: -1927746527
+      HarbourViewParallaxTop_88: 606428139
+      HarbourViewParallaxTop_93: -908164396
+      HarbourViewParallaxTop_68: -989720649
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

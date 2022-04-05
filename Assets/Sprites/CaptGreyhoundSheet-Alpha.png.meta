@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -132,9 +132,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 840
-        width: 420
-        height: 420
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,8 +142,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbcccd51b2f7faf44879a3d6bebd081d
-      internalID: -183623321
+      spriteID: b82029db4ba683044973636fe7b8952e
+      internalID: 314482193
       vertices: []
       indices: 
       edges: []
@@ -152,10 +152,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_1
       rect:
         serializedVersion: 2
-        x: 420
-        y: 840
-        width: 420
-        height: 420
+        x: 70
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce35d2a96d150824082d6fffa36ff350
-      internalID: 1046490368
+      spriteID: ddb1fb2d7f19d1040976735d7fcfe6a0
+      internalID: 735916505
       vertices: []
       indices: 
       edges: []
@@ -173,10 +173,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_2
       rect:
         serializedVersion: 2
-        x: 840
-        y: 840
-        width: 420
-        height: 420
+        x: 140
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 565876958606fd643a4a36f8de6a2a5a
-      internalID: 605495539
+      spriteID: 9c14c4a6ff6e1c845819bf04d7ca728d
+      internalID: -1475351706
       vertices: []
       indices: 
       edges: []
@@ -194,10 +194,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_3
       rect:
         serializedVersion: 2
-        x: 1260
-        y: 840
-        width: 420
-        height: 420
+        x: 210
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53aed60877f87d2448290b4db895ec70
-      internalID: 1867083017
+      spriteID: 0626491a454307f4eb2cbcdbcbdd5e94
+      internalID: 322363502
       vertices: []
       indices: 
       edges: []
@@ -215,10 +215,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_4
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 840
-        width: 420
-        height: 420
+        x: 280
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d15ef49ee05b65d4f9d11aa7b555ed4e
-      internalID: -526830881
+      spriteID: da442b0ffe2d7954b95de31027bcc88a
+      internalID: -1258509693
       vertices: []
       indices: 
       edges: []
@@ -236,10 +236,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_5
       rect:
         serializedVersion: 2
-        x: 2100
-        y: 840
-        width: 420
-        height: 420
+        x: 350
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79aa58535258fca40a3e3b6247c995e8
-      internalID: -153752726
+      spriteID: 9727abd07fdb2d946b4f746ebe9c27d9
+      internalID: 1573286151
       vertices: []
       indices: 
       edges: []
@@ -257,10 +257,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_6
       rect:
         serializedVersion: 2
-        x: 2520
-        y: 840
-        width: 420
-        height: 420
+        x: 420
+        y: 140
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,8 +268,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d8fce210c317e14f976bbb368e39556
-      internalID: -2121118090
+      spriteID: 78cf01d1749b5634f8621c42b8e9f94e
+      internalID: 1120828300
       vertices: []
       indices: 
       edges: []
@@ -279,9 +279,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 420
-        width: 420
-        height: 420
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,8 +289,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 426509696dcd143498fe9057cf974c96
-      internalID: -2015480053
+      spriteID: e860f176e362a0341a2fb482cd72ba94
+      internalID: -324931991
       vertices: []
       indices: 
       edges: []
@@ -299,10 +299,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_8
       rect:
         serializedVersion: 2
-        x: 420
-        y: 420
-        width: 420
-        height: 420
+        x: 70
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65009a2b491a6a442b7e5b056de1c8d5
-      internalID: -830387994
+      spriteID: 974e4762f8de6f14ca7feeff30bc8fc2
+      internalID: -1067306187
       vertices: []
       indices: 
       edges: []
@@ -320,10 +320,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_9
       rect:
         serializedVersion: 2
-        x: 840
-        y: 420
-        width: 420
-        height: 420
+        x: 140
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,8 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c90d4a2ec1864c4daf29d3b7d336e09
-      internalID: -1856116095
+      spriteID: 51b0b85930c002843b802e43f68cb443
+      internalID: 441365994
       vertices: []
       indices: 
       edges: []
@@ -341,10 +341,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_10
       rect:
         serializedVersion: 2
-        x: 1260
-        y: 420
-        width: 420
-        height: 420
+        x: 210
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,8 +352,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87503d6abc8e87f4e8383614cb65c1f1
-      internalID: 1706123609
+      spriteID: c5f9a0af8d9b6c643a923c74f3f6cb5f
+      internalID: -768694492
       vertices: []
       indices: 
       edges: []
@@ -362,10 +362,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_11
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 420
-        width: 420
-        height: 420
+        x: 280
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,8 +373,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73022124438044f49a44572b4faa2d80
-      internalID: 1565342310
+      spriteID: e9ebc734b2c9a904ba2e12c66157cb81
+      internalID: -2042231572
       vertices: []
       indices: 
       edges: []
@@ -383,10 +383,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_12
       rect:
         serializedVersion: 2
-        x: 2100
-        y: 420
-        width: 420
-        height: 420
+        x: 350
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,8 +394,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99d416f9e25eb3d45b25ef38c8f8dfa7
-      internalID: 1796779550
+      spriteID: 9f46ef900749f9d47a010c6209b808a0
+      internalID: -1486367634
       vertices: []
       indices: 
       edges: []
@@ -404,10 +404,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_13
       rect:
         serializedVersion: 2
-        x: 2520
-        y: 420
-        width: 420
-        height: 420
+        x: 420
+        y: 70
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -415,8 +415,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c982dcd68073c4f42acf53560f1ab899
-      internalID: 320774990
+      spriteID: ad033b19322ef48499373fced1715b98
+      internalID: -1227602935
       vertices: []
       indices: 
       edges: []
@@ -427,8 +427,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -436,8 +436,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b47e0f075cd29564fa21ca8e9eb7198e
-      internalID: -543720032
+      spriteID: 83ac1632908ba94468c08de96c14497a
+      internalID: 1149434265
       vertices: []
       indices: 
       edges: []
@@ -446,10 +446,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_15
       rect:
         serializedVersion: 2
-        x: 420
+        x: 70
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,8 +457,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fd465374aea27143966616b4ba2fa2d
-      internalID: 1140623342
+      spriteID: 7aa4e45f63dfcfe4e83314089c77c4e8
+      internalID: 1289489266
       vertices: []
       indices: 
       edges: []
@@ -467,10 +467,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_16
       rect:
         serializedVersion: 2
-        x: 840
+        x: 140
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,8 +478,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23fbacc0f4615dc4a8de91af61d1a209
-      internalID: 81778201
+      spriteID: cd0922b4d0d5b0e45ba2a2c8a4dbdd35
+      internalID: 305489394
       vertices: []
       indices: 
       edges: []
@@ -488,10 +488,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_17
       rect:
         serializedVersion: 2
-        x: 1260
+        x: 210
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -499,8 +499,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d287d3ff7e1e8c046be89469426cf5e1
-      internalID: 977228356
+      spriteID: d305b900147d1294d82f7f64e8b96acb
+      internalID: -1590978049
       vertices: []
       indices: 
       edges: []
@@ -509,10 +509,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_18
       rect:
         serializedVersion: 2
-        x: 1680
+        x: 280
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -520,8 +520,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce96bc4a70988324b98f4b97797d6467
-      internalID: -1409782333
+      spriteID: 495d9c70eae7ee143a52dc4a3d0d0562
+      internalID: 951448798
       vertices: []
       indices: 
       edges: []
@@ -530,10 +530,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_19
       rect:
         serializedVersion: 2
-        x: 2100
+        x: 350
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -541,8 +541,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c06ab22e857743b4f90e1992e150360f
-      internalID: 1381020401
+      spriteID: a1da4ad7f2ce80b4ba800bac5bec1ca9
+      internalID: 179041407
       vertices: []
       indices: 
       edges: []
@@ -551,10 +551,10 @@ TextureImporter:
       name: CaptGreyhoundSheet-Alpha_20
       rect:
         serializedVersion: 2
-        x: 2520
+        x: 420
         y: 0
-        width: 420
-        height: 420
+        width: 70
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -562,8 +562,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87c38326242bad14287b4170a3e73fe0
-      internalID: -742035734
+      spriteID: 39906b86020199b418a4eec97a06ce86
+      internalID: -2105705147
       vertices: []
       indices: 
       edges: []
@@ -579,27 +579,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CaptGreyhoundSheet-Alpha_10: 1706123609
-      CaptGreyhoundSheet-Alpha_13: 320774990
-      CaptGreyhoundSheet-Alpha_16: 81778201
-      CaptGreyhoundSheet-Alpha_7: -2015480053
-      CaptGreyhoundSheet-Alpha_5: -153752726
-      CaptGreyhoundSheet-Alpha_12: 1796779550
-      CaptGreyhoundSheet-Alpha_14: -543720032
-      CaptGreyhoundSheet-Alpha_19: 1381020401
-      CaptGreyhoundSheet-Alpha_17: 977228356
-      CaptGreyhoundSheet-Alpha_1: 1046490368
-      CaptGreyhoundSheet-Alpha_3: 1867083017
-      CaptGreyhoundSheet-Alpha_4: -526830881
-      CaptGreyhoundSheet-Alpha_20: -742035734
-      CaptGreyhoundSheet-Alpha_9: -1856116095
-      CaptGreyhoundSheet-Alpha_18: -1409782333
-      CaptGreyhoundSheet-Alpha_15: 1140623342
-      CaptGreyhoundSheet-Alpha_0: -183623321
-      CaptGreyhoundSheet-Alpha_8: -830387994
-      CaptGreyhoundSheet-Alpha_2: 605495539
-      CaptGreyhoundSheet-Alpha_11: 1565342310
-      CaptGreyhoundSheet-Alpha_6: -2121118090
+      CaptGreyhoundSheet-Alpha_10: -768694492
+      CaptGreyhoundSheet-Alpha_13: -1227602935
+      CaptGreyhoundSheet-Alpha_16: 305489394
+      CaptGreyhoundSheet-Alpha_7: -324931991
+      CaptGreyhoundSheet-Alpha_5: 1573286151
+      CaptGreyhoundSheet-Alpha_12: -1486367634
+      CaptGreyhoundSheet-Alpha_14: 1149434265
+      CaptGreyhoundSheet-Alpha_19: 179041407
+      CaptGreyhoundSheet-Alpha_17: -1590978049
+      CaptGreyhoundSheet-Alpha_1: 735916505
+      CaptGreyhoundSheet-Alpha_3: 322363502
+      CaptGreyhoundSheet-Alpha_4: -1258509693
+      CaptGreyhoundSheet-Alpha_20: -2105705147
+      CaptGreyhoundSheet-Alpha_9: 441365994
+      CaptGreyhoundSheet-Alpha_18: 951448798
+      CaptGreyhoundSheet-Alpha_15: 1289489266
+      CaptGreyhoundSheet-Alpha_0: 314482193
+      CaptGreyhoundSheet-Alpha_8: -1067306187
+      CaptGreyhoundSheet-Alpha_2: -1475351706
+      CaptGreyhoundSheet-Alpha_11: -2042231572
+      CaptGreyhoundSheet-Alpha_6: 1120828300
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
