@@ -211,7 +211,7 @@ public class ValkyrieController : MonoBehaviour
             cooldown = 0;
             //Prevent instant carma if too close to edge
             safety = 90;
-            health--;
+            health -= packet.getDamage();
             if (health > 0)
             {
                 animator.SetTrigger("Completed");
@@ -221,6 +221,12 @@ public class ValkyrieController : MonoBehaviour
             {
                 //Start death sequence
                 stun = 99999;
+                if (packet.getDamage() > 1)
+                {
+                    animator.SetTrigger("Completed");
+                    animator.SetTrigger("Stun");
+                    animator.SetTrigger("Throw");
+                }
                 animator.SetTrigger("Die");
                 StartCoroutine(DeathRoutine());
             }
@@ -353,5 +359,10 @@ public class ValkyrieController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SpawnRandom()
+    {
+        //Only to avoid error logs
     }
 }

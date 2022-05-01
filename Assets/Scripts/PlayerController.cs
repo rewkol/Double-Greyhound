@@ -312,8 +312,9 @@ public class PlayerController : MonoBehaviour
             health -= damage;
             if (health <= 0)
             {
-                //TODO: This should tell GameController that the player lost
-                Destroy(gameObject);
+                //TODO: This should tell UI to get you to enter a high score and then restart from HVHS
+                animator.SetTrigger("Knockback");
+                downed = true;
             }
             else 
             {
