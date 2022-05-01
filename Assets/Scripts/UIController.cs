@@ -172,6 +172,7 @@ public class UIController : MonoBehaviour
         bossNameText.transform.gameObject.SetActive(true);
         bossHealthBarOutline.gameObject.SetActive(true);
         bossHealthBarFill.gameObject.SetActive(true);
+        bossHealthBarFill.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     public void BossExit()
@@ -257,7 +258,7 @@ public class UIController : MonoBehaviour
     {
         for (int i = 0; i < 50; i++)
         {
-            camera.transform.position = camera.transform.position + new Vector3(0.07f, 0.0f, 0.0f);
+            camera.transform.position = camera.transform.position + new Vector3(0.072f, 0.0f, 0.0f);
             camera.gameObject.SendMessage("ForceUpdate", 0.07f);
             yield return new WaitForFixedUpdate();
         }

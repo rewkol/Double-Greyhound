@@ -298,7 +298,7 @@ public class MaleVikingController : MonoBehaviour
     public void SpawnRandom()
     {
         float startY = Random.Range(limitYBottom, limitYTop);
-        transform.position = new Vector3(transform.position.x, startY, ((startY - limitYTop) * 0.1f) - 1.0f);
+        transform.position = new Vector3(transform.position.x, startY, ((startY - limitYTop) * 0.01f) - 1.0f);
     }
 
     // Update is called once per frame
