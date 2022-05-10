@@ -333,6 +333,7 @@ public class ValkyrieController : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
+        ui.SetPlayerInvincible(true);
         for (int i = 0; i < 51; i++)
         {
             if (i < 50)
@@ -352,6 +353,7 @@ public class ValkyrieController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+        ui.SetPlayerInvincible(false);
         Destroy(gameObject);
     }
 

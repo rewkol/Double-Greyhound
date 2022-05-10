@@ -67,11 +67,10 @@ public class FemaleVikingController : MonoBehaviour
         {
             animator.SetTrigger("Walk");
             transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
-            transform.position += new Vector3(speed, 0.0f, 0.0f);
             cooldown++;
             if (cooldown > 1000)
             {
-                Destroy(gameObject);
+                transform.position += new Vector3(speed, 0.0f, 0.0f);
             }
             return;
         }

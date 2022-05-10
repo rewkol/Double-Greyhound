@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+/**
+ * Ostensibly controls the UI, but in reality has sorta become the GameController too
+ * <And to think I wrote this comment before implementing high scores...>
+ */
 public class UIController : MonoBehaviour
 {
     private int UIMode;
     private GameObject statusParent;
     private GameObject dialogueParent;
+    private GameObject scoreParent;
     private GameObject camera;
 
     //Score variables
     private long score;
     private Text scoreText;
+
+    //State variables
+    private int run;
+    private bool firstRun;
+    private int lastUnlock;
 
     //Player Health Variables
     private PlayerController player;
@@ -34,6 +47,27 @@ public class UIController : MonoBehaviour
     private bool isWriting;
     private bool skipText;
     private bool buttonPressed;
+    private bool transitionPrimed;
+    private string transitionScene;
+
+    //High Score Variables
+    private int cursorPosition;
+    private int cursorCooldown;
+    private char[] name;
+    private Text scoreTitle;
+    private Text scoreField;
+    private Text scoreEntry;
+    private Text scorePreview;
+    private Text upCaret;
+    private Text downCaret;
+    private Text leftCaret;
+    private Text rightCaret;
+    private bool scoreEntered;
+    private float caretDelta;
+    private HighScoreList.HighScore currentScore;
+    private int scorePosition;
+    private HighScoreList highScores;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +76,7 @@ public class UIController : MonoBehaviour
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         statusParent = GameObject.FindGameObjectsWithTag("UIStatus")[0];
         dialogueParent = GameObject.FindGameObjectsWithTag("UITextBox")[0];
+        scoreParent = GameObject.FindGameObjectsWithTag("UIScore")[0];
         camera = GameObject.FindGameObjectsWithTag("MainCamera")[0];
 
         //Player Health
@@ -67,13 +102,40 @@ public class UIController : MonoBehaviour
         skipText = false;
         buttonPressed = false;
         dialogueParent.SetActive(false);
+        transitionPrimed = false;
 
-        //Score
+        //Score (as status)
         score = 0;
         scoreText = statusParent.transform.Find("ScoreText").GetComponent<Text>();
         scoreText.text = "SCORE: 000000000000000";
 
-        //TODO: Load saved values from previous level
+        //Score (for record keeping)
+        scoreTitle = scoreParent.transform.Find("ScoreTitle").GetComponent<Text>();
+        scoreField = scoreParent.transform.Find("ScoreField").GetComponent<Text>();
+        scoreEntry = scoreParent.transform.Find("ScoreEntry").GetComponent<Text>();
+        scorePreview = scoreParent.transform.Find("ScoreEntry").Find("ScorePreview").GetComponent<Text>();
+        upCaret = scoreParent.transform.Find("ScoreEntry").Find("UpCaret").GetComponent<Text>();
+        downCaret = scoreParent.transform.Find("ScoreEntry").Find("DownCaret").GetComponent<Text>();
+        leftCaret = scoreParent.transform.Find("ScoreEntry").Find("LeftCaret").GetComponent<Text>();
+        rightCaret = scoreParent.transform.Find("ScoreEntry").Find("RightCaret").GetComponent<Text>();
+        scoreEntered = false;
+        cursorPosition = 0;
+        name = new char[12] { 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' };
+        cursorCooldown = 0;
+        caretDelta = 52f;
+        currentScore = null;
+        scorePosition = 0;
+        highScores = null;
+
+        scoreParent.SetActive(false);
+
+        //State
+        run = 0;
+        firstRun = true;
+        lastUnlock = 0;
+
+        //Load saved values from previous level
+        LoadGameState();
 
         UIMode = 0;
     }
@@ -123,6 +185,225 @@ public class UIController : MonoBehaviour
             }
         }
         //UIMode == 2 has nothing in the update loop and is controlled by CameraRoutine()
+        
+        //Transition is primed in UIMode 1, once it goes to 0 instantly switch to 2 and prepare to change scenes
+        if (transitionPrimed &&UIMode == 0)
+        {
+            UIMode = 2;
+            StartCoroutine(TransitionRoutine());
+        }
+    }
+
+    void FixedUpdate()
+    {
+        //I want this in fixed update to guarantee the cursor can't spin too fast when selecting letters
+        if (UIMode == 3)
+        {
+            if (!scoreEntered)
+            {
+                if (Input.GetAxis("Vertical") > 0 && cursorCooldown == 0)
+                {
+                    int val = (int)name[cursorPosition];
+                    val = CharacterMapping(++val);
+                    name[cursorPosition] = (char)val;
+                    cursorCooldown = 8;
+                }
+                if (Input.GetAxis("Vertical") < 0 && cursorCooldown == 0)
+                {
+                    int val = (int)name[cursorPosition];
+                    val = CharacterMapping(--val);
+                    name[cursorPosition] = (char)val;
+                    cursorCooldown = 8;
+                }
+                if (Input.GetAxis("Horizontal") > 0 && !buttonPressed)
+                {
+                    cursorPosition++;
+                    if (cursorPosition > 11)
+                    {
+                        cursorPosition = 11;
+                    }
+                    else
+                    {
+                        upCaret.GetComponent<RectTransform>().anchoredPosition = new Vector2(caretDelta, 0.0f) + upCaret.GetComponent<RectTransform>().anchoredPosition;
+                        downCaret.GetComponent<RectTransform>().anchoredPosition = new Vector2(caretDelta, 0.0f) + downCaret.GetComponent<RectTransform>().anchoredPosition;
+                    }
+                    buttonPressed = true;
+                }
+                if (Input.GetAxis("Horizontal") < 0 && !buttonPressed)
+                {
+                    cursorPosition--;
+                    if (cursorPosition < 0)
+                    {
+                        cursorPosition = 0;
+                    }
+                    else
+                    {
+                        upCaret.GetComponent<RectTransform>().anchoredPosition = new Vector2(-caretDelta, 0.0f) + upCaret.GetComponent<RectTransform>().anchoredPosition;
+                        downCaret.GetComponent<RectTransform>().anchoredPosition = new Vector2(-caretDelta, 0.0f) + downCaret.GetComponent<RectTransform>().anchoredPosition;
+                    }
+                    buttonPressed = true;
+                }
+
+                if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
+                {
+                    buttonPressed = false;
+                    cursorCooldown = 0;
+                }
+                if (cursorCooldown > 0)
+                {
+                    cursorCooldown--;
+                }
+
+
+                if (cursorPosition == 11)
+                {
+                    rightCaret.gameObject.SetActive(false);
+                }
+                else
+                {
+                    rightCaret.gameObject.SetActive(true);
+                }
+                if (cursorPosition == 0)
+                {
+                    leftCaret.gameObject.SetActive(false);
+                }
+                else
+                {
+                    leftCaret.gameObject.SetActive(true);
+                }
+
+                scoreEntry.text = new string(name);
+
+
+
+                if (Input.GetAxis("Fire1") > 0)
+                {
+                    scoreEntered = true;
+                    cursorCooldown = 50;
+                    currentScore = new HighScoreList.HighScore(score, new string(name), false);
+                    highScores = LoadHighScores();
+                    highScores.scores.Add(currentScore);
+
+                    //Save it before displaying so that we can mess with the list now
+
+                    //Remove hidden scores if the player hasn't beaten Emma yet
+                    if (highScores.hideScores && currentScore.score < 999999999L)
+                    {
+                        highScores.scores.RemoveAll(x => x.hidden);
+                        //But re add Emma back in if they have beaten Mitchell
+                        if (currentScore.score > 17061998L)
+                        {
+                            highScores.scores.Add(new HighScoreList.HighScore(999999999L, "EmmaManning", false));
+                        }
+                    }
+                    //Sort list desc
+                    highScores.scores.Sort();
+                    scorePosition = highScores.scores.FindIndex(x => x.CompareTo(currentScore) == 0);
+
+                    //Reload scores and decide whether or not to save this new score (Only allow 99 [displayable scores] to be saved)
+                    if (scorePosition < 99)
+                    {
+                        HighScoreList savedScores = LoadHighScores();
+                        savedScores.scores.Add(currentScore);
+                        savedScores.scores.Sort();
+                        if (scorePosition == 0)
+                        {
+                            savedScores.hideScores = false;
+                        }
+                        SaveHighScores(savedScores);
+                    }
+
+                    cursorPosition = 150;
+
+                    scorePreview.gameObject.SetActive(false);
+                    scoreEntry.gameObject.SetActive(false);
+                    scoreField.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                cursorPosition--;
+                if (cursorPosition == 0)
+                {
+                    cursorPosition = 150;
+                }
+
+                int scoresAbove = 14;
+                if (scorePosition < 14)
+                {
+                    scoresAbove = scorePosition;
+                }
+                else if (scorePosition > 98)
+                {
+                    //Need to flag them for embarassment
+                    scoresAbove = -1;
+                }
+
+                int startIndex = scorePosition - scoresAbove;
+                // If didn't get in the top 99, show the last 13, then ... then the player
+                if (scoresAbove < 0)
+                {
+                    startIndex = 86;
+                }
+
+                scoreField.text = "";
+                for (int i = startIndex; i < startIndex + 15; i++)
+                {
+                    //If no more high scores get out of here!
+                    if (i == highScores.scores.Count)
+                    {
+                        break;
+                    }
+
+                    if (i < 99)
+                    {
+                        scoreField.text += ((i == scorePosition && cursorPosition < 75) ? " " : "") + (i < 9 ? "0" : "") + (i + 1) + "> " + highScores.scores[i].ToString() + "\n";
+                    }
+                    else if (i == 99)
+                    {
+                        scoreField.text += "              ...              \n";
+                    }
+                    else
+                    {
+                        scoreField.text += (cursorPosition < 75 ? " " : "") + "XX> " + currentScore.ToString() + "\n";
+                    }
+                }
+
+
+                //After 1 second accept a punch to return to menu
+                if (cursorCooldown > 0)
+                {
+                    cursorCooldown--;
+                }
+                if (cursorCooldown == 0 && Input.GetAxis("Fire1") > 0)
+                {
+                    string sceneName = SceneManager.GetActiveScene().name;
+                    SceneManager.LoadScene("Menu");
+                    SceneManager.UnloadSceneAsync(sceneName);
+                }
+            }
+        }
+    }
+
+    private int CharacterMapping(int val)
+    {
+        //For safety move this so I don't overwrite the switched variable
+        int storeVal = val;
+        switch(storeVal)
+        {
+            //UP
+            case 91: { val = 97; break; }
+            case 123: { val = 32; break; }
+            case 33: { val = 65; break; }
+            //DOWN
+            case 64: { val = 32; break; }
+            case 96: { val = 90; break; }
+            case 31: { val = 122; break; }
+            //DEFAULT TO YOURSELF
+            default: { val = val; break; }
+        }
+
+        return val;
     }
 
     public void UpdateScore(long points)
@@ -132,13 +413,45 @@ public class UIController : MonoBehaviour
         string number = score.ToString();
 
         //Prefix it with 0s
-        if (number.Length < 15)
+        if (number.Length < 14)
         {
-            int difference = 15 - number.Length;
+            int difference = 14 - number.Length;
             number = new string('0', difference) + number;
         }
 
         scoreText.text = newText + number;
+    }
+
+    private void UpdateSpecial(int special)
+    {
+        if(special > 0)
+        {
+            statusParent.transform.Find("SpecialsBox").Find("SpecialIcon").gameObject.SetActive(true);
+        }
+        switch (special)
+        {
+            default:
+            {
+                statusParent.transform.Find("SpecialsBox").Find("SpecialIcon").gameObject.SetActive(false);
+                break;
+            }
+            case 1:
+            {
+                statusParent.transform.Find("SpecialsBox").Find("SpecialIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("AxeIcon");
+                break;
+            }
+            case 2:
+            {
+                statusParent.transform.Find("SpecialsBox").Find("SpecialIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("JumpIcon");
+                break;
+            }
+            case 3:
+            {
+                statusParent.transform.Find("SpecialsBox").Find("SpecialIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("HaloIcon");
+                break;
+            }
+        }
+
     }
 
     public void PlayerHealthBar(int health)
@@ -150,6 +463,18 @@ public class UIController : MonoBehaviour
             playerHealthScale = 0.0f;
         }
         playerHealthBarFill.localScale = new Vector3(playerHealthScale, 1.0f, 1.0f);
+    }
+
+    public void SetPlayerInvincible(bool vince)
+    {
+        if (vince)
+        {
+            player.MakeInvincible();
+        }
+        else
+        {
+            player.MakeVincible();
+        }
     }
 
     public void BossHealthBar(int health)
@@ -269,5 +594,242 @@ public class UIController : MonoBehaviour
     public bool GameActive()
     {
         return UIMode == 0;
+    }
+
+
+
+    //File stuff
+    /**
+     * Call at the end of a level to store state
+     */
+    public void SaveGameState(bool incrementRun, int specialUnlock)
+    {
+        if (incrementRun)
+        {
+            firstRun = false;
+            run++;
+        }
+
+        GameState state = new GameState(score, Mathf.Min(player.GetHealth() + 5, 20), player.GetSpecial(), specialUnlock > lastUnlock ? specialUnlock : lastUnlock, run, firstRun);
+        //Serialize state
+        string path = Application.persistentDataPath + "/state.tmp"; //AppData/LocalLow
+        FileStream file;
+        if (File.Exists(path))
+        {
+            file = File.OpenWrite(path);
+        }
+        else
+        {
+            file = File.Create(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, state);
+        file.Close();
+    }
+
+    /**
+     * Create new game state from scratch
+     */
+    public void CreateGameState()
+    {
+        GameState state = new GameState(0L, 20, 0, 0, 0, true);
+        //Serialize state
+        string path = Application.persistentDataPath + "/state.tmp"; 
+        FileStream file;
+        if (File.Exists(path))
+        {
+            file = File.OpenWrite(path);
+        }
+        else
+        {
+            file = File.Create(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, state);
+        file.Close();
+    }
+
+    /**
+     * Call at the beginning of a level to restore state
+     */
+    public void LoadGameState()
+    {
+        string path = Application.persistentDataPath + "/state.tmp";
+        FileStream file;
+
+        if (File.Exists(path))
+        {
+            file = File.OpenRead(path);
+        }
+        else
+        {
+            CreateGameState();
+            file = File.OpenRead(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        GameState state = (GameState) bf.Deserialize(file);
+        file.Close();
+
+        UpdateScore(state.score);
+        this.run = state.run;
+        this.firstRun = state.firstRun;
+        player.SetHealth(state.health);
+        PlayerHealthBar(state.health);
+        if (state.special == 0 && state.unlocked > 0)
+        {
+            player.SetSpecial(1);
+            UpdateSpecial(1);
+        }
+        else
+        {
+            player.SetSpecial(state.special);
+            UpdateSpecial(state.special);
+        }
+        this.lastUnlock = state.unlocked;
+        player.SetSpecialUnlocked(lastUnlock);
+
+    }
+
+    /**
+     * Locks out all gameplay control until end of time
+     */
+    public void EnterMenu()
+    {
+        UIMode = 99;
+    }
+
+    public void SaveHighScore()
+    {
+        UIMode = 2;
+        StartCoroutine(WaitForDeathRoutine());
+    }
+
+    /**
+     * Wait for death animation to finish before displaying score stuff
+     */
+    private IEnumerator WaitForDeathRoutine()
+    {
+        for(int i = 0; i < 50; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        UIMode = 3;
+        scoreParent.SetActive(true);
+        //Activate UI elements and controls for inputting name, and then display nearest 15 scores (+/- 12 on both sides if possible)
+        string number = score.ToString();
+
+        //Prefix it with 0s
+        if (number.Length < 14)
+        {
+            int difference = 14 - number.Length;
+            number = new string('0', difference) + number;
+        }
+
+        scorePreview.text = number;
+
+        scoreField.gameObject.SetActive(false);
+        scoreEntry.gameObject.SetActive(true);
+    }
+
+    private void CreateHighScores()
+    {
+        //TODO: Create a default high score list
+        HighScoreList scoreList = new HighScoreList();
+        scoreList.scores.Add(new HighScoreList.HighScore(4000L, "Valkyrie    ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(7500L, "Viking Chief", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(789L, "Seabee Swarm", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(101112L, "Queen Seabee", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(131415L, "St Malachy  ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(161718L, "SupremeSaint", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(192021L, "CapGreyhound", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(212223L, "Nick Balcomb", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(212223L, "John R G    ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(242526L, "Clifford S  ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(272829L, "Monet Comeau", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(303132L, "Patrick H   ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(333435L, "Robert Scott", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(363738L, "Alex Harper ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(394041L, "Brandi C    ", false));
+        scoreList.scores.Add(new HighScoreList.HighScore(17061998L, "Mitchell G  ", false));
+        // Hide scores from the post game
+        scoreList.scores.Add(new HighScoreList.HighScore(999999999L, "EmmaManning", true));
+        scoreList.hideScores = true;
+
+        string path = Application.persistentDataPath + "/scores.lst";
+        FileStream file;
+        if (File.Exists(path))
+        {
+            file = File.OpenWrite(path);
+        }
+        else
+        {
+            file = File.Create(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, scoreList);
+        file.Close();
+    }
+
+    private HighScoreList LoadHighScores()
+    {
+        string path = Application.persistentDataPath + "/scores.lst";
+        FileStream file;
+
+        if (File.Exists(path))
+        {
+            file = File.OpenRead(path);
+        }
+        else
+        {
+            CreateHighScores();
+            file = File.OpenRead(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        HighScoreList scoreList = (HighScoreList)bf.Deserialize(file);
+        file.Close();
+
+        return scoreList;
+    }
+
+    private void SaveHighScores(HighScoreList scoreList)
+    {
+        string path = Application.persistentDataPath + "/scores.lst";
+        FileStream file;
+        if (File.Exists(path))
+        {
+            file = File.OpenWrite(path);
+        }
+        else
+        {
+            file = File.Create(path);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, scoreList);
+        file.Close();
+    }
+
+    public void PrimeTransition(string nextScene)
+    {
+        transitionScene = nextScene;
+        transitionPrimed = true;
+    }
+
+    private IEnumerator TransitionRoutine()
+    {
+        player.Celebrate();
+        for (int i = 0; i < 150; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(transitionScene);
+        SceneManager.UnloadSceneAsync(sceneName);
     }
 }

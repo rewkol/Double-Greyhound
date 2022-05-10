@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     //Public Objects
     public HitboxController hitbox;
     public HurtboxController hurtbox;
+    public FjellriverController fjellriver;
 
     //Public Variables
     public float speed;
@@ -37,10 +38,12 @@ public class PlayerController : MonoBehaviour
     private bool specialPushed;
     private bool specialChangePushed;
     private int stun;
+    private bool doStun;
 
     //Character information
     private int health;
     private int special;
+    private int specialUnlocked;
     private float comboCounter;
     private List<FlightInstruction> flightProgram;
     private List<HitboxController> activeHitboxes;
@@ -65,7 +68,9 @@ public class PlayerController : MonoBehaviour
         specialCooldown = 0;
         specialPushed = false;
         specialChangePushed = false;
+        specialUnlocked = 0;
         stun = 0;
+        doStun = true;
         health = 20;
         flightProgram = new List<FlightInstruction>();
         activeHitboxes = new List<HitboxController>();
@@ -78,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!ui.GameActive())
+        if (!ui.GameActive())
         {
             animator.SetTrigger("Idle");
             return;
@@ -89,7 +94,7 @@ public class PlayerController : MonoBehaviour
             //If Program Queue has data, perform those actions instead of accepting User Input
             FlightInstruction currentInstruction = flightProgram[0];
 
-            for(int i = 0; i < currentInstruction.GetCount(); i++)
+            for (int i = 0; i < currentInstruction.GetCount(); i++)
             {
                 HandleInstruction(currentInstruction, i);
             }
@@ -162,6 +167,10 @@ public class PlayerController : MonoBehaviour
             cooldown--;
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
+        if (specialCooldown > 0)
+        {
+            specialCooldown--;
+        }
         if (stun > 0)
         {
             stun--;
@@ -198,7 +207,11 @@ public class PlayerController : MonoBehaviour
         //TODO: Press button to choose selected Special
         if (Input.GetAxis("Jump") > 0 && specialChangePushed == false)
         {
-            special = (special + 1) % 4;
+            special = (special + 1) % (specialUnlocked + 1);
+            if (special == 0 && specialUnlocked > 0)
+            {
+                special = 1;
+            }
             specialChangePushed = true;
         }
         if (Input.GetAxis("Jump") == 0)
@@ -261,14 +274,26 @@ public class PlayerController : MonoBehaviour
 
     private void Specials()
     {
-        //TODO: Put the actual specials implementation here
-
-        //Testing out Flight Instructions
-        if (flightProgram.Count == 0)
-        {//Activate specials
+        if (special == 1)
+        {
+            animator.SetTrigger("Axe");
+            cooldown = 55;
+            doStun = false;
+            FjellriverController axe = Instantiate(fjellriver, transform.position + new Vector3(-0.426f * 6.0f * (facingLeft? -1.0f : 1.0f), 0.15f * 6.0f, 0.0001f), transform.rotation);
+            axe.SetDirection(facingLeft);
+            specialCooldown = 135;
+        }
+        else if (special == 2)
+        {
             animator.SetTrigger("Jump");
             cooldown = 1;
+            doStun = false;
             flightProgram.AddRange(PlayerInstructionSets.GetJumpInstructions(facingLeft));
+        }
+        else if (special == 3)
+        {
+            doStun = false;
+            //TODO: Throw Halo
         }
     }
 
@@ -284,7 +309,7 @@ public class PlayerController : MonoBehaviour
             flightProgram.Clear();
 
             //Destroy all active hitboxes
-            foreach(HitboxController hitbox in activeHitboxes)
+            foreach (HitboxController hitbox in activeHitboxes)
             {
                 if (hitbox != null)
                 {
@@ -301,7 +326,7 @@ public class PlayerController : MonoBehaviour
                 cooldown = 1;
                 comboCounter = 0.0f;
             }
-            else
+            else if (doStun)
             {
                 animator.SetTrigger("Stun");
                 stun = 15;
@@ -315,8 +340,9 @@ public class PlayerController : MonoBehaviour
                 //TODO: This should tell UI to get you to enter a high score and then restart from HVHS
                 animator.SetTrigger("Knockback");
                 downed = true;
+                ui.SaveHighScore();
             }
-            else 
+            else
             {
                 StartCoroutine(BlinkRoutine());
             }
@@ -340,72 +366,72 @@ public class PlayerController : MonoBehaviour
         switch (command)
         {
             case "Move":
-            {
-                // Move player by the vector
-                transform.position = transform.position + instruction.GetVector(index);
+                {
+                    // Move player by the vector
+                    transform.position = transform.position + instruction.GetVector(index);
 
-                //Bounds check the X axis movement
-                if (transform.position.x > limitXRight)
-                {
-                    //Stopping the player exactly at the boundary causes an animation error so add the 0.0001f as an impossible to see spacer
-                    transform.position = transform.position + new Vector3(limitXRight - transform.position.x - 0.0001f, 0.0f, 0.0f);
+                    //Bounds check the X axis movement
+                    if (transform.position.x > limitXRight)
+                    {
+                        //Stopping the player exactly at the boundary causes an animation error so add the 0.0001f as an impossible to see spacer
+                        transform.position = transform.position + new Vector3(limitXRight - transform.position.x - 0.0001f, 0.0f, 0.0f);
+                    }
+                    else if (transform.position.x < limitXLeft)
+                    {
+                        transform.position = transform.position + new Vector3(limitXLeft - transform.position.x + 0.0001f, 0.0f, 0.0f);
+                    }
+                    break;
                 }
-                else if (transform.position.x < limitXLeft)
-                {
-                    transform.position = transform.position + new Vector3(limitXLeft - transform.position.x + 0.0001f, 0.0f, 0.0f);
-                }
-                break;
-            }
             case "Hurtbox":
-            {
-                // Resize hurtbox using X and Y. Move hurtbox by Vector
-                hurtbox.UpdateScale(instruction.GetX(index), instruction.GetY(index));
-                hurtbox.Move(instruction.GetVector(index));
-                break;
-            }
+                {
+                    // Resize hurtbox using X and Y. Move hurtbox by Vector
+                    hurtbox.UpdateScale(instruction.GetX(index), instruction.GetY(index));
+                    hurtbox.Move(instruction.GetVector(index));
+                    break;
+                }
             case "Hitbox":
-            {
-                // Create a new hitbox at Vector, with size X and Y, and TTL of Time
-                Vector3 vector = instruction.GetVector(index);
-                float x = instruction.GetX(index);
-                float y = instruction.GetY(index);
-                int ttl = instruction.GetTime(index);
+                {
+                    // Create a new hitbox at Vector, with size X and Y, and TTL of Time
+                    Vector3 vector = instruction.GetVector(index);
+                    float x = instruction.GetX(index);
+                    float y = instruction.GetY(index);
+                    int ttl = instruction.GetTime(index);
 
-                CreateHitbox(vector, x, y, ttl, 1);
-                break;
-            }
+                    CreateHitbox(vector, x, y, ttl, 1);
+                    break;
+                }
             case "Hitbox2":
-            {
-                // Same as above but more damage
-                Vector3 vector = instruction.GetVector(index);
-                float x = instruction.GetX(index);
-                float y = instruction.GetY(index);
-                int ttl = instruction.GetTime(index);
+                {
+                    // Same as above but more damage
+                    Vector3 vector = instruction.GetVector(index);
+                    float x = instruction.GetX(index);
+                    float y = instruction.GetY(index);
+                    int ttl = instruction.GetTime(index);
 
-                CreateHitbox(vector, x, y, ttl, 2);
-                break;
-            }
+                    CreateHitbox(vector, x, y, ttl, 2);
+                    break;
+                }
             case "Ignore":
-            {
-                downed = true;
-                break;
-            }
+                {
+                    downed = true;
+                    break;
+                }
             case "PayAttention":
-            {
-                downed = false;
-                break;
-            }
+                {
+                    downed = false;
+                    break;
+                }
             case "Wait":
-            {
-                //Do nothing this frame
-                break;
-            }
+                {
+                    //Do nothing this frame
+                    break;
+                }
             default:
-            {
-                //Default to sending the command as a function of this object
-                gameObject.SendMessageUpwards(command);
-                break;
-            }
+                {
+                    //Default to sending the command as a function of this object
+                    gameObject.SendMessageUpwards(command);
+                    break;
+                }
         }
     }
 
@@ -422,5 +448,60 @@ public class PlayerController : MonoBehaviour
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(int health)
+    {
+        this.health = health;
+    }
+
+    public int GetSpecial()
+    {
+        return this.special;
+    }
+
+    public void SetSpecial(int special)
+    {
+        this.special = special;
+    }
+
+    public void SetSpecialUnlocked(int unlocked)
+    {
+        this.specialUnlocked = unlocked;
+    }
+
+    /**
+     * For making the player invincible after defeating a boss so a projectile doesn't wreck their day.
+     * Can just reuse stun because they ain't moving afterward anyway
+     */
+    public void MakeInvincible()
+    {
+        stun = 9999999;
+    }
+
+    /**
+     * Nothing gold can stay
+     */
+    public void MakeVincible()
+    {
+        stun = 0;
+    }
+
+    public void Celebrate()
+    {
+        animator.SetTrigger("Victory");
+    }
+
+    /**
+     *  For making special attacks non-cancellable
+     */
+    public void SetStunnable(bool doStun)
+    {
+        this.doStun = doStun;
     }
 }

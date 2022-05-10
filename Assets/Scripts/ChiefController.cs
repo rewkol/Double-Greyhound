@@ -320,6 +320,7 @@ public class ChiefController : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
+        ui.SetPlayerInvincible(true);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -332,7 +333,7 @@ public class ChiefController : MonoBehaviour
             if (i == 60)
             {
                 //TODO: Initiate Death dialogue
-                ui.UpdateScore(2500L);
+                ui.UpdateScore(10000L);
                 ui.DisplayDialogue("ChiefHeadshot", "You're good.|I never expected you to best me.|Perhaps you have the strength|you need for the coming battle.");
                 while (!ui.GameActive())
                 {
@@ -350,14 +351,12 @@ public class ChiefController : MonoBehaviour
                 }
                 ui.DisplayDialogue("ChiefHeadshot", "And if you don't, I will give you mine!|I deem you worthy to wield my axe|Fjellriver|It has the power to|rend mountains in two|but to you I will grant just enough to|overcome any obstacle you might face.|Now climb aboard, I will see you|to your next challenge.|Good luck my friend!");
                 ui.BossExit();
-                while (!ui.GameActive())
-                {
-                    yield return new WaitForFixedUpdate();
-                }
+                ui.PrimeTransition("SHS");
             }
             yield return new WaitForFixedUpdate();
         }
-        //TODO: Trigger end of level 
+
+        ui.SaveGameState(false, 1);
     }
 
     // Update is called once per frame
