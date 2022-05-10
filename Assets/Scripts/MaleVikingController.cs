@@ -71,7 +71,8 @@ public class MaleVikingController : MonoBehaviour
             cooldown++;
             if (cooldown > 1000)
             {
-                Destroy(gameObject);
+                transform.position += new Vector3(speed, 0.0f, 0.0f);
+                //Don't despawn because despawning moves the camera around
             }
             return;
         }

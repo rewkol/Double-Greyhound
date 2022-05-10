@@ -25,10 +25,6 @@ public class CameraController : MonoBehaviour
         if(totalEnemies == 0 && player.transform.position.x > transform.position.x)
         {
             float dist = player.transform.position.x - transform.position.x;
-            if (dist > 0.1f)
-            {
-                dist = 0.1f;
-            }
             transform.position = transform.position + new Vector3(dist, 0.0f, 0.0f);
             parallax.Move(dist, transform.position.x);
         }
