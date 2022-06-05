@@ -214,20 +214,12 @@ public class FemaleVikingController : MonoBehaviour
     {
         animator.SetTrigger("Throw");
         cooldown = 105;
-        StartCoroutine(ThrowRoutine());
     }
 
-    private IEnumerator ThrowRoutine()
+    public void ThrowAxe()
     {
-        for (int i = 0; i < 22; i++)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-        if (stun == 0)
-        {
-            EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(0.95f * (facingLeft ? -1 : 1), 0.7f, 0.0f), transform.rotation);
-            thrownAxe.SetDirection(facingLeft);
-        }
+        EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(0.95f * (facingLeft ? -1 : 1), 0.7f, 0.0f), transform.rotation);
+        thrownAxe.SetDirection(facingLeft);
     }
 
     public void Hurt(DamagePacket packet)

@@ -58,6 +58,17 @@ public class EnemyAxeController : MonoBehaviour
         }
     }
 
+    public void Hurt()
+    {
+        Transform hitbox = transform.Find("AxeHitbox");
+        if (hitbox != null)
+        {
+            Destroy(hitbox.gameObject);
+            facingLeft = !facingLeft;
+            rotateModifier = -1 * rotateModifier;
+        }
+    }
+
     public void SetDirection(bool facingLeft)
     {
         this.facingLeft = facingLeft;
