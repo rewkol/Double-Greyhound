@@ -7,6 +7,7 @@ public class SeabeeController : MonoBehaviour
     //Public Objects
     public HitboxController hitbox;
     public FlyingBarbController barb;
+    public bool freeWill;
 
     //Public variables
     public float speed;
@@ -17,13 +18,11 @@ public class SeabeeController : MonoBehaviour
     //Private variables
     private Transform transform;
     private Animator animator;
+    private UIController ui;
     private bool facingLeft;
     private int cooldown;
     private int stun;
-    private float spacingX;
-    private float spacingY;
-    private bool inPosX;
-    private bool inPosY;
+    private int swarmStun;
     private int health;
     private PlayerController player;
     private bool nextAttackSwoop;
@@ -38,6 +37,7 @@ public class SeabeeController : MonoBehaviour
     private bool stuck;
     private float limitXLeft;
     private float limitXRight;
+    private bool inPos;
 
     //Constants
     private float DEFAULT_HEIGHT = 1.32f;
@@ -48,22 +48,22 @@ public class SeabeeController : MonoBehaviour
     {
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
+        ui = GameObject.FindObjectsOfType<UIController>()[0];
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         facingLeft = true;
         cooldown = 0;
         stun = 0;
-        spacingX = 1.8f;
-        spacingY = 1.0f;
-        health = 5;
-        inPosX = false;
-        inPosY = false;
+        //Stun for the miniboss version
+        swarmStun = 0;
+        health = 10;
+        inPos = false;
         height = 0.0f;
         running = false;
         untilAttack = Random.Range(6, 16);
         attackPrimed = 0;
         attackDistance = 0.0f;
 
-        targetHeight = 3.0f;
+        targetHeight = 0.0f;
         targetX = player.GetPosition().x + Random.Range(-3.0f, 3.0f);
         targetZ = player.GetPosition().z + Random.Range(0.0f, 0.0004f);
 
@@ -82,6 +82,11 @@ public class SeabeeController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!ui.GameActive())
+        {
+            return;
+        }
+
         if (player.IsDead())
         {
             if (!running)
@@ -157,8 +162,7 @@ public class SeabeeController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, moveZ);
 
         //If in position choose new target or do attack
-        //TODO: Implement Free Will and methods to directly control a Seabee if FreeWill is disabled
-        if (movement == new Vector3(0.0f, 0.0f, 0.0f))
+        if (freeWill && movement == new Vector3(0.0f, 0.0f, 0.0f))
         {
             untilAttack--;
             if (untilAttack == 0 && !running)
@@ -252,6 +256,17 @@ public class SeabeeController : MonoBehaviour
                 ChooseTarget();
             }
         }
+        else if (!freeWill)
+        {
+            if (movement == new Vector3(0.0f, 0.0f, 0.0f))
+            {
+                inPos = true;
+            }
+            else
+            {
+                inPos = false;
+            }
+        }
         if (running)
         {
             RunningTarget();
@@ -267,6 +282,10 @@ public class SeabeeController : MonoBehaviour
         {
             stun--;
             movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+        if (swarmStun > 0)
+        {
+            swarmStun--;
         }
 
         //Add height if no Z movement
@@ -333,6 +352,12 @@ public class SeabeeController : MonoBehaviour
 
                 transform.position += new Vector3(dist * (facingLeft ? -1 : 1), -dist, 0.0f);
                 height -= dist;
+                if (height < 0)
+                {
+                    float diff = height;
+                    height = 0;
+                    transform.position += new Vector3(0.0f, 0.0f, diff * 0.01f);
+                }
                 attackDistance -= dist;
             }
 
@@ -344,12 +369,22 @@ public class SeabeeController : MonoBehaviour
             animator.SetTrigger("Fly");
         }
         cooldown = 0;
-        ChooseTarget();
+        if (freeWill)
+        {
+            ChooseTarget();
+        }
     }
 
     private IEnumerator DropRoutine()
     {
         int i = 0;
+        if (!freeWill && health > 0)
+        {
+            float diff = (limitYTop - limitYBottom) / 2;
+            float diffZ = diff * 0.01f;
+            transform.position += new Vector3(0.0f, 0.0f, -diffZ);
+            height += diff;
+        }
         while (attackDistance > 0)
         {
             if (stun > 0)
@@ -373,22 +408,19 @@ public class SeabeeController : MonoBehaviour
             i++;
             yield return new WaitForFixedUpdate();
         }
-        if (stun == 0 && animator.GetCurrentAnimatorStateInfo(0).IsName("Swoop"))
-        {
-            animator.SetTrigger("Fly");
-            cooldown = 0;
-            ChooseTarget();
-        }
-        else
+        if (stun == 0)
         {
             animator.SetTrigger("Stuck");
             stuck = true;
-            ChooseTarget();
+            if (freeWill)
+            {
+                ChooseTarget();
+            }
             for (i = 0; i < 20; i++)
             {
                 yield return new WaitForFixedUpdate();
             }
-            bool loseBarb = Random.Range(0.0f, 1.0f) > (((health / 5.0f) / 2) + ((Random.Range(0.0f, 1.0f) / 2))) ? true : false;
+            bool loseBarb = Random.Range(0.0f, 1.0f) > (((health / 5.0f) / 2) + ((Random.Range(0.0f, 1.0f) / 2))) + (freeWill ? 0 : 999) ? true : false;
             if (loseBarb)
             {
                 animator.SetTrigger("Lose Barb");
@@ -458,7 +490,6 @@ public class SeabeeController : MonoBehaviour
             targetY = limitYTop;
         }
         BindTargetY(targetY);
-        Debug.Log("X: "+targetX+", Z: "+targetZ);
     }
 
     public void SwoopHitbox()
@@ -485,33 +516,54 @@ public class SeabeeController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (stun == 0)
+        if (stun == 0 && swarmStun == 0)
         {
-            facingLeft = packet.getDirection();
+            if (freeWill)
+            {
+                facingLeft = packet.getDirection();
+                //Bandaid fix for letting swarm have more health
+                if (health > 5)
+                {
+                    health = 5;
+                }
+            }
             transform.localScale = new Vector3((facingLeft ? 1.0f : -1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
             stun = 20;
             //Don't stick around too long
-            if (!stuck)
+            if (!stuck && freeWill)
             {
                 cooldown = 0;
             }
+            int actualDamage = health;
             health -= packet.getDamage();
             if (health <= 0)
             {
                 stun = 9999;
                 animator.SetTrigger("Die");
-                //More points if not running
-                GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(100L + (running ? 0L : 300L));
+                if (freeWill)
+                {
+                    ui.UpdateScore(100L + (running ? 0L : 300L));
+                }
                 StartCoroutine(DeathRoutine());
             }
             else
             {
-                if (!stuck)
+                actualDamage = actualDamage - health;
+                if (!stuck && freeWill)
                 {
                     animator.SetTrigger("Stun");
                     StartCoroutine(StunRoutine());
                 }
+                if (!freeWill)
+                {
+                    stun = 0;
+                    swarmStun = 10;
+                }
                 StartCoroutine(BlinkRoutine());
+            }
+            if (!freeWill)
+            {
+                transform.parent.gameObject.SendMessage("Hurt", actualDamage);
             }
         }
     }
@@ -553,7 +605,69 @@ public class SeabeeController : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
         }
-        Destroy(gameObject);
+
+        if (freeWill)
+        {
+            Destroy(gameObject);
+            stun = 99999;
+            //Give 'em a half hour of stun so that they stay down
+        }
     }
 
+    public void SetParent(Transform parent)
+    {
+        transform.parent = parent;
+    }
+
+    public void SetNewTarget(float x, float z, float h)
+    {
+        targetX = x;
+        targetZ = z;
+        targetHeight = h;
+    }
+
+    public void SetNewTarget(float x, float y)
+    {
+        targetX = x;
+        BindTargetY(y);
+    }
+
+    public void SetDirection(bool facingLeft)
+    {
+        this.facingLeft = facingLeft;
+    }
+
+    public void SetCooldown(int cooldown)
+    {
+        this.cooldown = cooldown;
+    }
+
+    public bool IsInPosition()
+    {
+        return health <= 0 || (inPos && cooldown == 0 && swarmStun == 0);
+    }
+
+    public void SetAttackDistance(float attack)
+    {
+        attackDistance = attack;
+    }
+
+    public void TriggerSwoop()
+    {
+        cooldown = 999;
+        animator.SetTrigger("Swoop");
+        StartCoroutine(SwoopRoutine());
+    }
+
+    public void TriggerDrop()
+    {
+        cooldown = 999;
+        animator.SetTrigger("Drop");
+        StartCoroutine(DropRoutine());
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -121,10 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitbox: {fileID: 8074193040407761209, guid: c6bb771747718bf46863d1a428900ef4, type: 3}
   barb: {fileID: 1699995378676602244, guid: 0fcf8ce932a7fc945b4314a319c00d87, type: 3}
+  freeWill: 1
   speed: 0.15
   limitYTop: -1.7
   limitYBottom: -5
-  shootChance: 0.33
+  shootChance: 0.25
 --- !u!1001 &8729348164915177394
 PrefabInstance:
   m_ObjectHideFlags: 0

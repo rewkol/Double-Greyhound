@@ -96,6 +96,12 @@ public class FjellriverController : MonoBehaviour
         }
     }
 
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
+
+
     void Update()
     {
 

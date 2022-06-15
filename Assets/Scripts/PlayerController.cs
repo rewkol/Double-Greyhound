@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private float comboCounter;
     private List<FlightInstruction> flightProgram;
     private List<HitboxController> activeHitboxes;
+    private FjellriverController axeInstance;
+    private bool axeInstanced;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
         //Initialize all the flags, timers, etc.
         facingLeft = false;
         downed = false;
-        special = 0;
+        special = 1;
         cooldown = 0;
         punchPushed = false;
         comboCounter = 0.0f;
@@ -68,12 +70,14 @@ public class PlayerController : MonoBehaviour
         specialCooldown = 0;
         specialPushed = false;
         specialChangePushed = false;
-        specialUnlocked = 0;
+        specialUnlocked = 1;
         stun = 0;
         doStun = true;
         health = 20;
         flightProgram = new List<FlightInstruction>();
         activeHitboxes = new List<HitboxController>();
+        axeInstance = null;
+        axeInstanced = false;
 
 
         //Get camera position to limit x movement
@@ -170,6 +174,10 @@ public class PlayerController : MonoBehaviour
         if (specialCooldown > 0)
         {
             specialCooldown--;
+            if (specialCooldown == 85 && axeInstanced)
+            {
+                axeInstanced = false;
+            }
         }
         if (stun > 0)
         {
@@ -281,6 +289,8 @@ public class PlayerController : MonoBehaviour
             doStun = false;
             FjellriverController axe = Instantiate(fjellriver, transform.position + new Vector3(-0.426f * 6.0f * (facingLeft? -1.0f : 1.0f), 0.15f * 6.0f, 0.0001f), transform.rotation);
             axe.SetDirection(facingLeft);
+            axeInstanced = true;
+            axeInstance = axe;
             specialCooldown = 135;
         }
         else if (special == 2)
@@ -317,6 +327,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
             activeHitboxes.Clear();
+
+            //Get rid of Fjellriver Controller
+            if (axeInstanced)
+            {
+                axeInstance.Destroy();
+                axeInstanced = false;
+            }
 
             comboCounter += damage;
             if (comboCounter >= 3.0f)
