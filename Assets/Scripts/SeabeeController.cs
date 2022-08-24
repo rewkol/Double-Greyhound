@@ -65,7 +65,7 @@ public class SeabeeController : MonoBehaviour
 
         targetHeight = 0.0f;
         targetX = player.GetPosition().x + Random.Range(-3.0f, 3.0f);
-        targetZ = player.GetPosition().z + Random.Range(0.0f, 0.0004f);
+        targetZ = player.GetPosition().z + Random.Range(0.042f, 0.048f);
 
         //Add height to Y position without changing Z. Height and Z can both change, and both affect where Y on screen is
         transform.position = new Vector3(transform.position.x, limitYTop + DEFAULT_HEIGHT + height, -1.0f);
