@@ -437,11 +437,11 @@ public class SwarmController : MonoBehaviour
                 }
             case 2:
                 {
-                    bees[0].SetNewTarget(leftX - 6.0f, centreX - 2.0f);
-                    bees[1].SetNewTarget(leftX - 6.0f, centreX - 2.0f);
-                    bees[2].SetNewTarget(Random.Range(0.0f, 1.0f) > 0.5f ? leftX - 6.0f : rightX + 6.0f, centreX - 2.0f);
-                    bees[3].SetNewTarget(rightX + 6.0f, centreX - 2.0f);
-                    bees[4].SetNewTarget(rightX + 6.0f, centreX - 2.0f);
+                    bees[0].SetNewTarget(leftX - 6.0f, centreY - 2.0f);
+                    bees[1].SetNewTarget(leftX - 6.0f, centreY - 2.0f);
+                    bees[2].SetNewTarget(Random.Range(0.0f, 1.0f) > 0.5f ? leftX - 6.0f : rightX + 6.0f, centreY - 2.0f);
+                    bees[3].SetNewTarget(rightX + 6.0f, centreY - 2.0f);
+                    bees[4].SetNewTarget(rightX + 6.0f, centreY - 2.0f);
                     break;
                 }
             case 3:
@@ -452,7 +452,7 @@ public class SwarmController : MonoBehaviour
                     }
                     for (int i = 1; i < 5; i += 2)
                     {
-                        bees[i].SetNewTarget(leftX - 6.0f, centreX - 2.0f);
+                        bees[i].SetNewTarget(leftX - 6.0f, centreY - 2.0f);
                     }
                     break;
                 }
@@ -464,7 +464,7 @@ public class SwarmController : MonoBehaviour
                     }
                     for (int i = 1; i < 5; i += 2)
                     {
-                        bees[i].SetNewTarget(rightX + 6.0f, centreX - 2.0f);
+                        bees[i].SetNewTarget(rightX + 6.0f, centreY - 2.0f);
                     }
                     break;
                 }
@@ -494,11 +494,11 @@ public class SwarmController : MonoBehaviour
                 }
             case 7:
                 {
-                    bees[0].SetNewTarget(rightX + 6.0f, centreX - 2.0f);
-                    bees[1].SetNewTarget(leftX - 6.0f, centreX - 2.0f);
-                    bees[2].SetNewTarget(Random.Range(0.0f, 1.0f) > 0.5f ? leftX - 6.0f : rightX + 6.0f, centreX - 2.0f);
-                    bees[3].SetNewTarget(rightX + 6.0f, centreX - 2.0f);
-                    bees[4].SetNewTarget(leftX - 6.0f, centreX - 2.0f);
+                    bees[0].SetNewTarget(rightX + 6.0f, centreY - 2.0f);
+                    bees[1].SetNewTarget(leftX - 6.0f, centreY - 2.0f);
+                    bees[2].SetNewTarget(Random.Range(0.0f, 1.0f) > 0.5f ? leftX - 6.0f : rightX + 6.0f, centreY - 2.0f);
+                    bees[3].SetNewTarget(rightX + 6.0f, centreY - 2.0f);
+                    bees[4].SetNewTarget(leftX - 6.0f, centreY - 2.0f);
                     break;
                 }
         }

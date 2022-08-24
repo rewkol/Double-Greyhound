@@ -123,8 +123,8 @@ MonoBehaviour:
   barb: {fileID: 1699995378676602244, guid: 0fcf8ce932a7fc945b4314a319c00d87, type: 3}
   freeWill: 1
   speed: 0.15
-  limitYTop: -1.7
-  limitYBottom: -5
+  limitYTop: -1.08
+  limitYBottom: -4.49
   shootChance: 0.25
 --- !u!1001 &8729348164915177394
 PrefabInstance:

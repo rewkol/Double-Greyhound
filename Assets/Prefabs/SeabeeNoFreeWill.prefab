@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: freeWill
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8729348163549144904, guid: fc17037bf4ef12340b177bbc56652cfa, type: 3}
+      propertyPath: limitYTop
+      value: -1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729348163549144904, guid: fc17037bf4ef12340b177bbc56652cfa, type: 3}
+      propertyPath: limitYBottom
+      value: -4.49
+      objectReference: {fileID: 0}
     - target: {fileID: 8729348163549144908, guid: fc17037bf4ef12340b177bbc56652cfa, type: 3}
       propertyPath: m_Name
       value: SeabeeNoFreeWill
