@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (stun == 0)
+        if (stun == 0 && ui.GameActive())
         {
             int damage = packet.getDamage();
             facingLeft = packet.getDirection();

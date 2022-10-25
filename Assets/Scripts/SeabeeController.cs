@@ -464,7 +464,7 @@ public class SeabeeController : MonoBehaviour
     {
         running = true;
         FlyingBarbController proj = Instantiate(barb, transform.position + new Vector3(1.2f * (facingLeft ? -1 : 1), 0.0f, 0.0f), transform.rotation);
-        proj.SetDirection(facingLeft);
+        proj.SetDirection(facingLeft ? -2 : 0);
         RunningTarget();
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlyingBarbController : MonoBehaviour
 {
     private Transform transform;
-    private bool facingLeft;
+    private int direction;
     private bool hit;
     private int count;
 
@@ -16,22 +16,19 @@ public class FlyingBarbController : MonoBehaviour
         hit = false;
         count = 0;
 
-        if (!facingLeft)
-        {
-            transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
-        }
+        TurnBarb(direction);
     }
 
     void FixedUpdate()
     {
         if (!hit)
         {
-            transform.position += new Vector3(0.2f * (facingLeft ? -1 : 1), 0.0f, 0.0f);
+            transform.position += new Vector3(0.2f * ((direction + 1) % 2), 0.15f * (direction % 2), 0.0f);
             count++;
         }
         else
         {
-            transform.position += new Vector3((count < 40 ? ((40 - count) / 40.0f) * 0.2f : 0.0f) * (facingLeft ? -1 : 1), (count < 40 ? (count / 40.0f) * -0.2f : -0.2f), 0.0f);
+            transform.position += new Vector3((count < 40 ? ((40 - count) / 40.0f) * 0.2f : 0.0f) * ((direction + 1) % 2), (count < 40 ? (count / 40.0f) * -0.2f : -0.2f), 0.0f);
             count++;
         }
 
@@ -49,13 +46,28 @@ public class FlyingBarbController : MonoBehaviour
         if (hitbox != null)
         {
             Destroy(hitbox.gameObject);
-            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f * (facingLeft ? 1 : -1));
+            transform.localScale = new Vector3(6.0f, 6.0f, 1.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f * (direction == -1 ? 3.0f : 1.0f));
         }
     }
 
-    public void SetDirection(bool facingLeft)
+    public void SetDirection(int direction)
     {
-        this.facingLeft = facingLeft;
+        // Directions: 1 == up, 0 == right, -1 == down, -2 == left
+        this.direction = direction;
+        TurnBarb(direction);
+    }
+
+    private void TurnBarb(int direction)
+    {
+        if (direction != 0)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f * (direction + 2));
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
+        }
     }
 
     // Update is called once per frame
