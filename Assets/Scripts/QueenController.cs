@@ -89,12 +89,12 @@ public class QueenController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
-        ChooseTarget();
 
         // Reset limits
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXMid = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
+        ChooseTarget();
     }
 
     // Update is called once per frame
@@ -249,8 +249,8 @@ public class QueenController : MonoBehaviour
                 }
                 // Can only start pointing in a jump if not nearing the edge of the screen
                 if (pointTimer == 0 
-                    && ((jumpDirection == 1 && transform.position.x > limitXLeft + 2.0f) 
-                    || (jumpDirection == -1 && transform.position.x < limitXRight - 2.0f)))
+                    && ((jumpDirection == 1 && transform.position.x > limitXLeft + 5.5f) 
+                    || (jumpDirection == -1 && transform.position.x < limitXRight - 5.5f)))
                 {
                     StartCoroutine(JumpingPointRoutine());
                     // Lock out the pointTimer so it doesn't infinitely set off
@@ -650,7 +650,7 @@ public class QueenController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("Land");
-        cooldown = 70;
+        cooldown = 80;
         kicking = false;
     }
 
@@ -700,6 +700,7 @@ public class QueenController : MonoBehaviour
     private IEnumerator DeathRoutine()
     {
         animator.SetTrigger("Die");
+        ui.UpdateScore(15000L);
         ui.StartManualCutscene();
         // If in the air, land near player y position
         if (jumping || kicking)

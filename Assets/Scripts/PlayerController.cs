@@ -205,6 +205,8 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Stand");
             movement = new Vector3(0.0f, 0.0f, 0.0f);
             flightProgram.AddRange(PlayerInstructionSets.GetStandingInstructions());
+            // Sometimes this gets retriggered while still down. Stop that!
+            animator.ResetTrigger("Knockback");
         }
 
         transform.position = transform.position + (movement * speed);
