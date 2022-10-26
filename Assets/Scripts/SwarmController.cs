@@ -92,7 +92,8 @@ public class SwarmController : MonoBehaviour
         topY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).y;
         bottomY = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 1.0f, transform.position.z - Camera.main.transform.position.z)).y;
         centreX = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.z - Camera.main.transform.position.z)).x;
-        centreY = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.z - Camera.main.transform.position.z)).y;
+        // Adding the DEFAULT_HEIGHT from Seabee because I have removed it from Seabee
+        centreY = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, transform.position.z - Camera.main.transform.position.z)).y + 1.32f;
         
         //Post dialogue target
         for (int i = 0; i < 5; i++)

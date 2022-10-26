@@ -68,7 +68,7 @@ public class SeabeeController : MonoBehaviour
         targetZ = player.GetPosition().z + Random.Range(0.042f, 0.048f);
 
         //Add height to Y position without changing Z. Height and Z can both change, and both affect where Y on screen is
-        transform.position = new Vector3(transform.position.x, limitYTop + DEFAULT_HEIGHT + height, -1.0f);
+        transform.position = new Vector3(transform.position.x, limitYTop + height, -1.0f);
 
         nextAttackSwoop = false;
         if (Random.Range(0.0f, 1.0f) < 0.5f)
@@ -299,7 +299,7 @@ public class SeabeeController : MonoBehaviour
 
     private void ChooseTarget()
     {
-        float space = Random.Range(0.0f, 1.0f) <= 0.95f ? 3.0f : 0.0f;
+        float space = Random.Range(0.0f, 1.0f) <= 0.95f ? 4.5f : 0.0f;
         if (transform.position.x < player.GetPosition().x)
         {
             targetX = player.GetPosition().x + Random.Range(1.0f, 3.0f);
@@ -364,7 +364,7 @@ public class SeabeeController : MonoBehaviour
             i++;
             yield return new WaitForFixedUpdate();
         }
-        if (stun == 0 && animator.GetCurrentAnimatorStateInfo(0).IsName("Swoop"))
+        if (stun == 0 && animator.GetCurrentAnimatorStateInfo(0).IsName("SeabeeSwoop"))
         {
             animator.SetTrigger("Fly");
         }
@@ -464,7 +464,7 @@ public class SeabeeController : MonoBehaviour
     {
         running = true;
         FlyingBarbController proj = Instantiate(barb, transform.position + new Vector3(1.2f * (facingLeft ? -1 : 1), 0.0f, 0.0f), transform.rotation);
-        proj.SetDirection(facingLeft);
+        proj.SetDirection(facingLeft ? -2 : 0);
         RunningTarget();
     }
 
@@ -483,7 +483,7 @@ public class SeabeeController : MonoBehaviour
         }
         if (player.GetPosition().y > midY)
         {
-            targetY = limitYBottom;
+            targetY = limitYBottom ;
         }
         else
         {
@@ -591,7 +591,8 @@ public class SeabeeController : MonoBehaviour
     private IEnumerator DeathRoutine()
     {
         gameObject.tag = "Untagged";
-        float toFall = DEFAULT_HEIGHT + height;
+        // Little extra to ensure they trigger the fall and don't appear to high up
+        float toFall = height + (height > 0 ? DEFAULT_HEIGHT : 0.7f);
         int i = 0;
         while(toFall > 0.0f)
         {

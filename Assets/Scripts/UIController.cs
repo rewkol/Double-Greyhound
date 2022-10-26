@@ -579,6 +579,17 @@ public class UIController : MonoBehaviour
         StartCoroutine(CameraRoutine());
     }
 
+    //Allows other controllers to force UIMode 2 so they can create their own custom cutscenes
+    public void StartManualCutscene()
+    {
+        UIMode = 2;
+    }
+
+    public void EndManualCutscene()
+    {
+        UIMode = 0;
+    }
+
     private IEnumerator CameraRoutine()
     {
         for (int i = 0; i < 50; i++)

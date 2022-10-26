@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// THIS COULD HAVE ALL BEEN DONE IN THE ANIMATION SYSTEM!!! DON'T BREAK IT THOUGH
+//
 //Throwing all FlightInstruction sets into their own files so as not to clutter up the main controllers
 //I could save these out to files that get parsed or whatever, but honestly who cares and this will
 //Get compiled down into binary (I could also do some fun bitwise stuff manually, but this isn't 1985 anymore)
