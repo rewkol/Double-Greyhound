@@ -422,7 +422,7 @@ public class UIController : MonoBehaviour
         scoreText.text = newText + number;
     }
 
-    private void UpdateSpecial(int special)
+    public void UpdateSpecial(int special)
     {
         if(special > 0)
         {
