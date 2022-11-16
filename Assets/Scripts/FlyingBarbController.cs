@@ -28,7 +28,7 @@ public class FlyingBarbController : MonoBehaviour
         }
         else
         {
-            transform.position += new Vector3((count < 40 ? ((40 - count) / 40.0f) * 0.2f : 0.0f) * ((direction + 1) % 2), (count < 40 ? (count / 40.0f) * -0.2f : -0.2f), 0.0f);
+            transform.position += new Vector3(-1 * (count < 40 ? ((40 - count) / 40.0f) * 0.2f : 0.0f) * ((direction + 1) % 2), (count < 40 ? (count / 40.0f) * -0.2f : -0.2f), 0.0f);
             count++;
         }
 

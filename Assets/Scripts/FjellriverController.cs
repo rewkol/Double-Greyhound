@@ -43,7 +43,6 @@ public class FjellriverController : MonoBehaviour
     {
         if (count == 42)
         {
-            player.SetStunnable(true);
             GetComponent<Transform>().Find("Hit1").gameObject.SetActive(true);
             GetComponent<Transform>().Find("Hit2").gameObject.SetActive(true);
         }
