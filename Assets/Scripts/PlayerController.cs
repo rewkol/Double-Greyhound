@@ -533,6 +533,14 @@ public class PlayerController : MonoBehaviour
         return transform.position;
     }
 
+    /**
+     * Only to be used for the most extreme situations!!!
+     */
+    public void ForcePosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+
     public int GetHealth()
     {
         return health;
