@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public PlayerController player;
-    public ParallaxBGController parallax;
+    private ParallaxBGController[] parallaxes;
 
     private Transform transform;
 
@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         transform = GetComponent<Transform>();
+
+        parallaxes = GameObject.FindObjectsOfType<ParallaxBGController>();
     }
 
     // Update is called once per frame
@@ -26,13 +28,19 @@ public class CameraController : MonoBehaviour
         {
             float dist = player.transform.position.x - transform.position.x;
             transform.position = transform.position + new Vector3(dist, 0.0f, 0.0f);
-            parallax.Move(dist, transform.position.x);
+            for (int i = 0; i < parallaxes.Length; i++)
+            {
+                parallaxes[i].Move(dist, transform.position.x);
+            }
         }
     }
 
     // WHen someone else controls the camera the parallax can get broken
     public void ForceUpdate(float dist)
     {
-        parallax.Move(dist, transform.position.x);
+        for (int i = 0; i < parallaxes.Length; i++)
+        {
+            parallaxes[i].Move(dist, transform.position.x);
+        }
     }
 }
