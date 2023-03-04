@@ -43,4 +43,14 @@ public class CameraController : MonoBehaviour
             parallaxes[i].Move(dist, transform.position.x);
         }
     }
+
+    public void ForcePosition(float x)
+    {
+        transform.position = new Vector3(x, transform.position.y, transform.position.z);
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 }

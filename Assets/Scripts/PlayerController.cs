@@ -341,6 +341,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(KnockbackRoutine());
                 ui.SaveHighScore();
                 health = 0;
+                ui.PlayerHealthBar(health);
             }
             else
             {
@@ -599,5 +600,32 @@ public class PlayerController : MonoBehaviour
     public void SetUnstunnable()
     {
         this.doStun = false;
+    }
+
+    /**
+     * For animating the STM cutscenes
+     */
+    public void KnockbackAnimation()
+    {
+        //This only gets called in one place so we can assume positions are constant
+        //Make sure always visible after being hit
+        if (transform.position.x < 38.0f)
+        {
+            facingLeft = true;
+            transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
+        }
+        else if (transform.position.x > 40.0f)
+        {
+            facingLeft = false;
+            transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+        }
+        animator.SetTrigger("Knockback");
+        StartCoroutine(KnockbackRoutine());
+        ui.PlayerHealthBar(0);
+    }
+
+    public void KnockbackAnimationRecovery()
+    {
+        ui.PlayerHealthBar(health);
     }
 }
