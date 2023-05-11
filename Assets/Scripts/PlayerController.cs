@@ -312,8 +312,11 @@ public class PlayerController : MonoBehaviour
             {
                 //Clear cooldown so user can act immediately out of stun in case they used a move with huge cooldown before being stunned
                 cooldown = 0;
-                facingLeft = packet.getDirection();
-                transform.localScale = new Vector3((facingLeft ? -1.0f : 1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
+                if (damage > 0)
+                {
+                    facingLeft = packet.getDirection();
+                    transform.localScale = new Vector3((facingLeft ? -1.0f : 1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
+                }
                 //Above only applies if stun is being applied. Don't want to break stunless mvoes
             }
 
@@ -343,22 +346,37 @@ public class PlayerController : MonoBehaviour
                 health = 0;
                 ui.PlayerHealthBar(health);
             }
+            else if (health > 20)
+            {
+                StartCoroutine(HealthBlinkRoutine());
+                stun = 10;
+                health = 20;
+            }
             else
             {
-                StartCoroutine(BlinkRoutine());
-                comboCounter += damage;
-                if (comboCounter >= 3.0f)
+                // Allow 0 damage to cause stun too so that you can scare players
+                if (damage >= 0)
                 {
-                    animator.SetTrigger("Knockback");
-                    StartCoroutine(KnockbackRoutine());
-                    cooldown = 60;
-                    comboCounter = 0.0f;
+                    StartCoroutine(BlinkRoutine());
+                    comboCounter += damage;
+                    if (comboCounter >= 3.0f)
+                    {
+                        animator.SetTrigger("Knockback");
+                        StartCoroutine(KnockbackRoutine());
+                        cooldown = 60;
+                        comboCounter = 0.0f;
+                    }
+                    else if (doStun)
+                    {
+                        animator.SetTrigger("Stun");
+                        stun = 15;
+                        StartCoroutine(StunRoutine());
+                    }
                 }
-                else if (doStun)
+                else
                 {
-                    animator.SetTrigger("Stun");
-                    stun = 15;
-                    StartCoroutine(StunRoutine());
+                    StartCoroutine(HealthBlinkRoutine());
+                    stun = 10;
                 }
                 ui.PlayerHealthBar(health);
             }
@@ -386,6 +404,16 @@ public class PlayerController : MonoBehaviour
     private IEnumerator BlinkRoutine()
     {
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 0.0f, 0.0f, 1.0f);
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);
+    }
+
+    private IEnumerator HealthBlinkRoutine()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(0.5f, 1.0f, 0.5f, 1.0f);
         for (int i = 0; i < 10; i++)
         {
             yield return new WaitForFixedUpdate();

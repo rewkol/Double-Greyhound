@@ -82,11 +82,6 @@ public class SeabeeController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!ui.GameActive())
-        {
-            return;
-        }
-
         if (player.IsDead())
         {
             if (!running)
@@ -107,6 +102,12 @@ public class SeabeeController : MonoBehaviour
             }
             return;
         }
+
+        if (!ui.GameActive())
+        {
+            return;
+        }
+
         //Movement code
         float moveHorizontal = targetX - transform.position.x;
         float moveVertical = (targetZ - transform.position.z) * 100.0f;

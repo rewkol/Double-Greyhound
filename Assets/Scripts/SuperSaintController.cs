@@ -26,6 +26,8 @@ public class SuperSaintController : MonoBehaviour
     private bool inPosY;
     private int health;
     private PlayerController player;
+    private float limitXLeft;
+    private float limitXRight;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,10 @@ public class SuperSaintController : MonoBehaviour
         health = 4;
         inPosX = false;
         inPosY = false;
+
+        //Get camera position to limit x movement
+        limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
+        limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
     }
 
     void FixedUpdate()
@@ -158,7 +164,7 @@ public class SuperSaintController : MonoBehaviour
         transform.position = transform.position + (movement * speed);
 
         //Attack code
-        if (inPosX && inPosY && cooldown == 0 && stun == 0 && attackCycle == 0 && !player.StopChasing())
+        if (inPosX && inPosY && cooldown == 0 && stun == 0 && attackCycle == 0 && !player.StopChasing() && limitXLeft + 0.7f < transform.position.x && limitXRight - 0.7f > transform.position.x)
         {
             animator.SetTrigger("Throw");
             cooldown = 110;
@@ -188,7 +194,7 @@ public class SuperSaintController : MonoBehaviour
             {
                 stun = 9999;
                 animator.SetTrigger("Dead");
-                GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(200L);
+                GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(900L);
                 StartCoroutine(DeathRoutine());
             }
             else
