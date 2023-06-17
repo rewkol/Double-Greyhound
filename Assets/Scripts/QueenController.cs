@@ -756,5 +756,7 @@ public class QueenController : MonoBehaviour
         ui.DisplayDialogue("QueenHeadshot", "We can see how you have managed|to come so far all by yourself.|But you should not go through|this trial alone - we shall help you.|As a mother and as Queen,|our gossip network spreads far.|We know where your trophies are hidden.|We shall send you with haste back Uptown.|Your rivals await!");
         ui.BossExit();
         ui.PrimeTransition("STM");
+
+        ui.SaveGameState(false, 2);
     }
 }
