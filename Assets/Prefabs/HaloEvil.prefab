@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7819172996626160444
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594444, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594446, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_Name
+      value: HaloEvil
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594447, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594447, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206953742019594447, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}

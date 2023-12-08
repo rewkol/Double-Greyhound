@@ -44,6 +44,7 @@ public class CherubimController : MonoBehaviour
         {
             StartCoroutine(HeadTurnRoutine());
         }
+        StartCoroutine(FlyingAnimationRoutine());
     }
 
     // Update is called once per frame
@@ -228,5 +229,40 @@ public class CherubimController : MonoBehaviour
     public void SpawnRandom()
     {
         transform.position = new Vector3(transform.position.x, player.GetPosition().y + Random.Range(2.0f, 12.0f), -1.0f);
+    }
+
+    private IEnumerator FlyingAnimationRoutine()
+    {
+        while(true)
+        {
+            for(int i = 0; i < 25; i++)
+            {
+                if (i == 4)
+                {
+                    transform.position += new Vector3(0.0f, 0.05f, 0.0f);
+                }
+                if (i == 8)
+                {
+                    transform.position += new Vector3(0.0f, 0.05f, 0.0f);
+                }
+                if (i == 12)
+                {
+                    transform.position += new Vector3(0.0f, -0.025f, 0.0f);
+                }
+                if (i == 16)
+                {
+                    transform.position += new Vector3(0.0f, -0.025f, 0.0f);
+                }
+                if (i == 20)
+                {
+                    transform.position += new Vector3(0.0f, -0.025f, 0.0f);
+                }
+                if (i == 24)
+                {
+                    transform.position += new Vector3(0.0f, -0.025f, 0.0f);
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 215611033652948495, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
       propertyPath: m_Name
-      value: Enemy Hurtbox
+      value: Enemy Hurtbox Variant
       objectReference: {fileID: 0}
     - target: {fileID: 215611033652948495, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
       propertyPath: m_TagString
@@ -20,12 +20,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2142914044920638064, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2348053
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142914044920638064, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6628667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142914044920638064, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.6351546
+      value: -0.00699
       objectReference: {fileID: 0}
     - target: {fileID: 2142914044920638064, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8723587
+      value: -0.01579
       objectReference: {fileID: 0}
     - target: {fileID: 2142914044920638064, guid: 5b78c9e73d293e34b9688437919ed58b, type: 3}
       propertyPath: m_LocalPosition.z

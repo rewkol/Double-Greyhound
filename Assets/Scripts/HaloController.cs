@@ -46,6 +46,11 @@ public class HaloController : MonoBehaviour
         facingLeft = left;
     }
 
+    public bool GetDirection()
+    {
+        return this.facingLeft;
+    }
+
     public void SetAsEnemy(bool enemy)
     {
         transform = GetComponent<Transform>();
@@ -63,6 +68,11 @@ public class HaloController : MonoBehaviour
             Transform hurtbox = transform.Find("HaloHurtbox");
             Destroy(hurtbox.gameObject);
         }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return this.transform.position;
     }
 
     // Update is called once per frame

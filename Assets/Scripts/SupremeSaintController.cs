@@ -140,7 +140,8 @@ public class SupremeSaintController : MonoBehaviour
         // Keep spawning rings until the player is close enough for a punch, or defeated boss
         while (health > 0 && transform.position.x - player.GetPosition().x >= spacingX)
         {
-            Instantiate(ring, transform.position + new Vector3(0.0f, 0.0f, 0.01f), transform.rotation);
+            RingAuraController instance = Instantiate(ring, transform.position + new Vector3(0.0f, 0.0f, 0.01f), transform.rotation);
+            instance.SetDirection(true);
             for (int i = 0; i < ((health > 40) ? 100 : 90); i++)
             {
                 if (health <= 0 || transform.position.x - player.GetPosition().x < spacingX)
