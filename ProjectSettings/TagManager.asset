@@ -13,6 +13,7 @@ TagManager:
   - UITextBox
   - UIStatus
   - UIScore
+  - Puppet
   layers:
   - Default
   - TransparentFX

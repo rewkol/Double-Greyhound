@@ -9,6 +9,9 @@ public class RingAuraController : MonoBehaviour
     private Animator animatorBottom;
 
     private int i;
+    private bool goesLeft;
+    private bool manual;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +21,24 @@ public class RingAuraController : MonoBehaviour
         transform.Find("GroundHitbox").gameObject.SetActive(false);
         i = 0;
 
-        // Make sure height is right
-        float deltaY = 1.80f - transform.position.y;
-        float deltaZ = -1.016f - transform.position.z;
-        transform.position = transform.position + new Vector3(0.0f, deltaY, deltaZ);
-
-        if (Random.Range(0.0f, 1.0f) < 0.33f)
+        if (manual)
         {
-            Ground();
+            transform.Find("GroundHitbox").gameObject.SetActive(true);
+            transform.Find("SkyHitbox").gameObject.SetActive(false);
+            animatorTop.SetTrigger("Grounded");
+            animatorBottom.SetTrigger("Grounded");
+        }
+        else
+        {
+            // Make sure height is right
+            float deltaY = 1.80f - transform.position.y;
+            float deltaZ = -1.016f - transform.position.z;
+            transform.position = transform.position + new Vector3(0.0f, deltaY, deltaZ);
+
+            if (Random.Range(0.0f, 1.0f) < 0.33f)
+            {
+                Ground();
+            }
         }
     }
 
@@ -45,7 +58,7 @@ public class RingAuraController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float x = -0.25f;
+        float x = -0.25f * (goesLeft ? 1.0f : -1.0f);
         if (i < 7)
         {
             x = 0.0f;
@@ -62,5 +75,19 @@ public class RingAuraController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetDirection(bool direction)
+    {
+        this.goesLeft = direction;
+        if (!direction)
+        {
+            GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+    }
+
+    public void LimitAir()
+    {
+        this.manual = true;
     }
 }

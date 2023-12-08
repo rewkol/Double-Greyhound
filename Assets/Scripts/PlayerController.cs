@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     private List<HitboxController> activeHitboxes;
     private FjellriverController axeInstance;
     private bool axeInstanced;
+    private HaloController haloInstance;
+    private bool haloWindup;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +81,8 @@ public class PlayerController : MonoBehaviour
         axeInstance = null;
         axeInstanced = false;
         doAnimation = false;
+        haloInstance = null;
+        haloWindup = false;
 
 
         //Get camera position to limit x movement
@@ -168,6 +172,16 @@ public class PlayerController : MonoBehaviour
             if (specialCooldown == 85 && axeInstanced)
             {
                 axeInstanced = false;
+            }
+            if (specialCooldown == 54 && haloWindup)
+            {
+                haloWindup = false;
+            }
+            // When cooldown is done we can forget about any instanced items
+            if (specialCooldown == 0)
+            {
+                axeInstance = null;
+                haloInstance = null;
             }
         }
         if (stun > 0)
@@ -300,6 +314,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Halo");
             cooldown = 22;
             specialCooldown = 76;
+            haloWindup = true;
         }
     }
 
@@ -337,6 +352,12 @@ public class PlayerController : MonoBehaviour
                 axeInstanced = false;
             }
 
+            // Clear Halo flag
+            if (haloWindup)
+            {
+                haloWindup = false;
+            }
+
             health -= damage;
             if (health <= 0)
             {
@@ -359,7 +380,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(BlinkRoutine());
                     comboCounter += damage;
-                    if (comboCounter >= 3.0f)
+                    if (comboCounter >= 3.0f && doStun)
                     {
                         animator.SetTrigger("Knockback");
                         StartCoroutine(KnockbackRoutine());
@@ -521,6 +542,7 @@ public class PlayerController : MonoBehaviour
         HaloController thrownHalo = Instantiate(halo, transform.position + new Vector3(1.0f * (facingLeft ? -1 : 1), 0.8f, 0.0f), transform.rotation);
         thrownHalo.SetDirection(facingLeft);
         thrownHalo.SetAsEnemy(false);
+        haloInstance = thrownHalo;
     }
 
     public void ChangeHurtbox(int hurtboxPosition)
@@ -630,6 +652,17 @@ public class PlayerController : MonoBehaviour
         this.doStun = false;
     }
 
+    public void FaceLeft(bool faceLeft)
+    {
+        this.facingLeft = faceLeft;
+        transform.localScale = new Vector3(6.0f * (faceLeft ? -1 : 1), transform.localScale.y, transform.localScale.z);
+    }
+
+    public bool IsFacingLeft()
+    {
+        return this.facingLeft;
+    }
+
     /**
      * For animating the STM cutscenes
      */
@@ -655,5 +688,25 @@ public class PlayerController : MonoBehaviour
     public void KnockbackAnimationRecovery()
     {
         ui.PlayerHealthBar(health);
+    }
+
+    public bool IsAxeInstanced()
+    {
+        return this.axeInstanced;
+    }
+
+    public FjellriverController GetAxeInstance()
+    {
+        return this.axeInstance;
+    }
+
+    public bool IsHaloWindup()
+    {
+        return this.haloWindup;
+    }
+
+    public HaloController GetHaloInstance()
+    {
+        return this.haloInstance;
     }
 }

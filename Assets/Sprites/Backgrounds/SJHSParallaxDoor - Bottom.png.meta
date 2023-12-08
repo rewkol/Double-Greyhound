@@ -1,0 +1,2676 @@
+fileFormatVersion: 2
+guid: a49eb15cd8395b34fb974240389ff09e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565cad1744f378547adc7f54d0e7fc86
+      internalID: -9821757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a4a82516e02474cb8080750c3044b9
+      internalID: 1728850808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_2
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7f0990aa396bb5499d190fbed4df0ea
+      internalID: 998413667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14983f608e6ed3d4bb27cfdc5a4d6636
+      internalID: -470053705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_4
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 945531d5f05ebbe43a3636842504d5a1
+      internalID: -274167601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_5
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ec045dd4e77bf148887143571919c6f
+      internalID: 1353072179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_6
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c73c23c0b6bbab45830b9acdfced992
+      internalID: -1659648789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_7
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a872808eb9032d4a934f9a400272a96
+      internalID: 1884775660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_8
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94e4636f06355a1408a4de0ff0e645f9
+      internalID: -2074875758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_9
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a606cbb10dbf70f4098b7e1af0c35fa5
+      internalID: -451600931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_10
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c637ef209b193244aa77eafc6e219d2a
+      internalID: -829842615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_11
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c155793abb488a147b82708fafc4a95a
+      internalID: 1437922006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_12
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc445c8e25dda0047880640ed99879eb
+      internalID: -806250289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_13
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e1282994893b8d43ba04cbbd782f95d
+      internalID: 1657941335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_14
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f5d102cf0c88c44ca80ca9859b91686
+      internalID: 868291698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_15
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a52f0f130215c4fa088e83e76a7d65
+      internalID: 305132590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_16
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94c4972df6dcb1a4aa09d670317fcb43
+      internalID: -1288813877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_17
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9b984e4e89833542864d1ee6d470d1c
+      internalID: -642041693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_18
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b76be2f50814249a9123d74802bd24
+      internalID: 1129283539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_19
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfa4194214f777248bb206f400a9dcf6
+      internalID: 1086247494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_20
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec77cffb2f7c404d89fb0b5fadbc60d
+      internalID: 947488192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_21
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffa16d92dd50537459035174b2564274
+      internalID: -948830772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_22
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 720
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07e3bbf737e58f4f8ea38dfc9a3752b
+      internalID: -1796243607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b990e0851d2e3b140b513e184c7978ca
+      internalID: 1810537994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_24
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee0daf0ef4038348a10062740fbab5b
+      internalID: -659048434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_25
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 373c832a7cb8acc46b22fbba2a863d33
+      internalID: -1506985204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_26
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d13717cfae589d44baedb3768f41e7bc
+      internalID: 1066930900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_27
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7397e2b906a282c4a90d8ce64873f3d6
+      internalID: 1998150581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_28
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adcddd38d55b1e44db2562eca119dd5b
+      internalID: -563564996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_29
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65b50c2fe8eba7644873565f3ddbec80
+      internalID: 899111895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_30
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 007d3bc8cbedccc4db0282cc73cff884
+      internalID: -1394584630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_31
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec33913c347a8749b8129812d7db681
+      internalID: 1494951342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_32
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b73cc61004cc83458d65c91c44e2667
+      internalID: 1691501009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_33
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee7b2a9ec9a9cb249bbf612315efb122
+      internalID: 1560259246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_34
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc01954aee541cd44b1bf4fae2eb1dd7
+      internalID: 1075803755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_35
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9ef33baeed1734bac17523c40756ea
+      internalID: -238375244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_36
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f811875530ca70047830a6caddc9666c
+      internalID: 1158545094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_37
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c670a8765649784b8764497e974e1f4
+      internalID: 1931638490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_38
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c5bfc1c39bef8d47a0b322ae28e87fe
+      internalID: -312022530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_39
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65bd55d1562f84043897be30f2d361df
+      internalID: -1558381597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_40
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c90a2a2e4d192f24b9eac85d2ed70425
+      internalID: -368246267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_41
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4fe25b945492b942bd0836ed5dbd7f1
+      internalID: 1147744207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_42
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94c304ed9a2c0740b4136b7a6cb7d68
+      internalID: -1803730498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_43
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82bbfe0d783f57f4393a760b36aa245b
+      internalID: -81983885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_44
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb12e1db13c75f4b892db9ea741e32d
+      internalID: 1826814306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_45
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 540
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 008574913ba3c5640b4871d4a78a64a1
+      internalID: -1508703487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1df7f3f15e58b1646b0e6cda1d5d9726
+      internalID: 1394637959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_47
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7641346a929343f478eae656a3250f1c
+      internalID: 1613009843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_48
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61135e796c2b08f468ea1e456fcb3a3c
+      internalID: -834169712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_49
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab69ec0052d6b574da25c0e5ef72d725
+      internalID: 394471536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_50
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c5d2f7b29f0b7c448897e52f5ac0b7c
+      internalID: -936821917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_51
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5459c06696f0d746a4255c2810594dd
+      internalID: -1768363367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_52
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31606f7e99729b749a4e4725c31c08c7
+      internalID: 199031823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_53
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951a7c3371dcb284a9a2ae30f727152e
+      internalID: 1620875983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_54
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1490ffb392cce347bf8f06e3daca308
+      internalID: -2055752863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_55
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95cd0dc21a2ce64b8add8bf21c256fa
+      internalID: -1491844388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_56
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83cda203f4e165e46a7684253b702992
+      internalID: -1737732070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_57
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbeef44117d87149bcf771445da96b7
+      internalID: 1677512704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_58
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 829e61bdde0c340449b121d6137115c3
+      internalID: -1438141824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_59
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd5efc06a019ca41b9a80c6be86ac87
+      internalID: 583389512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_60
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70b42eabb1e7ba349833abb86e82c5c1
+      internalID: 1052947667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_61
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35e6459f2895734a8bbc280398a4f47
+      internalID: 222922167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_62
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 279e4a142ef859c48832fa0f8c0ff09e
+      internalID: -1313620664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_63
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e3482a1a6abdec4c81582f2edea071d
+      internalID: -775279713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_64
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f962adce857bf429324a171a54ff1f
+      internalID: -1671246076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_65
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8828c86581ec49240a0b12c0492daff7
+      internalID: -1013925948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_66
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3141a122527cc649a11466b385c7fe0
+      internalID: 1707535351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_67
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a305e8f0536c32a4aaaa6426e098b2b2
+      internalID: -1297715725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_68
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 360
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f951e7e162480b5499f4495bfc571758
+      internalID: 538516423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_69
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f910d74661056ea40bc563660558f6d5
+      internalID: -1936064531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_70
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c98c5ef7b83b6b04b99ded1f091d2d3f
+      internalID: -713476048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_71
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ddc6e0d0a635e4988097124e22cc7c
+      internalID: -271572171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_72
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97b6b2c22a9503a4a8689bd8a897d9bf
+      internalID: -1453506281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_73
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a55e5b9e245f644d90d0c22fa7a7244
+      internalID: -905941014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_74
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb21ae7075b3e9444bdc9322045fe2bb
+      internalID: -629172299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_75
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dd23ef5756667d4ea48e8292dd7cac3
+      internalID: 1284574696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_76
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a67e2536d430fb4e9e1e11949aeca7b
+      internalID: -1068522299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_77
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d727a623cba5d84aa68686346881c17
+      internalID: -92141259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_78
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2a4ecd829312054894553d8a03c68d7
+      internalID: -1533249028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_79
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e2e0bff58187741a7f8af4d5c4aa2d
+      internalID: 1181898153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_80
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca6c13f22b29ad041a2f591a1ef7f1f0
+      internalID: -1058260150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_81
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2a2e2bea9eeac4591a6c8c23e14c94
+      internalID: -820967489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_82
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b82171e5f744ca4dbecd23bac8026d3
+      internalID: -824241793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_83
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2048e466c2823be4d920cabda2a90884
+      internalID: 1970557037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_84
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bfe814b00990dc41a8f80ec4bdd2ba2
+      internalID: 1269769368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_85
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7632038380965641b054a4e00df4f23
+      internalID: 162554253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_86
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 496ace6e54050ce489b612659ae7bc47
+      internalID: 1214861816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_87
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dce1086ebdc93a143b4ed247df59f81a
+      internalID: -770942568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_88
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7db3c04ced369554cbaa00c9309babb1
+      internalID: -454588374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_89
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b2afbd047554b4388796b8e590c733
+      internalID: -1123181706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_90
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c37e2cc99bf974ba0a3380cfb6f12a
+      internalID: -2140622504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_91
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 180
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35d7cf8516370194dacc13c4afe4f0aa
+      internalID: 93327789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32916a50a18f6ad4a920c60ec0d7942d
+      internalID: 1108562123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_93
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48391cfb3f272d479f6924ca3facb96
+      internalID: 866771590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_94
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d585cc02f3b2d74c85945c5f17c4493
+      internalID: -763264316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_95
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8efc6f014214dec4199cff9c369e3429
+      internalID: 534188906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_96
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc201e12951fa9438429a9f30ef171f
+      internalID: 1634434428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_97
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1745c06acd6f37a4db84509d0757fe62
+      internalID: -138397600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_98
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5119ff9943528234b8bf1a64cad93a6e
+      internalID: 1842732494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_99
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24303fb40f8a2c4f85425706471ef62
+      internalID: 1283515240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_100
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed18a4c7a4b2392409b837ba82948330
+      internalID: 2107470004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_101
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6430e02b4b86ed340b422a54f4d54f72
+      internalID: -289198315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_102
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d32779255e3884bbeccaa67e53ea3c
+      internalID: -1560982913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_103
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae508c9ebdfe3644ba75e501ac8b417
+      internalID: 2028399762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_104
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ae043b3192553240b110c9e7891e33a
+      internalID: 1961442439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_105
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469e185ecb976274fae247f1888ffbf2
+      internalID: -589570061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_106
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b226bc348a948b94fa8cb0db5302cba4
+      internalID: 2055301841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_107
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6adbf3c674eea534e8904da8925a00e8
+      internalID: 930639606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_108
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74bec07d7712ca4db11800e9a6a4bde
+      internalID: 1498913107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_109
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 331223471afe0094eb9c0b3e81847815
+      internalID: -1849493864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_110
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 378d99cc6265a9b4cbf5ad2d8abc0975
+      internalID: 870537125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_111
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6ebec5704bb7f4c84dd8d22c294c16
+      internalID: 1182626275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_112
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e88fe60d09812b0429aefb4573955a85
+      internalID: -737351429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_113
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88d512ed9c72c2f4aa5135bd81beffae
+      internalID: -1561794493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SJHSParallaxDoor - Bottom_114
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 0
+        width: 57
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a06d9fe2357314a99fd6b898e64940
+      internalID: -487313929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SJHSParallaxDoor - Bottom_70: -713476048
+      SJHSParallaxDoor - Bottom_48: -834169712
+      SJHSParallaxDoor - Bottom_76: -1068522299
+      SJHSParallaxDoor - Bottom_6: -1659648789
+      SJHSParallaxDoor - Bottom_72: -1453506281
+      SJHSParallaxDoor - Bottom_61: 222922167
+      SJHSParallaxDoor - Bottom_17: -642041693
+      SJHSParallaxDoor - Bottom_101: -289198315
+      SJHSParallaxDoor - Bottom_85: 162554253
+      SJHSParallaxDoor - Bottom_39: -1558381597
+      SJHSParallaxDoor - Bottom_102: -1560982913
+      SJHSParallaxDoor - Bottom_97: -138397600
+      SJHSParallaxDoor - Bottom_14: 868291698
+      SJHSParallaxDoor - Bottom_65: -1013925948
+      SJHSParallaxDoor - Bottom_98: 1842732494
+      SJHSParallaxDoor - Bottom_94: -763264316
+      SJHSParallaxDoor - Bottom_73: -905941014
+      SJHSParallaxDoor - Bottom_57: 1677512704
+      SJHSParallaxDoor - Bottom_83: 1970557037
+      SJHSParallaxDoor - Bottom_99: 1283515240
+      SJHSParallaxDoor - Bottom_103: 2028399762
+      SJHSParallaxDoor - Bottom_29: 899111895
+      SJHSParallaxDoor - Bottom_50: -936821917
+      SJHSParallaxDoor - Bottom_31: 1494951342
+      SJHSParallaxDoor - Bottom_43: -81983885
+      SJHSParallaxDoor - Bottom_71: -271572171
+      SJHSParallaxDoor - Bottom_93: 866771590
+      SJHSParallaxDoor - Bottom_108: 1498913107
+      SJHSParallaxDoor - Bottom_111: 1182626275
+      SJHSParallaxDoor - Bottom_12: -806250289
+      SJHSParallaxDoor - Bottom_32: 1691501009
+      SJHSParallaxDoor - Bottom_69: -1936064531
+      SJHSParallaxDoor - Bottom_8: -2074875758
+      SJHSParallaxDoor - Bottom_114: -487313929
+      SJHSParallaxDoor - Bottom_59: 583389512
+      SJHSParallaxDoor - Bottom_64: -1671246076
+      SJHSParallaxDoor - Bottom_51: -1768363367
+      SJHSParallaxDoor - Bottom_5: 1353072179
+      SJHSParallaxDoor - Bottom_62: -1313620664
+      SJHSParallaxDoor - Bottom_95: 534188906
+      SJHSParallaxDoor - Bottom_19: 1086247494
+      SJHSParallaxDoor - Bottom_104: 1961442439
+      SJHSParallaxDoor - Bottom_56: -1737732070
+      SJHSParallaxDoor - Bottom_52: 199031823
+      SJHSParallaxDoor - Bottom_15: 305132590
+      SJHSParallaxDoor - Bottom_60: 1052947667
+      SJHSParallaxDoor - Bottom_44: 1826814306
+      SJHSParallaxDoor - Bottom_28: -563564996
+      SJHSParallaxDoor - Bottom_82: -824241793
+      SJHSParallaxDoor - Bottom_107: 930639606
+      SJHSParallaxDoor - Bottom_74: -629172299
+      SJHSParallaxDoor - Bottom_3: -470053705
+      SJHSParallaxDoor - Bottom_75: 1284574696
+      SJHSParallaxDoor - Bottom_23: 1810537994
+      SJHSParallaxDoor - Bottom_34: 1075803755
+      SJHSParallaxDoor - Bottom_49: 394471536
+      SJHSParallaxDoor - Bottom_54: -2055752863
+      SJHSParallaxDoor - Bottom_18: 1129283539
+      SJHSParallaxDoor - Bottom_84: 1269769368
+      SJHSParallaxDoor - Bottom_26: 1066930900
+      SJHSParallaxDoor - Bottom_63: -775279713
+      SJHSParallaxDoor - Bottom_13: 1657941335
+      SJHSParallaxDoor - Bottom_53: 1620875983
+      SJHSParallaxDoor - Bottom_79: 1181898153
+      SJHSParallaxDoor - Bottom_87: -770942568
+      SJHSParallaxDoor - Bottom_42: -1803730498
+      SJHSParallaxDoor - Bottom_67: -1297715725
+      SJHSParallaxDoor - Bottom_24: -659048434
+      SJHSParallaxDoor - Bottom_92: 1108562123
+      SJHSParallaxDoor - Bottom_7: 1884775660
+      SJHSParallaxDoor - Bottom_47: 1613009843
+      SJHSParallaxDoor - Bottom_58: -1438141824
+      SJHSParallaxDoor - Bottom_112: -737351429
+      SJHSParallaxDoor - Bottom_88: -454588374
+      SJHSParallaxDoor - Bottom_21: -948830772
+      SJHSParallaxDoor - Bottom_91: 93327789
+      SJHSParallaxDoor - Bottom_40: -368246267
+      SJHSParallaxDoor - Bottom_22: -1796243607
+      SJHSParallaxDoor - Bottom_0: -9821757
+      SJHSParallaxDoor - Bottom_1: 1728850808
+      SJHSParallaxDoor - Bottom_33: 1560259246
+      SJHSParallaxDoor - Bottom_105: -589570061
+      SJHSParallaxDoor - Bottom_41: 1147744207
+      SJHSParallaxDoor - Bottom_27: 1998150581
+      SJHSParallaxDoor - Bottom_55: -1491844388
+      SJHSParallaxDoor - Bottom_110: 870537125
+      SJHSParallaxDoor - Bottom_78: -1533249028
+      SJHSParallaxDoor - Bottom_30: -1394584630
+      SJHSParallaxDoor - Bottom_90: -2140622504
+      SJHSParallaxDoor - Bottom_10: -829842615
+      SJHSParallaxDoor - Bottom_46: 1394637959
+      SJHSParallaxDoor - Bottom_25: -1506985204
+      SJHSParallaxDoor - Bottom_109: -1849493864
+      SJHSParallaxDoor - Bottom_100: 2107470004
+      SJHSParallaxDoor - Bottom_113: -1561794493
+      SJHSParallaxDoor - Bottom_80: -1058260150
+      SJHSParallaxDoor - Bottom_96: 1634434428
+      SJHSParallaxDoor - Bottom_81: -820967489
+      SJHSParallaxDoor - Bottom_45: -1508703487
+      SJHSParallaxDoor - Bottom_106: 2055301841
+      SJHSParallaxDoor - Bottom_16: -1288813877
+      SJHSParallaxDoor - Bottom_36: 1158545094
+      SJHSParallaxDoor - Bottom_77: -92141259
+      SJHSParallaxDoor - Bottom_37: 1931638490
+      SJHSParallaxDoor - Bottom_66: 1707535351
+      SJHSParallaxDoor - Bottom_35: -238375244
+      SJHSParallaxDoor - Bottom_38: -312022530
+      SJHSParallaxDoor - Bottom_68: 538516423
+      SJHSParallaxDoor - Bottom_20: 947488192
+      SJHSParallaxDoor - Bottom_89: -1123181706
+      SJHSParallaxDoor - Bottom_86: 1214861816
+      SJHSParallaxDoor - Bottom_4: -274167601
+      SJHSParallaxDoor - Bottom_11: 1437922006
+      SJHSParallaxDoor - Bottom_2: 998413667
+      SJHSParallaxDoor - Bottom_9: -451600931
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

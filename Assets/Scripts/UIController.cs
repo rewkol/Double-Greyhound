@@ -579,6 +579,12 @@ public class UIController : MonoBehaviour
         StartCoroutine(CameraRoutine());
     }
 
+    public void PanCameraReverse()
+    {
+        UIMode = 2;
+        StartCoroutine(CameraReverseRoutine());
+    }
+
     //Allows other controllers to force UIMode 2 so they can create their own custom cutscenes
     public void StartManualCutscene()
     {
@@ -596,6 +602,17 @@ public class UIController : MonoBehaviour
         {
             camera.transform.position = camera.transform.position + new Vector3(0.072f, 0.0f, 0.0f);
             camera.gameObject.SendMessage("ForceUpdate", 0.07f);
+            yield return new WaitForFixedUpdate();
+        }
+        UIMode = 0;
+    }
+
+    private IEnumerator CameraReverseRoutine()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            camera.transform.position = camera.transform.position + new Vector3(-0.072f, 0.0f, 0.0f);
+            camera.gameObject.SendMessage("ForceUpdate", -0.07f);
             yield return new WaitForFixedUpdate();
         }
         UIMode = 0;

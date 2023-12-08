@@ -39,6 +39,11 @@ public class FjellriverController : MonoBehaviour
         this.facingLeft = facingLeft;
     }
 
+    public bool GetDirection()
+    {
+        return this.facingLeft;
+    }
+
     void FixedUpdate()
     {
         if (count == 42)
