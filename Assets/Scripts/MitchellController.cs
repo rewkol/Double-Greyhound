@@ -12,6 +12,7 @@ public class MitchellController : MonoBehaviour
     private UIController ui;
     private float limitXLeft;
     private float limitXRight;
+    private FloorBreakController destroyer;
 
     private Transform transform;
     private Animator animator;
@@ -31,6 +32,7 @@ public class MitchellController : MonoBehaviour
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
 
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        destroyer = GameObject.FindObjectsOfType<FloorBreakController>()[0];
 
         health = 9999;
         state = 0;
@@ -64,8 +66,7 @@ public class MitchellController : MonoBehaviour
         yield return new WaitForFixedUpdate();
         ui.StartManualCutscene();
         float playerX = player.GetPosition().x;
-        float midpointX = (limitXRight - limitXLeft) / 2.0f;
-
+        float midpointX = (limitXRight + limitXLeft) / 2.0f;
         float startingX = transform.position.x;
         if (playerX < midpointX)
         {
@@ -299,12 +300,64 @@ public class MitchellController : MonoBehaviour
     {
         state = 0;
         ui.StartManualCutscene();
+        renderer.material = lerpMaterial;
+        // Fade to white
+        float amount = 0.1f;
+        for (int i = 0; i < 10; i++)
+        {
+            renderer.material.SetFloat("_LerpAmount", amount);
+            amount += 0.1f;
+            transform.position += new Vector3(0.0f, 0.03f, 0.0f);
+            yield return new WaitForFixedUpdate();
+        }
 
-        // TODO: Fade to white
-        // TODO: Morph into the final boss white silhouette
-        // TODO: Trigger the object that controls the destruction of the stage and moves to the pool arena
-            // TODO: That object will also trigger the instantiation of the final boss
-        // TODO: Destroy yourself
-        yield break;
+        float midpointX = (limitXRight + limitXLeft) / 2.0f;
+        while (Mathf.Abs(midpointX - transform.position.x) > 1.0f)
+        {
+            transform.position += new Vector3(facingLeft ? -0.1f : 0.1f, 0.0f, 0.0f);
+            if (transform.position.y < 3.0f)
+            {
+                transform.position += new Vector3(0.0f, 0.03f, 0.0f);
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        for (int i = 0; i < 20; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        animator.SetTrigger("Morph");
+        // Bump him up because sprite change moves him down a smidge
+        transform.position += new Vector3((facingLeft ? 1 : -1) * 0.06f, 0.12f, 0.0f);
+        for (int i = 0; i < 150; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        for (int i = 0; i < 90; i++)
+        {
+            transform.position += new Vector3(0.0f, (i < 20 ? (i / 20.0f): 1.0f) * 0.2f, 0.0f);
+            yield return new WaitForFixedUpdate();
+        }
+
+        for (int i = 0; i < 15; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.localScale = new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, 1.0f);
+        for (int i = 0; i < 40; i++)
+        {
+            transform.position += new Vector3(0.0f, -1.75f, 0.0f);
+            if (i == 7)
+            {
+                destroyer.Break();
+                ui.BossExit();
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        Destroy(gameObject);
     }
 }

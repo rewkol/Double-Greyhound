@@ -152,7 +152,7 @@ public class StMalachyController : MonoBehaviour
         }
 
         Instantiate(lightning, player.GetPosition() + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.1f, 0.1f) + Y_OFFSET, 0.0f), transform.rotation);
-        player.KnockbackAnimation();
+        player.KnockbackAnimation(true);
 
         bool hellEvent = Random.Range(0.0f, 1.0f) < 0.05f;
 
