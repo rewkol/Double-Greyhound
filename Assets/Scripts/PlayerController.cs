@@ -393,6 +393,10 @@ public class PlayerController : MonoBehaviour
                         stun = 15;
                         StartCoroutine(StunRoutine());
                     }
+                    else;
+                    {
+                        stun = 15;
+                    }
                 }
                 else
                 {
@@ -666,23 +670,25 @@ public class PlayerController : MonoBehaviour
     /**
      * For animating the STM cutscenes
      */
-    public void KnockbackAnimation()
+    public void KnockbackAnimation(bool zeroHealth)
     {
-        //This only gets called in one place so we can assume positions are constant
-        //Make sure always visible after being hit
-        if (transform.position.x < 38.0f)
+        float midpoint = (limitXLeft + limitXRight) / 2;
+        if (transform.position.x < midpoint - 1.0f)
         {
             facingLeft = true;
             transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
         }
-        else if (transform.position.x > 40.0f)
+        else if (transform.position.x > midpoint + 1.0f)
         {
             facingLeft = false;
             transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
         }
         animator.SetTrigger("Knockback");
         StartCoroutine(KnockbackRoutine());
-        ui.PlayerHealthBar(0);
+        if (zeroHealth)
+        {
+            ui.PlayerHealthBar(0);
+        }
     }
 
     public void KnockbackAnimationRecovery()

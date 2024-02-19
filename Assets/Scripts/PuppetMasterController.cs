@@ -257,7 +257,7 @@ public class PuppetMasterController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         specialNow = player.GetSpecial();
-        if (specialPrior != specialNow)
+        if (specialPrior != specialNow && this.start)
         {
             StartCoroutine(TrackSpecialRoutine());
             yield break;
@@ -292,7 +292,11 @@ public class PuppetMasterController : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(TrackSpecialRoutine());
+
+        if (this.start)
+        {
+            StartCoroutine(TrackSpecialRoutine());
+        }
     }
 
     private IEnumerator DisappearRoutine()

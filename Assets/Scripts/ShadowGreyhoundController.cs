@@ -83,7 +83,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         specialChangePushed = false;
         stun = 0;
         inPos = false;
-        health = 10;// 100;
+        health = 100;
         doAnimation = false;
 
 
@@ -536,7 +536,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
 
 
-        if (state == 2 && health < 7) // > 51
+        if (state == 2 && health < 50) // > 51
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
             {
@@ -673,6 +673,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
         ui.EndManualCutscene();
         ui.DisplayDialogue("ShadowHeadshot", "Enough!|I am tired of this charade!");
+        ui.BossExit();
         while (!ui.GameActive())
         {
             yield return new WaitForFixedUpdate();
