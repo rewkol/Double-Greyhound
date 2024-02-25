@@ -73,7 +73,16 @@ public class UIController : MonoBehaviour
     void Start()
     {
         //Get components
-        player = GameObject.FindObjectsOfType<PlayerController>()[0];
+        PlayerController[] players = GameObject.FindObjectsOfType<PlayerController>();
+        if (players.Length == 0)
+        {
+            UIMode = 99;
+            return;
+        }
+        else
+        {
+            player = players[0];
+        }
         statusParent = GameObject.FindGameObjectsWithTag("UIStatus")[0];
         dialogueParent = GameObject.FindGameObjectsWithTag("UITextBox")[0];
         scoreParent = GameObject.FindGameObjectsWithTag("UIScore")[0];
@@ -134,15 +143,18 @@ public class UIController : MonoBehaviour
         firstRun = true;
         lastUnlock = 0;
 
-        //Load saved values from previous level
-        LoadGameState();
-
         UIMode = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // This mode is used to load the UIController without it doing anything so we can use the state functions for the CreditsController
+        if (UIMode == 99)
+        {
+            return;
+        }
+
         //UIMode == 0 is normal gameplay triggered by data pushed here from the other controllers
         if (UIMode == 1)
         {
@@ -286,14 +298,14 @@ public class UIController : MonoBehaviour
 
                     //Save it before displaying so that we can mess with the list now
 
-                    //Remove hidden scores if the player hasn't beaten Emma yet
+                    //Remove hidden scores if the player hasn't beaten Mitchell yet
                     if (highScores.hideScores && currentScore.score < 999999999L)
                     {
                         highScores.scores.RemoveAll(x => x.hidden);
-                        //But re add Emma back in if they have beaten Mitchell
+                        //But re add Mitchell back in if they beat Shadow Greyhound
                         if (currentScore.score > 17061998L)
                         {
-                            highScores.scores.Add(new HighScoreList.HighScore(999999999L, "EmmaManning", false));
+                            highScores.scores.Add(new HighScoreList.HighScore(999999999L, "The Creator ", false));
                         }
                     }
                     //Sort list desc
@@ -419,7 +431,11 @@ public class UIController : MonoBehaviour
             number = new string('0', difference) + number;
         }
 
-        scoreText.text = newText + number;
+        // Need this check for the credits to be able to load the current score without the other UI elements present
+        if (UIMode != 99)
+        {
+            scoreText.text = newText + number;
+        }
     }
 
     public void UpdateSpecial(int special)
@@ -624,6 +640,10 @@ public class UIController : MonoBehaviour
         return UIMode == 0;
     }
 
+    public long GetScore()
+    {
+        return this.score;
+    }
 
 
     //File stuff
@@ -702,23 +722,27 @@ public class UIController : MonoBehaviour
         file.Close();
 
         UpdateScore(state.score);
-        this.run = state.run;
-        this.firstRun = state.firstRun;
-        player.SetHealth(state.health);
-        PlayerHealthBar(state.health);
-        if (state.special == 0 && state.unlocked > 0)
+        // Need this check for the credits controller again
+        // I know I could do the old fashioned trick of just having all these elements off screen but we aren't heathens are we
+        if (UIMode != 99)
         {
-            player.SetSpecial(1);
-            UpdateSpecial(1);
+            this.run = state.run;
+            this.firstRun = state.firstRun;
+            player.SetHealth(state.health);
+            PlayerHealthBar(state.health);
+            if (state.special == 0 && state.unlocked > 0)
+            {
+                player.SetSpecial(1);
+                UpdateSpecial(1);
+            }
+            else
+            {
+                player.SetSpecial(state.special);
+                UpdateSpecial(state.special);
+            }
+            this.lastUnlock = state.unlocked;
+            player.SetSpecialUnlocked(lastUnlock);
         }
-        else
-        {
-            player.SetSpecial(state.special);
-            UpdateSpecial(state.special);
-        }
-        this.lastUnlock = state.unlocked;
-        player.SetSpecialUnlocked(lastUnlock);
-
     }
 
     /**
@@ -783,7 +807,7 @@ public class UIController : MonoBehaviour
         scoreList.scores.Add(new HighScoreList.HighScore(394041L, "Brandi C    ", false));
         scoreList.scores.Add(new HighScoreList.HighScore(17061998L, "Mitchell G  ", false));
         // Hide scores from the post game
-        scoreList.scores.Add(new HighScoreList.HighScore(999999999L, "EmmaManning", true));
+        scoreList.scores.Add(new HighScoreList.HighScore(999999999L, "The Creator ", true));
         scoreList.hideScores = true;
 
         string path = Application.persistentDataPath + "/scores.lst";
@@ -802,7 +826,7 @@ public class UIController : MonoBehaviour
         file.Close();
     }
 
-    private HighScoreList LoadHighScores()
+    public HighScoreList LoadHighScores()
     {
         string path = Application.persistentDataPath + "/scores.lst";
         FileStream file;

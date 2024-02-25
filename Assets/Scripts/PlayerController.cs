@@ -84,12 +84,20 @@ public class PlayerController : MonoBehaviour
         haloInstance = null;
         haloWindup = false;
 
-
         //Get camera position to limit x movement
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         // For safety
         ChangeHurtbox(0);
+
+        StartCoroutine(LoadStateRoutine());
+    }
+
+    private IEnumerator LoadStateRoutine()
+    {
+        yield return new WaitForFixedUpdate();
+        // Load data from previous level
+        ui.LoadGameState();
     }
 
     void FixedUpdate()

@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Debug.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: c1f34409bcf3bad4f86fa400ad29edc8
+  - enabled: 1
+    path: Assets/Scenes/SHS.unity
+    guid: 52eb667aee43294488af715c7c794298
+  - enabled: 1
+    path: Assets/Scenes/SJHS.unity
+    guid: 24494dc32ef65b648a833bac4055557c
+  - enabled: 1
+    path: Assets/Scenes/STM.unity
+    guid: 1f6852df543239f46938198c6c833097
   m_configObjects: {}
