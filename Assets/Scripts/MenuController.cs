@@ -19,7 +19,7 @@ public class MenuController : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") != 0)
         {
-            ui.SaveGameState(false, 0);
+            ui.CreateGameState();
 
             SceneManager.LoadScene("HVHS");
             SceneManager.UnloadSceneAsync("Menu");
