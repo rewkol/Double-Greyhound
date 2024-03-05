@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitbox: {fileID: 8074193040407761209, guid: c6bb771747718bf46863d1a428900ef4, type: 3}
   axe: {fileID: 4319797330651797158, guid: 6c17021a96205d143b676e3babbbed07, type: 3}
-  speed: 0.2
+  speed: 0.21
   limitYTop: -0.07
   limitYBottom: -3.15
   limitXRight: 108
