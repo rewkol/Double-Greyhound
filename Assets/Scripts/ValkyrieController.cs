@@ -24,9 +24,13 @@ public class ValkyrieController : MonoBehaviour
     private int stun;
     private float spacingX;
     private int health;
-    private PlayerController player;
     private bool chaseMode;
+    private bool cutscene;
+
     private UIController ui;
+    private PlayerController player;
+
+    private Transform forceLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,9 @@ public class ValkyrieController : MonoBehaviour
         stun = 0;
         spacingX = 2.0f;
         health = 6;
+        cutscene = true;
+
+        forceLeft = GameObject.FindGameObjectsWithTag("Puppet")[0].GetComponent<Transform>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -68,13 +75,39 @@ public class ValkyrieController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("Idle");
+        cutscene = false;
     }
 
     void FixedUpdate()
     {
+        if (player.IsDead())
+        {
+            animator.SetTrigger("Idle");
+            cooldown++;
+            if (cooldown > 100 && cooldown < 1000)
+            {
+                transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ValkyrieWalk"))
+                {
+                    animator.SetTrigger("Walk");
+                }
+                transform.position += new Vector3(0.05f, 0.0f, 0.0f);
+            }
+            return;
+        }
+
         if (!ui.GameActive())
         {
             return;
+        }
+
+        if (player.GetPosition().x >= limitXRight && transform.position.x <= limitXRight)
+        {
+            transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
         }
 
         //Movement Code
@@ -87,6 +120,10 @@ public class ValkyrieController : MonoBehaviour
         if ((transform.position.x + moveHorizontal) - player.GetPosition().x <= spacingX)
         {
             moveHorizontal = -(transform.position.x - spacingX - player.GetPosition().x);
+            if (moveHorizontal > speed)
+            {
+                moveHorizontal = speed;
+            }
         }
 
         float moveVertical = player.GetPosition().y - transform.position.y;
@@ -152,22 +189,37 @@ public class ValkyrieController : MonoBehaviour
 
         transform.position = transform.position + movement;
 
-        //Fast Attack logic
-        if (safety == 0 && transform.position.x > limitXRight && player.GetPosition().x > limitXLeft && cooldown == 0 && stun == 0 && !player.StopChasing())
+        //Fast Attack logic if player tries to go past edge of screen
+        if (safety == 0 && transform.position.x > limitXRight && player.GetPosition().x > limitXRight && cooldown == 0 && stun == 0 && !player.StopChasing())
         {
-            FastSwing();
-        }
-        else if (transform.position.x - player.GetPosition().x < 0.2f && !chaseMode )
-        {
-            cooldown = 0;
-            stun = 0;
+            cooldown = 10;
             animator.SetTrigger("Insta");
-            HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(-1.30f, 0.60f, 0.0f), transform.rotation);
-            hit.SetX(1.1f);
-            hit.SetY(1.7f);
+            HitboxController hit = Instantiate(hitbox, transform.position - new Vector3(1.3f, 0.00f, 0.0f), transform.rotation);
+            hit.SetX(4.0f);
+            hit.SetY(10.0f);
             hit.SetTtl(200);
             hit.SetDamage(3);
-            hit.SetParent(transform);
+            if (player.GetPosition().x >= transform.position.x)
+            {
+                hit.SetParent(forceLeft);
+            }
+            else
+            {
+                hit.SetParent(transform);
+            }
+        }
+        // Instant reaction to give Valkyire the chance to block player from sneaking past her
+        else if (transform.position.x - player.GetPosition().x < 0.3f && !chaseMode)
+        {
+            animator.SetTrigger("Completed");
+            cooldown = 0;
+            stun = 0;
+            chaseMode = true;
+        }
+        // Nuclear option!!!!!!
+        else if (player.GetPosition().x >= transform.position.x && cooldown == 0 && !player.StopChasing())
+        {
+            StartCoroutine(NuclearRoutine());
             chaseMode = true;
         }
     }
@@ -176,26 +228,15 @@ public class ValkyrieController : MonoBehaviour
     {
         animator.SetTrigger("FastSwing");
         cooldown = 50;
-        StartCoroutine(FastRoutine());
-    }
-
-    private IEnumerator FastRoutine()
-    {
-        for(int i = 0; i < 8; i++)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-
-        HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(1.30f * (facingLeft ? -1 : 1), 0.60f, 0.0f), transform.rotation);
-        hit.SetX(1.1f);
-        hit.SetY(1.7f);
-        hit.SetTtl(200);
-        hit.SetDamage(3);
-        hit.SetParent(transform);
     }
 
     public void Hurt(DamagePacket packet)
     {
+        if (health <= 0 || cutscene)
+        {
+            return;
+        }
+        
         //In chase mode get stunned and knockback into either attack pattern (long/normal swing, or throw on 1 hp remaining)
         if (chaseMode)
         {
@@ -221,12 +262,6 @@ public class ValkyrieController : MonoBehaviour
             {
                 //Start death sequence
                 stun = 99999;
-                if (packet.getDamage() > 1)
-                {
-                    animator.SetTrigger("Completed");
-                    animator.SetTrigger("Stun");
-                    animator.SetTrigger("Throw");
-                }
                 animator.SetTrigger("Die");
                 StartCoroutine(DeathRoutine());
             }
@@ -242,13 +277,13 @@ public class ValkyrieController : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             float knockbackSpeed = 0.25f;
-            float moveX = transform.position.x + knockbackSpeed > limitXRight ? limitXRight - transform.position.x : knockbackSpeed;
-            transform.position = transform.position + new Vector3(moveX, 0.0f, 0.0f);
+            transform.position = transform.position + new Vector3(knockbackSpeed, 0.0f, 0.0f);
             yield return new WaitForFixedUpdate();
         }
         if (health > 1.0f)
         {
-            if (Random.Range(0.0f, 1.0f) < 0.4f)
+            // Make it impossible to sneak by if too close to edge of screen so player can't sneak by
+            if (limitXRight - transform.position.x < 1.0f || Random.Range(0.0f, 1.0f) < 0.4f)
             {
                 animator.SetTrigger("ShortSwing");
                 StartCoroutine(ShortSwingRoutine());
@@ -274,15 +309,6 @@ public class ValkyrieController : MonoBehaviour
     {
         for(int i = 0; i < 48; i++)
         {   
-            if (i == 38 && !chaseMode)
-            {
-                HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(-1.30f, 0.60f, 0.0f), transform.rotation);
-                hit.SetX(1.1f);
-                hit.SetY(1.7f);
-                hit.SetTtl(200);
-                hit.SetDamage(3);
-                hit.SetParent(transform);
-            }
             yield return new WaitForFixedUpdate();
         }
         chaseMode = true;
@@ -293,15 +319,6 @@ public class ValkyrieController : MonoBehaviour
     {
         for (int i = 0; i < 17; i++)
         {
-            if (i == 12 && !chaseMode)
-            {
-                HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(-1.30f, 0.60f, 0.0f), transform.rotation);
-                hit.SetX(1.1f);
-                hit.SetY(1.7f);
-                hit.SetTtl(200);
-                hit.SetDamage(3);
-                hit.SetParent(transform);
-            }
             yield return new WaitForFixedUpdate();
         }
         chaseMode = true;
@@ -311,11 +328,6 @@ public class ValkyrieController : MonoBehaviour
     {
         for (int i = 0; i < 38; i++)
         {
-            if (i == 19 && !chaseMode)
-            {
-                EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(-0.95f, 0.7f, 0.0f), transform.rotation);
-                thrownAxe.SetDirection(true);
-            }
             yield return new WaitForFixedUpdate();
         }
         chaseMode = true;
@@ -333,6 +345,7 @@ public class ValkyrieController : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
+        cutscene = true;
         ui.SetPlayerInvincible(true);
         for (int i = 0; i < 51; i++)
         {
@@ -342,7 +355,6 @@ public class ValkyrieController : MonoBehaviour
             }
             if (i == 50)
             {
-                //TODO: Initiate Death dialogue
 				ui.UpdateScore(2500L);
                 ui.DisplayDialogue("ValkyrieHeadshot", "You may have bested me...|But my brothers and sisters will keep you|from reaching the Chief!");
                 ui.BossExit();
@@ -355,6 +367,68 @@ public class ValkyrieController : MonoBehaviour
         }
         ui.SetPlayerInvincible(false);
         Destroy(gameObject);
+    }
+
+    public void SwingAxe(int chase)
+    {
+        if (chase == 0 || !chaseMode)
+        {
+            HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(-1.30f, 0.60f, 0.0f), transform.rotation);
+            hit.SetX(1.1f);
+            hit.SetY(1.7f);
+            hit.SetTtl(200);
+            hit.SetDamage(3);
+            if (player.GetPosition().x >= transform.position.x)
+            {
+                hit.SetParent(forceLeft);
+            }
+            else
+            {
+                hit.SetParent(transform);
+            }
+        }
+    }
+
+    public void ThrowAxe()
+    {
+        EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(-0.95f, 0.7f, 0.0f), transform.rotation);
+        thrownAxe.SetDirection(true);
+    }
+
+    private IEnumerator NuclearRoutine()
+    {
+        // The so-called nuclear option because it breaks some precepts of the boss battle
+        // Should not have been required but players are crafty
+        cooldown = 26;
+        animator.ResetTrigger("Idle");
+        for (int i = 0; i < 8;  i++)
+        {
+            if (i == 5)
+            {
+                animator.SetTrigger("Insta");
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        // Hitbox spans whole screen and is so far right that it forces player to get knocked back into the screen
+        HitboxController hit = Instantiate(hitbox, transform.position + new Vector3(1.3f, 0.00f, 0.0f), transform.rotation);
+        hit.SetX(2.1f);
+        hit.SetY(10.0f);
+        hit.SetTtl(200);
+        hit.SetDamage(3);
+        if (player.GetPosition().x >= transform.position.x)
+        {
+            hit.SetParent(forceLeft);
+        }
+        else
+        {
+            hit.SetParent(transform);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     // Update is called once per frame
