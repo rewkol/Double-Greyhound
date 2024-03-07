@@ -233,7 +233,7 @@ public class SuperSaintController : MonoBehaviour
         {
             if (i < 50)
             {
-                transform.position = transform.position + new Vector3((facingLeft ? 1 : -1) * 0.0105f, (22 - i) / 205.0f, 0.0f);
+                transform.position = transform.position + new Vector3((facingLeft ? 1 : -1) * 0.028f, (17 - i) / 220.0f, 0.0f);
             }
             if (i == 200)
             {
@@ -247,7 +247,7 @@ public class SuperSaintController : MonoBehaviour
     public void SpawnRandom()
     {
         float startY = Random.Range(limitYBottom, limitYTop);
-        transform.position = new Vector3(transform.position.x, startY, ((startY - limitYTop) * 0.01f) - 1.0f);
+        transform.position = new Vector3(transform.position.x, startY, ((startY - limitYTop + 0.01f) * 0.01f) - 1.0f);
     }
 
     // Update is called once per frame
