@@ -10,6 +10,7 @@ public class DressCrownController : MonoBehaviour
     //Private variables
     private Transform transform;
     private Animator animator;
+    private bool facingLeft;
 
 
     // Start is called before the first frame update
@@ -22,6 +23,11 @@ public class DressCrownController : MonoBehaviour
         {
             animator.SetTrigger("Crown");
             StartCoroutine(CrownRoutine());
+        }
+
+        if (!facingLeft)
+        {
+            transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
         }
     }
 
@@ -36,9 +42,6 @@ public class DressCrownController : MonoBehaviour
 
     public void SetFacingLeft(bool facingLeft)
     {
-        if(!facingLeft)
-        {
-            transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
-        }
+        this.facingLeft = facingLeft;
     }
 }

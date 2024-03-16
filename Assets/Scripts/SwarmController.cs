@@ -564,4 +564,9 @@ public class SwarmController : MonoBehaviour
         ui.SetPlayerInvincible(false);
         Destroy(gameObject);
     }
+
+    public void SpawnRandom()
+    {
+        //suppress warnings
+    }
 }

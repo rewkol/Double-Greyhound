@@ -165,15 +165,16 @@ public class QueenController : MonoBehaviour
         else
         {
             float playerDist = Mathf.Abs(player.GetPosition().x - transform.position.x);
-            if (punchCounter > Random.Range(4, 10))
-            {
-                animator.SetTrigger("Jump");
-                punchCounter = 0;
-                cooldown = 50;
-            }
             // Grounded
             if (!jumping && !kicking)
             {
+                // If just punching too much leave
+                if (cooldown == 0 && punchCounter > Random.Range(4, 10))
+                {
+                    animator.SetTrigger("Jump");
+                    punchCounter = 0;
+                    cooldown = 75;
+                }
                 // If really close can jab twice
                 if (cooldown == 0 && playerDist < 1.5f)
                 {
@@ -196,12 +197,11 @@ public class QueenController : MonoBehaviour
                     animator.SetTrigger("Jab");
                     punchCounter++;
                 }
-                // TODO: If far jump
                 else if (cooldown == 0 && playerDist >= 2.3f)
                 {
                     animator.SetTrigger("Jump");
                     punchCounter = 0;
-                    cooldown = 50;
+                    cooldown = 75;
                 }
             }
             // Jumping/Hovering
@@ -235,8 +235,26 @@ public class QueenController : MonoBehaviour
                 {
                     StartCoroutine(LandRoutine());
                 }
+                // Can only start pointing in a jump if not nearing the edge of the screen
+                else if (!pointing && pointTimer == 0 
+                    && ((jumpDirection == -1 && transform.position.x > limitXLeft + 5.5f) 
+                    || (jumpDirection == 1 && transform.position.x < limitXRight - 5.5f)))
+                {
+                    StartCoroutine(JumpingPointRoutine());
+                    // Lock out the pointTimer so it doesn't infinitely set off
+                    pointTimer = 99999;
+                }
+                // If somehow left screen, turn around immediately
+                else if (!pointing && transform.position.x < (limitXLeft - 1.0f))
+                {
+                    jumpDirection = 1;
+                }
+                else if (!pointing && transform.position.x > (limitXRight + 1.0f))
+                {
+                    jumpDirection = -1;
+                }
                 // If strike zone is close to edge of screen, land (small chance to turn around in mid-air, increases as health decreases)
-                if (!pointing && strikeZone < (limitXLeft + 1.0f) || strikeZone > (limitXRight - 1.0f))
+                else if (!pointing && (strikeZone < (limitXLeft + 1.0f) || strikeZone > (limitXRight - 1.0f)))
                 {
                     if (Random.Range((120 - health) / 180.0f, 1.0f) > 0.75f)
                     {
@@ -246,15 +264,6 @@ public class QueenController : MonoBehaviour
                     {
                         StartCoroutine(LandRoutine());
                     }
-                }
-                // Can only start pointing in a jump if not nearing the edge of the screen
-                if (pointTimer == 0 
-                    && ((jumpDirection == 1 && transform.position.x > limitXLeft + 5.5f) 
-                    || (jumpDirection == -1 && transform.position.x < limitXRight - 5.5f)))
-                {
-                    StartCoroutine(JumpingPointRoutine());
-                    // Lock out the pointTimer so it doesn't infinitely set off
-                    pointTimer = 99999;
                 }
 
                 //Timer only decreases when in position
@@ -417,6 +426,7 @@ public class QueenController : MonoBehaviour
     private IEnumerator DressFallRoutine()
     {
         flying = false;
+        pointing = false;
         stun = 99999;
         ui.StartManualCutscene();
         animator.SetTrigger("Descend");
@@ -580,6 +590,14 @@ public class QueenController : MonoBehaviour
     {
         StartCoroutine(JumpingRoutine());
         jumpDirection = facingLeft ? -1 : 1;
+        if (transform.position.x < limitXLeft + 3.5f)
+        {
+            jumpDirection = 1;
+        }
+        else if (transform.position.x > limitXRight - 3.5f)
+        {
+            jumpDirection = -1;
+        }
     }
 
     private IEnumerator JumpingRoutine()
@@ -607,7 +625,7 @@ public class QueenController : MonoBehaviour
             // Jump reduces as she ascends further
             float heightDelta = (((float) (jumpFrames - i)) / jumpFrames) * 0.29f;
             // X component of jump should already be handled in normal movement code
-            if (ui.GameActive())
+            if (health > 0)
             {
                 transform.position += new Vector3(0.0f, heightDelta, 0.0f);
             }
@@ -643,7 +661,7 @@ public class QueenController : MonoBehaviour
         float zDelta = (transform.position.z - player.GetPosition().z) / jumpFrames;
         for (int i = 0; i < jumpFrames; i++)
         {
-            if (ui.GameActive())
+            if (health > 0)
             {
                 transform.position += new Vector3(0.0f, -0.32f, -zDelta);
             }
@@ -656,6 +674,7 @@ public class QueenController : MonoBehaviour
 
     private IEnumerator JumpingPointRoutine()
     {
+        pointing = true;
         bool pointDirection = Random.Range(0.0f, 1.0f) < 0.5f;
         if (pointDirection)
         {
@@ -665,7 +684,6 @@ public class QueenController : MonoBehaviour
         {
             animator.SetTrigger("PointBottom");
         }
-        pointing = true;
         for (int i = 0; i < 100; i++)
         {
             if (ui.GameActive())
@@ -758,5 +776,10 @@ public class QueenController : MonoBehaviour
         ui.PrimeTransition("STM");
 
         ui.SaveGameState(false, 2);
+    }
+
+    public void SpawnRandom()
+    {
+        // supresses errors
     }
 }

@@ -658,7 +658,10 @@ public class UIController : MonoBehaviour
             run++;
         }
 
-        GameState state = new GameState(score, Mathf.Min(player.GetHealth() + 5, 20), player.GetSpecial(), specialUnlock > lastUnlock ? specialUnlock : lastUnlock, run, firstRun);
+        GameState state = new GameState(score, Mathf.Min(player.GetHealth() + 5, 20), 
+            specialUnlock > player.GetSpecial() ? specialUnlock : player.GetSpecial(), 
+            specialUnlock > lastUnlock ? specialUnlock : lastUnlock, 
+            run, firstRun);
         //Serialize state
         string path = Application.persistentDataPath + "/state.tmp"; //AppData/LocalLow
         FileStream file;
