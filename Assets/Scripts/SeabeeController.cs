@@ -59,7 +59,7 @@ public class SeabeeController : MonoBehaviour
         inPos = false;
         height = 0.0f;
         running = false;
-        untilAttack = Random.Range(6, 16);
+        untilAttack = Random.Range(5, 11);
         attackPrimed = 0;
         attackDistance = 0.0f;
 
@@ -207,7 +207,7 @@ public class SeabeeController : MonoBehaviour
                     }
                 }
 
-                untilAttack = Random.Range(7, 15);
+                untilAttack = Random.Range(6, 12);
                 nextAttackSwoop = Random.Range(0.0f, 1.0f) < 0.5f ? true : false;
             }
             else if (attackPrimed > 0)
@@ -592,11 +592,27 @@ public class SeabeeController : MonoBehaviour
     private IEnumerator DeathRoutine()
     {
         gameObject.tag = "Untagged";
-        // Little extra to ensure they trigger the fall and don't appear to high up
+        // Little extra to ensure they trigger the fall and don't appear too high up
         float toFall = height + (height > 0 ? DEFAULT_HEIGHT : 0.7f);
         int i = 0;
-        while(toFall > 0.0f)
+        // Precalculate final Y position to establish what the Z Position should be on landing
+        float toFallPre = toFall;
+        int k = 0;
+        float yPos = transform.position.y;
+        while (toFallPre > 0.0f || yPos > limitYTop - 0.7f)
         {
+            yPos += ((22 - k) / 205.0f);
+            toFallPre += (22 - k) / 205.0f;
+            k++;
+        }
+        // Need to correct by 0.01f to match player's starting point and correct for the 0.7f flying level
+        float zPos = ((limitYTop - yPos) * -0.01f) - 0.995f;
+        transform.position = new Vector3(transform.position.x, transform.position.y, zPos);
+
+
+        while(toFall > 0.0f || transform.position.y > limitYTop - 0.7f)
+        {
+            // If doing a safety adjustment to fall height also adjust the z axis
             transform.position = transform.position + new Vector3((facingLeft ? 1 : -1) * 0.0105f, (22 - i) / 205.0f, 0.0f);
             toFall += (22 - i) / 205.0f;
             i++;
@@ -671,5 +687,10 @@ public class SeabeeController : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void SpawnRandom()
+    {
+        // Does nothing
     }
 }
