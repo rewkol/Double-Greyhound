@@ -104,6 +104,11 @@ public class FloorBreakController : MonoBehaviour
             poolBottom.position += new Vector3(0.0f, panSpeed, 0.0f);
 
             splash.position += new Vector3(0.0f, panSpeed * 4.0f, 0.0f);
+
+            if (i == 63)
+            {
+                player.LandingAnimation();
+            }
             yield return new WaitForFixedUpdate();
         }
 

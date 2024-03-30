@@ -28,6 +28,7 @@ public class SuperSaintController : MonoBehaviour
     private PlayerController player;
     private float limitXLeft;
     private float limitXRight;
+    private bool onScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +42,13 @@ public class SuperSaintController : MonoBehaviour
         // Extra cooldown on top of cooldown
         attackCycle = 0;
         stun = 0;
-        spacingX = 7.2f;
+        spacingX = 12.0f;
         spacingY = 0.4f;
         health = 4;
         inPosX = false;
         inPosY = false;
+        // Tracks that saint has at least been on screen once
+        onScreen = false;
 
         //Get camera position to limit x movement
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
@@ -57,13 +60,15 @@ public class SuperSaintController : MonoBehaviour
         if (player.IsDead())
         {
             animator.SetTrigger("Walk");
-            transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
-            transform.position += new Vector3(speed, 0.0f, 0.0f);
-            cooldown++;
-            if (cooldown > 1000)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("SaintWalk"))
             {
-                transform.position += new Vector3(speed, 0.0f, 0.0f);
-                //Don't despawn because despawning moves the camera around
+                transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+                cooldown++;
+                if (cooldown < 1000)
+                {
+                    transform.position += new Vector3(speed, 0.0f, 0.0f);
+                    //Don't despawn because despawning moves the camera around
+                }
             }
             return;
         }
@@ -86,6 +91,8 @@ public class SuperSaintController : MonoBehaviour
             }
         }
 
+        onScreen = limitXLeft < transform.position.x && limitXRight > transform.position.x;
+
         //Space away from player for attacking
         if (Mathf.Abs(moveVertical) < spacingY)
         {
@@ -97,12 +104,17 @@ public class SuperSaintController : MonoBehaviour
             inPosY = false;
         }
         // If too close start to walk away
-        if (Mathf.Abs(moveHorizontal) < (3 * spacingX) / 5.0f)
+        if (Mathf.Abs(moveHorizontal) <  (2 * spacingX) / 5.0f)
         {
             moveHorizontal = moveHorizontal * -1;
             inPosX = false;
         }
-        else if (Mathf.Abs(moveHorizontal) < spacingX)
+        else if (Mathf.Abs(moveHorizontal) < spacingX && onScreen)
+        {
+            moveHorizontal = 0.0f;
+            inPosX = true;
+        }
+        else if (Mathf.Abs(moveHorizontal) < spacingX / 2.0f && !onScreen)
         {
             moveHorizontal = 0.0f;
             inPosX = true;
@@ -164,7 +176,7 @@ public class SuperSaintController : MonoBehaviour
         transform.position = transform.position + (movement * speed);
 
         //Attack code
-        if (inPosX && inPosY && cooldown == 0 && stun == 0 && attackCycle == 0 && !player.StopChasing() && limitXLeft + 0.7f < transform.position.x && limitXRight - 0.7f > transform.position.x)
+        if (inPosX && inPosY && cooldown == 0 && stun == 0 && attackCycle == 0 && !player.StopChasing() && onScreen)
         {
             animator.SetTrigger("Throw");
             cooldown = 110;
@@ -190,7 +202,7 @@ public class SuperSaintController : MonoBehaviour
             cooldown = 0;
             attackCycle = 0;
             health -= packet.getDamage();
-            if (health <= 0)
+            if (health <= 0 && !player.IsDead())
             {
                 stun = 9999;
                 animator.SetTrigger("Dead");

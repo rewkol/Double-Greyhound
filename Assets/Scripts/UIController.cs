@@ -659,7 +659,7 @@ public class UIController : MonoBehaviour
         }
 
         GameState state = new GameState(score, Mathf.Min(player.GetHealth() + 5, 20), 
-            specialUnlock > player.GetSpecial() ? specialUnlock : player.GetSpecial(), 
+            specialUnlock > player.GetSpecialUnlocked() ? specialUnlock : player.GetSpecial(), 
             specialUnlock > lastUnlock ? specialUnlock : lastUnlock, 
             run, firstRun);
         //Serialize state

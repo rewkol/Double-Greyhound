@@ -38,7 +38,7 @@ public class CherubimController : MonoBehaviour
         attackTimer = Random.Range(40, 80);
         attacks = Random.Range(1, 4);
         primedTurns = Random.Range(0, 3);
-        speed = 0.04f;
+        speed = 0.06f;
 
         if (primedTurns > 0)
         {

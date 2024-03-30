@@ -44,7 +44,7 @@ public class StMalachyController : MonoBehaviour
         ascensionOver = false;
         // He is strongest in the game. Secret Super Boss
         health = 1000;
-        target = player.GetPosition();
+        target = new Vector3(0.0f, 0.0f, 0.0f);
         counter = Random.Range(40, 70);
     }
 
@@ -126,7 +126,7 @@ public class StMalachyController : MonoBehaviour
     {
         for (int i = 0; i < 320; i++)
         {
-            if (i == 50)
+            if (i == 50 && !triggeredBattle)
             {
                 animator.SetTrigger("BlessLong");
             }
@@ -158,6 +158,10 @@ public class StMalachyController : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
+            if (i == 49)
+            {
+                player.LandingAnimation();
+            }
             yield return new WaitForFixedUpdate();
         }
 

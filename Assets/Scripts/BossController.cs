@@ -130,7 +130,8 @@ public class BossController : MonoBehaviour
         timer--;
         if (timer <= 0)
         {
-            timer = Random.Range(35, 80);
+            int correction = (int) (((750 - health) / 750.0f) * 5);
+            timer = Random.Range(25 - correction, 50 - (correction * 4));
             // Trigger action
             float chance = Random.Range(0.0f, 1.0f);
             bool attacked = false;
@@ -180,7 +181,7 @@ public class BossController : MonoBehaviour
             }
             else
             {
-                if (chance < 0.05f)
+                if (chance < 0.2f)
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -191,7 +192,7 @@ public class BossController : MonoBehaviour
                         justTurned = false;
                     }
                 }
-                else if (chance > 0.9f && !justTurned)
+                else if (chance > 0.7f && !justTurned)
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -207,21 +208,27 @@ public class BossController : MonoBehaviour
                 if (!attacked)
                 {
                     float handed = Random.Range(0.0f, 1.0f);
-                    if (handed < 0.1f && bias == 0)
+                    if (handed > 0.8f && leftHand.CanTurn() && rightHand.CanTurn())
                     {
                         rightHand.PrimeAttack();
-                    }
-                    else if (handed < 0.1f && bias == 2)
-                    {
                         leftHand.PrimeAttack();
                     }
-                    else if (bias == 0)
-                    {
-                        leftHand.PrimeAttack();
-                    }
-                    else if (bias == 2)
+                    else if (bias == 2 || (handed < 0.2f && bias == 0))
                     {
                         rightHand.PrimeAttack();
+                        // If attmepted attack failed, try the other with random chance
+                        if (!rightHand.AttackPrimed() && handed > 0.5f)
+                        {
+                            leftHand.PrimeAttack();
+                        }
+                    }
+                    else if (bias == 0 || (handed < 0.2f && bias == 2))
+                    {
+                        leftHand.PrimeAttack();
+                        if (!leftHand.AttackPrimed() && handed > 0.5f)
+                        {
+                            rightHand.PrimeAttack();
+                        }
                     }
                     justTurned = false;
                 }
@@ -440,7 +447,7 @@ public class BossController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        ui.PrimeTransition("SJHS");
+        ui.PrimeTransition("Credits");
         ui.SaveGameState(true, 3);
     }
 }

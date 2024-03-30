@@ -83,7 +83,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         specialChangePushed = false;
         stun = 0;
         inPos = false;
-        health = 100;
+        health = 70;
         doAnimation = false;
 
 
@@ -122,7 +122,7 @@ public class ShadowGreyhoundController : MonoBehaviour
             CopyPlayerMovement();
 
             // Switch after crossing the door
-            if (transform.position.x >= 50.0f)
+            if (transform.position.x >= 50.0f && health > 0)
             {
                 state = 1;
                 DefaultStance();
@@ -536,7 +536,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
 
 
-        if (state == 2 && health < 50) // > 51
+        if (state == 2 && health < 35) // > 36
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
             {

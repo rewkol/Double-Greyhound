@@ -32,7 +32,7 @@ public class SupremeSaintController : MonoBehaviour
         cooldown = 10;
         stun = 0;
         spacingX = 4.0f;
-        health = 80;
+        health = 60;
 
 
         StartCoroutine(EntranceRoutine());
@@ -64,7 +64,7 @@ public class SupremeSaintController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!ui.GameActive())
+        if (!ui.GameActive() || player.IsDead())
         {
             return;
         }
@@ -113,7 +113,7 @@ public class SupremeSaintController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        if (health > 0)
+        if (health > 0 && !player.IsDead())
         {
             // begin punch again if player is still too close
             if (transform.position.x - player.GetPosition().x < spacingX * 3 && !player.StopChasing())
@@ -138,14 +138,18 @@ public class SupremeSaintController : MonoBehaviour
         }
 
         // Keep spawning rings until the player is close enough for a punch, or defeated boss
-        while (health > 0 && transform.position.x - player.GetPosition().x >= spacingX)
+        while (health > 0 && transform.position.x - player.GetPosition().x >= spacingX && !player.IsDead())
         {
             RingAuraController instance = Instantiate(ring, transform.position + new Vector3(0.0f, 0.0f, 0.01f), transform.rotation);
             instance.SetDirection(true);
             for (int i = 0; i < ((health > 40) ? 100 : 90); i++)
             {
-                if (health <= 0 || transform.position.x - player.GetPosition().x < spacingX)
+                if (health <= 0 || transform.position.x - player.GetPosition().x < spacingX || player.IsDead())
                 {
+                    if (player.IsDead())
+                    {
+                        animator.SetTrigger("Idle");
+                    }
                     break;
                 }
 

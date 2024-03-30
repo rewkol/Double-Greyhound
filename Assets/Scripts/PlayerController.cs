@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private float limitXRight;
     private bool facingLeft;
     private bool downed;
+    private bool jumping;
+    private float jumpHeight;
 
     //Timers/Flags
     private int cooldown;
@@ -65,6 +67,9 @@ public class PlayerController : MonoBehaviour
         //Initialize all the flags, timers, etc.
         facingLeft = false;
         downed = false;
+        jumping = false;
+        jumpHeight = 0.0f;
+
         special = 3;
         cooldown = 0;
         punchPushed = false;
@@ -305,7 +310,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Axe");
             cooldown = 55;
-            FjellriverController axe = Instantiate(fjellriver, transform.position + new Vector3(-0.426f * 6.0f * (facingLeft? -1.0f : 1.0f), 0.15f * 6.0f, 0.0001f), transform.rotation);
+            FjellriverController axe = Instantiate(fjellriver, transform.position + new Vector3(-0.426f * 6.0f * (facingLeft ? -1.0f : 1.0f), 0.15f * 6.0f, 0.0001f), transform.rotation);
             axe.SetDirection(facingLeft);
             axeInstanced = true;
             axeInstance = axe;
@@ -370,7 +375,7 @@ public class PlayerController : MonoBehaviour
             if (health <= 0)
             {
                 animator.SetTrigger("Knockback");
-                StartCoroutine(KnockbackRoutine());
+                StartCoroutine(KnockbackRoutine(false));
                 ui.SaveHighScore();
                 health = 0;
                 ui.PlayerHealthBar(health);
@@ -391,7 +396,7 @@ public class PlayerController : MonoBehaviour
                     if (comboCounter >= 3.0f && doStun)
                     {
                         animator.SetTrigger("Knockback");
-                        StartCoroutine(KnockbackRoutine());
+                        StartCoroutine(KnockbackRoutine(false));
                         cooldown = 60;
                         comboCounter = 0.0f;
                     }
@@ -454,29 +459,66 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);
     }
 
-    private IEnumerator KnockbackRoutine()
+    private IEnumerator KnockbackRoutine(bool manualControl)
     {
-        downed = true;
-        for (int i = 0; i < 49; i++)
+        if (!jumping || jumpHeight < 0.000001f)
         {
-            transform.position += new Vector3(0.03f * (facingLeft ? 1 : -1), 0.01f * ((48 - i) - 24), 0.0f);
-            // Correct out of boundsness
-            if (transform.position.x < limitXLeft)
+            downed = true;
+            for (int i = 0; i < 49; i++)
             {
-                transform.position += new Vector3(limitXLeft - transform.position.x, 0.0f, 0.0f);
+                transform.position += new Vector3(0.03f * (facingLeft ? 1 : -1), 0.01f * ((48 - i) - 24), 0.0f);
+                // Correct out of boundsness
+                if (transform.position.x < limitXLeft)
+                {
+                    transform.position += new Vector3(limitXLeft - transform.position.x, 0.0f, 0.0f);
+                }
+                else if (transform.position.x > limitXRight)
+                {
+                    transform.position += new Vector3(limitXRight - transform.position.x, 0.0f, 0.0f);
+                }
+                yield return new WaitForFixedUpdate();
             }
-            else if (transform.position.x > limitXRight)
+            // Break before landing so other callers can create different length fall animations
+            if (manualControl)
             {
-                transform.position += new Vector3(limitXRight - transform.position.x, 0.0f, 0.0f);
+                yield break;
             }
-            yield return new WaitForFixedUpdate();
-        }
-        if (transform.position.y - 0.85f >= limitYBottom)
-        {
-            transform.position += new Vector3(0.0f, -0.85f, -0.0085f);
-        }
 
-        // Yes the cooldown goes beyond this so they can sit and contemplate their failures
+            animator.SetTrigger("Downed");
+            if (transform.position.y - 0.85f >= limitYBottom)
+            {
+                transform.position += new Vector3(0.0f, -0.85f, -0.0085f);
+            }
+            // Yes the cooldown goes beyond this so they can sit and contemplate their failures
+        }
+        // This should only trigger if player is dead while jumping
+        else
+        {
+            int i = 0;
+            while (jumpHeight > 0.0f)
+            {
+                transform.position += new Vector3(0.03f * (facingLeft ? 1 : -1), 0.01f * ((48 - i) - 24), 0.0f);
+                jumpHeight += 0.01f * ((48 - i) - 24);
+                // Correct out of boundsness
+                if (transform.position.x < limitXLeft)
+                {
+                    transform.position += new Vector3(limitXLeft - transform.position.x, 0.0f, 0.0f);
+                }
+                else if (transform.position.x > limitXRight)
+                {
+                    transform.position += new Vector3(limitXRight - transform.position.x, 0.0f, 0.0f);
+                }
+                i++;
+
+                yield return new WaitForFixedUpdate();
+            }
+
+            animator.SetTrigger("Downed");
+            if (transform.position.y - 0.85f >= limitYBottom)
+            {
+                transform.position += new Vector3(0.0f, -0.85f, -0.0085f);
+            }
+        }
     }
 
     private IEnumerator StandingRoutine()
@@ -494,15 +536,26 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator JumpRoutine()
     {
+        jumping = true;
         //Crouched
         for (int i = 0; i < 9; i++)
         {
+            if (health <= 0)
+            {
+                yield break;
+            }
             yield return new WaitForFixedUpdate();
         }
         //Jumping
         for (int i = 0; i < 24; i++)
         {
+            if (health <= 0)
+            {
+                yield break;
+            }
+
             transform.position += new Vector3(0.07f * (facingLeft ? -1 : 1), 0.33f * (((float)(24 - i)) / 24), 0.0f);
+            jumpHeight += 0.33f * (((float)(24 - i)) / 24);
             // Correct out of boundsness
             if (transform.position.x < limitXLeft)
             {
@@ -519,12 +572,23 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
         }
+        if (health <= 0)
+        {
+            yield break;
+        }
+
         //Kick
         CreateHitbox(new Vector3(0.0f * 6, -0.15742f * 6, 0.0f), 0.08799372f * 6, 0.2870359f * 6, 140, 1);
         for (int i = 0; i < 7; i++)
         {
+            if (health <= 0)
+            {
+                yield break;
+            }
+
             // This is calculated to be the exact height of the jump so we don't need to worry about losing/gaining altitude with each jump
             transform.position += new Vector3(0.18f * (facingLeft ? -1 : 1), -0.589285714285f, 0.0f);
+            jumpHeight += -0.589285714285f;
             // Correct out of boundsness
             if (transform.position.x < limitXLeft)
             {
@@ -536,17 +600,28 @@ public class PlayerController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+        if (health <= 0)
+        {
+            yield break;
+        }
+
         //Landing
         CreateHitbox(new Vector3(0.011f * 6, -0.241f * 6, 0.0f), 0.203804f * 6, 0.135036f * 6, 20, 2);
         for (int i = 0; i < 9; i++)
         {
+            if (health <= 0)
+            {
+                yield break;
+            }
+
             if (i == 1)
             {
                 CreateHitbox(new Vector3(0.01281f * 6, -0.2591f * 6, 0.0f), 0.4173282f * 6, 0.09884501f * 6, 20, 1);
+                jumping = false;
+                jumpHeight = 0.0f;
             }
             yield return new WaitForFixedUpdate();
         }
-
     }
 
     public void ThrowHalo()
@@ -624,6 +699,11 @@ public class PlayerController : MonoBehaviour
         this.special = special;
     }
 
+    public int GetSpecialUnlocked()
+    {
+        return this.specialUnlocked;
+    }
+
     public void SetSpecialUnlocked(int unlocked)
     {
         this.specialUnlocked = unlocked;
@@ -692,10 +772,19 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
         }
         animator.SetTrigger("Knockback");
-        StartCoroutine(KnockbackRoutine());
+        StartCoroutine(KnockbackRoutine(true));
         if (zeroHealth)
         {
             ui.PlayerHealthBar(0);
+        }
+    }
+
+    public void LandingAnimation()
+    {
+        animator.SetTrigger("Downed");
+        if (transform.position.y - 0.85f >= limitYBottom)
+        {
+            transform.position += new Vector3(0.0f, -0.85f, -0.0085f);
         }
     }
 
