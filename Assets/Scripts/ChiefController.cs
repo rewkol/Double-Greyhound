@@ -280,7 +280,7 @@ public class ChiefController : MonoBehaviour
                 animator.SetTrigger("Completed");
                 StartCoroutine(BlinkRoutine());
             }
-            else
+            else if (!player.IsDead())
             {
                 //Start death sequence
                 stun = 99999;

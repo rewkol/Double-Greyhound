@@ -82,7 +82,7 @@ public class SeabeeController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.IsDead())
+        if (player.IsDead() && health > 0 && cooldown == 0)
         {
             if (!running)
             {
@@ -94,8 +94,9 @@ public class SeabeeController : MonoBehaviour
             }
             transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
             transform.position += new Vector3(speed, 0.0f, 0.0f);
-            cooldown++;
-            if (cooldown > 1000)
+            // Using stun instead because of how attacks work here
+            stun++;
+            if (stun > 1000)
             {
                 transform.position += new Vector3(speed, 0.0f, 0.0f);
                 //Don't despawn because despawning moves the camera around

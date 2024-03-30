@@ -36,6 +36,7 @@ public class QueenController : MonoBehaviour
     private int punchCounter;
     private int jumpDirection;
     private int pointTimer;
+    private bool inAnimation;
 
     private static float PLAYER_HEIGHT_ADJUSTMENT = 0.05f; 
 
@@ -61,6 +62,7 @@ public class QueenController : MonoBehaviour
         punchCounter = 0;
         jumpDirection = 1;
         pointTimer = 0;
+        inAnimation = false;
 
 
         float midY = (limitYTop + limitYBottom) / 2;
@@ -100,6 +102,46 @@ public class QueenController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (player.IsDead() && health > 0)
+        {
+            cooldown++;
+            if (flying)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("QueenFlyingIdle"))
+                {
+                    // Reusing a trigger because I don't want to add a whole new one for this
+                    animator.SetTrigger("Hover");
+                }
+                if (cooldown > 100 && cooldown < 1000)
+                {
+                    transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
+                    drone1.SendMessage("SwitchDirection", false);
+                    drone2.SendMessage("SwitchDirection", false);
+                    transform.position += new Vector3(0.04f, 0.0f, 0.0f);
+                }
+            }
+            else
+            {
+                if (!jumping && !kicking && cooldown > 100 && cooldown < 1000)
+                {
+                    transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("QueenMMAJump") || !animator.GetCurrentAnimatorStateInfo(0).IsName("QueenMMAHover"))
+                    {
+                        animator.SetTrigger("Jump");
+                    }
+                    jumpDirection = 1;
+                }
+                else if (jumping && cooldown > 100 && cooldown < 1000)
+                {
+                    transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
+                    jumpDirection = 1;
+                    transform.position += new Vector3(0.05f, 0.0f, 0.0f);
+                }
+            }
+            return;
+        }
+
+
         if (!ui.GameActive())
         {
             return;
@@ -355,7 +397,7 @@ public class QueenController : MonoBehaviour
                 stun = 7;
                 StartCoroutine(BlinkRoutine());
             }
-            else
+            else if (!player.IsDead())
             {
                 cooldown = 99999;
                 stun = 99999;
@@ -602,6 +644,13 @@ public class QueenController : MonoBehaviour
 
     private IEnumerator JumpingRoutine()
     {
+        // Because of stupid overlapping animations because my state machine here is so broken, I need this to prevent overlapping coroutine triggers
+        if (inAnimation)
+        {
+            yield break;
+        }
+        inAnimation = true;
+
         pointTimer = 99999;
         jumping = true;
         int jumpFrames = Random.Range(26, 36) + (transform.position.y < limitYTop - 1.5f ? 6 : 0);
@@ -631,6 +680,8 @@ public class QueenController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+
+        inAnimation = false;
         // Hover if completed, kick if not
         if (!cancel)
         {
@@ -644,10 +695,17 @@ public class QueenController : MonoBehaviour
         {
             StartCoroutine(LandRoutine());
         }
+
     }
 
     private IEnumerator LandRoutine()
     {
+        if (inAnimation)
+        {
+            yield break;
+        }
+        inAnimation = true;
+
         jumping = false;
         kicking = true;
         animator.SetTrigger("Kick");
@@ -670,10 +728,18 @@ public class QueenController : MonoBehaviour
         animator.SetTrigger("Land");
         cooldown = 80;
         kicking = false;
+
+        inAnimation = false;
     }
 
     private IEnumerator JumpingPointRoutine()
     {
+        if (inAnimation)
+        {
+            yield break;
+        }
+        inAnimation = true;
+
         pointing = true;
         bool pointDirection = Random.Range(0.0f, 1.0f) < 0.5f;
         if (pointDirection)
@@ -707,6 +773,8 @@ public class QueenController : MonoBehaviour
         // Reusing for cancelling point
         animator.SetTrigger("PointPre");
         ResetPointTimer();
+
+        inAnimation = false;
     }
 
     private void ResetPointTimer()

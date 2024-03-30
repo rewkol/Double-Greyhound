@@ -80,10 +80,16 @@ public class ValkyrieController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.IsDead())
+        if (player.IsDead() && health > 0)
         {
-            animator.SetTrigger("Idle");
             cooldown++;
+            if (cooldown <= 100)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ValkyrieIdle"))
+                {
+                    animator.SetTrigger("Idle");
+                }
+            }
             if (cooldown > 100 && cooldown < 1000)
             {
                 transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
@@ -258,7 +264,7 @@ public class ValkyrieController : MonoBehaviour
                 animator.SetTrigger("Completed");
                 StartCoroutine(BlinkRoutine());
             }
-            else
+            else if (!player.IsDead())
             {
                 //Start death sequence
                 stun = 99999;

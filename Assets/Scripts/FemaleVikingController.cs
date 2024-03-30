@@ -63,14 +63,18 @@ public class FemaleVikingController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.IsDead())
+        if (player.IsDead() && health > 0)
         {
             animator.SetTrigger("Walk");
-            transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
-            cooldown++;
-            if (cooldown > 1000)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("FemaleVikingWalk"))
             {
-                transform.position += new Vector3(speed, 0.0f, 0.0f);
+                transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+                cooldown++;
+                if (cooldown < 1000)
+                {
+                    transform.position += new Vector3(speed, 0.0f, 0.0f);
+                    //Don't despawn because despawning moves the camera around
+                }
             }
             return;
         }

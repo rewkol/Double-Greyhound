@@ -237,6 +237,11 @@ public class BossHandController : MonoBehaviour
         }
     }
 
+    public bool AttackPrimed()
+    {
+        return this.primeAttack;
+    }
+
     public void FireAttack()
     {
         if (state && cooldown == 0)
@@ -484,7 +489,7 @@ public class BossHandController : MonoBehaviour
         }
         Dangle();
         state = true;
-        cooldown = 300;
+        cooldown = 200;
     }
 
     private IEnumerator FireRoutine()

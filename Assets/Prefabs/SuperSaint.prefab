@@ -122,8 +122,8 @@ MonoBehaviour:
   hitbox: {fileID: 8074193040407761209, guid: c6bb771747718bf46863d1a428900ef4, type: 3}
   halo: {fileID: 3206953742019594445, guid: d7643f7345318c04fa9db66d1a8ac82e, type: 3}
   speed: 0.09
-  limitYTop: 0.17
-  limitYBottom: -2.88
+  limitYTop: -0.18
+  limitYBottom: -3.32
 --- !u!1001 &2564437795673801104
 PrefabInstance:
   m_ObjectHideFlags: 0

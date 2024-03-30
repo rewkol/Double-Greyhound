@@ -8,10 +8,12 @@ public class FireController : MonoBehaviour
 
     private Transform transform;
     private PlayerController player;
+    private UIController ui;
     private Vector3[] targets;
     private int trackTimer;
     private bool onTarget;
     private bool facingLeft;
+    private bool healing;
 
     private const float speed = 0.05f;
     private const float VERTICAL_PADDING = -0.7f;
@@ -21,6 +23,7 @@ public class FireController : MonoBehaviour
     {
         transform = GetComponent<Transform>();
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
+        ui = GameObject.FindObjectsOfType<UIController>()[0];
         // Player hasn't been instantiated fully yet if fire exists on first frame...
         targets = new Vector3[20];
         for (int i = 0; i < 20; i++)
@@ -30,11 +33,17 @@ public class FireController : MonoBehaviour
         trackTimer = 100;
         onTarget = false;
         facingLeft = true;
+        healing = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!ui.GameActive())
+        {
+            StartCoroutine(HealingRoutine());
+            return;
+        }
         // Track player for some time, after this target stops updating
         if (trackTimer > 0)
         {
@@ -99,6 +108,12 @@ public class FireController : MonoBehaviour
 
     private IEnumerator HealingRoutine()
     {
+        if (healing)
+        {
+            yield break;
+        }
+
+        healing = true;
         for (int i = 0; i < 50; i++)
         {
             yield return new WaitForFixedUpdate();

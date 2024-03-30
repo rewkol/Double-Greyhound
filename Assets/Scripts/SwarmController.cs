@@ -17,6 +17,8 @@ public class SwarmController : MonoBehaviour
     private int[] attackOrder;
     private int[] attackDelay;
 
+    private PlayerController player;
+
     private float leftX;
     private float topY;
     private float rightX;
@@ -29,6 +31,7 @@ public class SwarmController : MonoBehaviour
     {
         transform = GetComponent<Transform>();
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        player = GameObject.FindObjectsOfType<PlayerController>()[0];
         health = 50;
         attack = false;
         pattern = Random.Range(0, 8);
@@ -538,7 +541,7 @@ public class SwarmController : MonoBehaviour
     {
         health -= dmg;
         ui.BossHealthBar(health);
-        if (health <= 0)
+        if (health <= 0 && !player.IsDead())
         {
             StartCoroutine(DeathRoutine());
         }
