@@ -31,6 +31,9 @@ public class UIController : MonoBehaviour
     private PlayerController player;
     private float playerHealthMaxWidth;
     private Transform playerHealthBarFill;
+    private Transform playerHealthBarDrain;
+    private float drain;
+    private const float DEFAULT_WIDTH = 188.23f;
 
     //Boss Health Variables
     private float bossHealthMaxWidth;
@@ -68,6 +71,14 @@ public class UIController : MonoBehaviour
     private int scorePosition;
     private HighScoreList highScores;
 
+    //Transparency Variables
+    private bool collisionTransparency;
+    private bool utilityTransparency;
+    private RawImage uiTexture;
+
+    // Specials Variables
+    private Transform specialCover;
+
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +102,9 @@ public class UIController : MonoBehaviour
         //Player Health
         playerHealthBarFill = statusParent.transform.Find("PlayerHealthBarRed");
         playerHealthMaxWidth = playerHealthBarFill.GetComponent<RectTransform>().rect.width;
+        playerHealthBarDrain = playerHealthBarFill.Find("PlayerHealthBarPink");
+        playerHealthBarDrain.localScale = new Vector3(0.0f, 1.0f, 1.0f);
+        drain = 0.0f;
 
         //Boss Health
         bossHealthBarFill = statusParent.transform.Find("BossHealthBarRed");
@@ -138,6 +152,13 @@ public class UIController : MonoBehaviour
 
         scoreParent.SetActive(false);
 
+        collisionTransparency = false;
+        utilityTransparency = true;
+        uiTexture = GameObject.FindGameObjectsWithTag("UITexture")[0].GetComponent<RawImage>();
+
+        specialCover = statusParent.transform.Find("SpecialCover");
+        specialCover.localScale = new Vector3(1.0f, 0.0f, 1.0f);
+
         //State
         run = 0;
         firstRun = true;
@@ -153,6 +174,16 @@ public class UIController : MonoBehaviour
         if (UIMode == 99)
         {
             return;
+        }
+
+        if (UIMode == 0)
+        {
+            float alpha = 0.5f + (collisionTransparency ? 0.0f : 0.25f) + (utilityTransparency ? 0.0f : 0.25f);
+            uiTexture.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+        }
+        else
+        {
+            uiTexture.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         //UIMode == 0 is normal gameplay triggered by data pushed here from the other controllers
@@ -208,6 +239,9 @@ public class UIController : MonoBehaviour
 
     void FixedUpdate()
     {
+        this.collisionTransparency = false;
+        transform.position = camera.transform.position + new Vector3(-5.77f, 3.9f, 110.0f);
+
         //I want this in fixed update to guarantee the cursor can't spin too fast when selecting letters
         if (UIMode == 3)
         {
@@ -474,6 +508,76 @@ public class UIController : MonoBehaviour
     {
         //Change health bar size as player health changes
         float playerHealthScale = ((float) health) / 20.0f;
+        float diff = 0.0f;
+        bool doHitStun = false;
+        bool doHealStun = false;
+        if (playerHealthScale < playerHealthBarFill.localScale.x && playerHealthBarFill.GetComponent<RectTransform>().sizeDelta.x > 0.0f)
+        {
+            doHitStun = true;
+            diff = playerHealthBarFill.localScale.x - playerHealthScale;
+        }
+        else if (playerHealthScale > playerHealthBarFill.localScale.x)
+        {
+            doHealStun = true;
+            diff = playerHealthScale - playerHealthBarFill.localScale.x;
+        }
+        else if (playerHealthBarFill.GetComponent<RectTransform>().sizeDelta.x <= 0.0f)
+        {
+            doHealStun = true;
+            diff = playerHealthScale;
+        }
+
+        if (playerHealthScale < 0.0f)
+        {
+            playerHealthScale = 0.0f;
+        }
+        else if (playerHealthScale > 1.0f)
+        {
+            playerHealthScale = 1.0f;
+        }
+
+        if (playerHealthBarFill.GetComponent<RectTransform>().sizeDelta.x > 0.0f)
+        {
+            this.drain = playerHealthBarFill.localScale.x - playerHealthScale;
+        }
+        else
+        {
+            this.drain = -playerHealthScale;
+        }
+        
+        // If 0 need to scale back up to support the drain child object having a scale
+        if (playerHealthScale <= 0.0f)
+        {
+            RectTransform rect = playerHealthBarFill.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(0.0f, rect.sizeDelta.y);
+            playerHealthBarFill.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else
+        {
+            RectTransform rect = playerHealthBarFill.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(DEFAULT_WIDTH, rect.sizeDelta.y);
+            playerHealthBarFill.localScale = new Vector3(playerHealthScale, 1.0f, 1.0f);
+        }
+
+        playerHealthBarDrain.localScale = new Vector3(this.drain * (1.0f / playerHealthBarFill.localScale.x), 1.0f, 1.0f);
+
+        // Calls afterward to make sure all values calculated properly
+        if (doHitStun)
+        {
+            StartCoroutine(HitstunRoutine(diff));
+        }
+        else if (doHealStun)
+        {
+            // invert the drain to be positive
+            this.drain = -this.drain;
+            StartCoroutine(HealStunRoutine(diff));
+        }
+    }
+
+    public void PlayerHealthBarNoStun(int health)
+    {
+        //Change health bar size as player health changes
+        float playerHealthScale = ((float)health) / 20.0f;
         if (playerHealthScale < 0.0f)
         {
             playerHealthScale = 0.0f;
@@ -732,7 +836,7 @@ public class UIController : MonoBehaviour
             this.run = state.run;
             this.firstRun = state.firstRun;
             player.SetHealth(state.health);
-            PlayerHealthBar(state.health);
+            PlayerHealthBarNoStun(state.health);
             if (state.special == 0 && state.unlocked > 0)
             {
                 player.SetSpecial(1);
@@ -886,5 +990,85 @@ public class UIController : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(transitionScene);
         SceneManager.UnloadSceneAsync(sceneName);
+    }
+
+    private IEnumerator HitstunRoutine(float duration)
+    {
+        this.utilityTransparency = false;
+        float timeStep = 0.01f;
+        Time.timeScale = 0.0f;
+        // Yes I could just use max lol
+        float remaining = duration > this.drain ? duration : this.drain;
+        while (remaining > 0.0f)
+        {
+            if (remaining <= this.drain)
+            {
+                playerHealthBarDrain.localScale = new Vector3(remaining * (1.0f / playerHealthBarFill.localScale.x), 1.0f, 1.0f);
+            }
+            remaining -= timeStep;
+            yield return new WaitForSecondsRealtime(timeStep);
+        }
+        Time.timeScale = 1.0f;
+
+        // Just make sure the scale is 0 by the end
+        playerHealthBarDrain.localScale = new Vector3(0.0f, 1.0f, 1.0f);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        this.utilityTransparency = true;
+    }
+
+    // I believe mine is the first game to have heal stun lolol
+    private IEnumerator HealStunRoutine(float duration)
+    {
+        this.utilityTransparency = false;
+        float timeStep = 0.01f;
+        float fullBar = playerHealthBarFill.localScale.x;
+
+        if (this.drain == fullBar)
+        {
+            this.drain -= timeStep;
+        }
+        playerHealthBarFill.localScale = new Vector3(fullBar - this.drain, 1.0f, 1.0f);
+        Time.timeScale = 0.0f;
+        // Yes I could just use max lol
+        float remaining = duration > this.drain ? duration : this.drain;
+        while (remaining > 0.0f)
+        {
+            if (remaining <= this.drain)
+            {
+                playerHealthBarFill.localScale = new Vector3(fullBar - remaining, 1.0f, 1.0f);
+                playerHealthBarDrain.localScale = new Vector3(remaining * (1.0f / playerHealthBarFill.localScale.x), 1.0f, 1.0f);
+            }
+            remaining -= timeStep;
+            yield return new WaitForSecondsRealtime(timeStep);
+        }
+        Time.timeScale = 1.0f;
+
+        // Just make sure the scale is 0 by the end
+        playerHealthBarFill.localScale = new Vector3(fullBar, 1.0f, 1.0f);
+        playerHealthBarDrain.localScale = new Vector3(0.0f, 1.0f, 1.0f);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        this.utilityTransparency = true;
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        this.collisionTransparency = true;
+    }
+
+    public void TriggerSpecialCover(int frames)
+    {
+        StartCoroutine(SpecialCooldownRoutine(frames));
+    }
+
+    private IEnumerator SpecialCooldownRoutine(int frames)
+    {
+        for (int i = frames; i > 0; i--)
+        {
+            this.specialCover.localScale = new Vector3(1.0f, ((float) i) / frames, 1.0f);
+            yield return new WaitForFixedUpdate();
+        }
+        this.specialCover.localScale = new Vector3(1.0f, 0.0f, 1.0f);
     }
 }

@@ -315,12 +315,14 @@ public class PlayerController : MonoBehaviour
             axeInstanced = true;
             axeInstance = axe;
             specialCooldown = 135;
+            ui.TriggerSpecialCover(135);
         }
         else if (special == 2)
         {
             animator.SetTrigger("Jump");
             cooldown = 64;
             StartCoroutine(JumpRoutine());
+            ui.TriggerSpecialCover(64);
         }
         else if (special == 3)
         {
@@ -328,6 +330,7 @@ public class PlayerController : MonoBehaviour
             cooldown = 22;
             specialCooldown = 76;
             haloWindup = true;
+            ui.TriggerSpecialCover(76);
         }
     }
 
