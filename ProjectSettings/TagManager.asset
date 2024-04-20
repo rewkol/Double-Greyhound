@@ -14,6 +14,7 @@ TagManager:
   - UIStatus
   - UIScore
   - Puppet
+  - UITexture
   layers:
   - Default
   - TransparentFX

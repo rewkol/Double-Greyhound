@@ -719,6 +719,7 @@ public class ShadowGreyhoundController : MonoBehaviour
 
     private void CopyPlayerMovement()
     {
+        this.special = player.GetSpecial();
         CalculateMovement();
         PerformActions();
     }
