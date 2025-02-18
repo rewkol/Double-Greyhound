@@ -33,10 +33,13 @@ public class BossController : MonoBehaviour
     private bool justTurned;
     private float midpoint;
 
+    private GameObject musicController;
+
     // Start is called before the first frame update
     void Start()
     {
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        musicController = GameObject.Find("MusicController");
         animator = GetComponent<Animator>();
         transform = GetComponent<Transform>();
 
@@ -138,7 +141,7 @@ public class BossController : MonoBehaviour
 
             if (turned)
             {
-                if (chance < 0.2f && !justTurned)
+                if (chance < 0.25f && !justTurned)
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -431,6 +434,11 @@ public class BossController : MonoBehaviour
     // Wow this is it huh
     private IEnumerator DeathRoutine()
     {
+        if (musicController != null)
+        {
+            musicController.SendMessage("StopCurrentSong");
+        }
+
         state = 0;
         animator.SetTrigger("Pain");
         ui.BossExit();

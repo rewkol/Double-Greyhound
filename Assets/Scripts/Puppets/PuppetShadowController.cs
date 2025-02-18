@@ -153,7 +153,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
 
     private IEnumerator DieRoutine()
     {
-        state = 0;
+        timer = -99;
         animator.SetTrigger("Die");
         for (int i = 0; i < 70; i++)
         {
@@ -185,7 +185,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
 
     private IEnumerator VictoryRoutine()
     {
-        state = 0;
+        timer = -99;
         int wait = Random.Range(5, 20);
         for (int i = 1; i < wait; i++)
         {

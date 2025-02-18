@@ -23,6 +23,8 @@ public class MitchellController : MonoBehaviour
     private bool hasHurt;
     private bool facingLeft;
 
+    private GameObject musicController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class MitchellController : MonoBehaviour
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
 
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        musicController = GameObject.Find("MusicController");
         destroyer = GameObject.FindObjectsOfType<FloorBreakController>()[0];
 
         health = 9999;
@@ -43,6 +46,11 @@ public class MitchellController : MonoBehaviour
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x - 1.5f;
 
         StartCoroutine(EntranceRoutine());
+
+        if (musicController != null)
+        {
+            musicController.SendMessage("StartNextSong");
+        }
     }
 
     // Update is called once per frame
@@ -300,6 +308,11 @@ public class MitchellController : MonoBehaviour
     {
         state = 0;
         ui.StartManualCutscene();
+        if (musicController != null)
+        {
+            musicController.SendMessage("StopCurrentSong");
+        }
+
         renderer.material = lerpMaterial;
         // Fade to white
         float amount = 0.1f;

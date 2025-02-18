@@ -104,7 +104,7 @@ public class StMalachyController : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         // Need that pause so that Camera is in fixed position every time
-        gameObject.tag = "Boss";
+        gameObject.tag = "Enemy";
         ui.PanCamera();
         //Need to trigger here so that ui mode is set first
         triggeredFight = true;
