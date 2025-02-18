@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 2869213973202574378}
   m_Layer: 0
   m_Name: Valkyrie
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

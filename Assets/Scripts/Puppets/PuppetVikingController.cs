@@ -153,7 +153,7 @@ public class PuppetVikingController : MonoBehaviour, IPuppet
 
     private IEnumerator DieRoutine()
     {
-        state = 0;
+        timer = -99;
         animator.SetTrigger("Die");
         for (int i = 0; i < 70; i++)
         {

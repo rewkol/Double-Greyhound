@@ -58,10 +58,16 @@ public class ShadowGreyhoundController : MonoBehaviour
     private float avoidYBottom;
     private float avoidYTop;
 
+    private int staleness;
+    private bool punchHappy;
+
+    private GameObject musicController;
+
     // Start is called before the first frame update
     void Start()
     {
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        musicController = GameObject.Find("MusicController");
         puppetMaster = GameObject.FindObjectsOfType<PuppetMasterController>()[0];
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -101,6 +107,9 @@ public class ShadowGreyhoundController : MonoBehaviour
         avoidXRight = -99.9f;
         avoidYBottom = -99.9f;
         avoidYTop = -99.9f;
+
+        staleness = 0;
+        punchHappy = false;
     }
 
 
@@ -206,6 +215,11 @@ public class ShadowGreyhoundController : MonoBehaviour
             transform.position += new Vector3(0.0f, limitYTop - transform.position.y, 0.0f);
         }
         yield return new WaitForFixedUpdate();
+        
+        if (musicController != null)
+        {
+            musicController.SendMessage("StopCurrentSong");
+        }
 
 
         ui.DisplayDialogue("GodHeadshot", "I thought I'd try something different|for our final meeting!");
@@ -230,6 +244,10 @@ public class ShadowGreyhoundController : MonoBehaviour
             {
                 ui.DisplayDialogue("ShadowHeadshot", "Or I guess this is the first|time you have met me in this form...|I am the one whole stole the trophies!|I am the Greyhound who came before you|and I am the Greyhound who will|end your journey!");
                 ui.BossEntrance(health, "SHADOW GREYHOUND");
+                if (musicController != null)
+                {
+                    musicController.SendMessage("StartNextSong");
+                }
             }
             yield return new WaitForFixedUpdate();
         }
@@ -248,6 +266,12 @@ public class ShadowGreyhoundController : MonoBehaviour
      */
     private void BattleLogic()
     {
+        // Reset staleness if the player has been hurt (hitstun will reduce the time scale)
+        if (Time.timeScale < 1.0f)
+        {
+            staleness = 0;
+        }
+
         // Need up to date camera bounds
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
@@ -260,7 +284,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         float spacingX = 5.0f;
         float varianceX = 0.25f;
         float spacingY = 1.0f;
-        float varianceY = 0.1f;
+        float varianceY = 0.15f;
 
         // Always face the player (unless in the middle of an action)
         if (cooldown == 0)
@@ -283,14 +307,14 @@ public class ShadowGreyhoundController : MonoBehaviour
             spacingX = 7.5f;
             spacingY = 1.0f;
             varianceX = 1.0f;
-            varianceY = 0.1f;
+            varianceY = 0.15f;
         }
         else if (special == 2)
         {
             spacingX = 2.6f;
             spacingY = 0.0f;
-            varianceX = 0.1f;
-            varianceY = 0.1f;
+            varianceX = 0.15f;
+            varianceY = 0.15f;
         }
         else if (special == 3)
         {
@@ -302,7 +326,7 @@ public class ShadowGreyhoundController : MonoBehaviour
             spacingX = Mathf.Max(haloDist, 5.0f);
             spacingY = 0.0f;
             varianceX = 0.5f;
-            varianceY = 0.1f;
+            varianceY = 0.15f;
         }
 
         // Really don't care about Y axis in these calculations
@@ -442,6 +466,12 @@ public class ShadowGreyhoundController : MonoBehaviour
                 target = targets[minDistTarget];
             }
 
+            // Sometimes we need to switch it up using harder logic
+            if (punchHappy)
+            {
+                target = new Vector3(playerPos.x, target.y, 0.0f);
+            }
+
 
             // Rewrite moveHorizontal and moveVertical using the target instead of player
             moveHorizontal = target.x - transform.position.x;
@@ -506,6 +536,11 @@ public class ShadowGreyhoundController : MonoBehaviour
             transform.position = transform.position + (movement * speed);
         }
 
+        if (player.StopChasing())
+        {
+            staleness = 0;
+        }
+
         if (player.StopChasing() && !animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
         {
             animator.SetTrigger("Idle");
@@ -514,6 +549,12 @@ public class ShadowGreyhoundController : MonoBehaviour
         // If in position to attack do so
         if (inPos && cooldown == 0 && specialCooldown == 0)
         {
+            staleness++;
+            if (staleness > Random.Range(7, 13))
+            {
+                punchHappy = true;
+                StartCoroutine(PunchHappyRoutine());
+            }
             // Can literally use the player code to trigger :)
             Specials();
         }
@@ -561,6 +602,15 @@ public class ShadowGreyhoundController : MonoBehaviour
                 if (i == 0)
                 {
                     // I could just use 0-2 but mimicking Player for consistency
+                    if (special != player.GetSpecial() - 1 && (player.GetSpecial() == 1 && special != 3))
+                    {
+                        staleness -= Random.Range(3,7);
+                        if (staleness < 0)
+                        {
+                            staleness = 0;
+                        }
+                    }
+
                     special = player.GetSpecial() - 1;
                     if (special == 0)
                     {
@@ -611,6 +661,11 @@ public class ShadowGreyhoundController : MonoBehaviour
             {
                 StartCoroutine(BlinkRoutine());
                 ui.BossHealthBar(health);
+
+                if (punchHappy && cooldown == 0)
+                {
+                    staleness = Random.Range(0, 3);
+                }
             }
         }
     }
@@ -670,6 +725,11 @@ public class ShadowGreyhoundController : MonoBehaviour
         for (int i = 0; i < 15; i++)
         {
             yield return new WaitForFixedUpdate();
+        }
+
+        if (musicController != null)
+        {
+            musicController.SendMessage("StopCurrentSong");
         }
         ui.EndManualCutscene();
         ui.DisplayDialogue("ShadowHeadshot", "Enough!|I am tired of this charade!");
@@ -868,11 +928,11 @@ public class ShadowGreyhoundController : MonoBehaviour
             specialCooldown = 76;
         }
 
-        if (state >= 2 && health > 75)
+        if (state >= 2 && health > 35)
         {
             specialCooldown += Random.Range(5, 10);
         }
-        else if (state >= 2 && health <= 75)
+        else if (state >= 2 && health <= 35)
         {
             specialCooldown += Random.Range(0, 2);
         }
@@ -964,6 +1024,8 @@ public class ShadowGreyhoundController : MonoBehaviour
     private void Punch()
     {
         CreateHitbox(new Vector3(1.1f, 0.63f, 0.0f), 1.2f, 0.8f, 180, 1);
+        punchHappy = false;
+        staleness = 0; 
     }
 
     // These two are only here to keep the Animation Controller from spewing errors
@@ -989,5 +1051,39 @@ public class ShadowGreyhoundController : MonoBehaviour
             case 6: { hurtbox.UpdateScale(0.0f, 0.0f); break; }
             default: { hurtbox.UpdateScale(0.2348053f, 0.6628667f); hurtbox.MoveDirect(new Vector3(-0.00699f, -0.01579f, 0.0f)); break; }
         }
+    }
+
+    private IEnumerator PunchHappyRoutine()
+    {
+        int length = 0;
+        if (this.special == 1)
+        {
+            length = 40;
+        }
+        else if (this.special == 2)
+        {
+            length = 20;
+        }
+        else if (this.special == 3)
+        {
+            length = 75;
+        }
+
+        for (int i = 0; i < length; i++)
+        {
+            if (staleness <= 0 || !punchHappy)
+            {
+                break;
+            }
+
+            if (cooldown > 0)
+            {
+                i--;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+        punchHappy = false;
+        staleness = 0;
     }
 }

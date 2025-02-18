@@ -79,6 +79,9 @@ public class UIController : MonoBehaviour
     // Specials Variables
     private Transform specialCover;
 
+    // Music Variables
+    private GameObject musicController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +101,9 @@ public class UIController : MonoBehaviour
         dialogueParent = GameObject.FindGameObjectsWithTag("UITextBox")[0];
         scoreParent = GameObject.FindGameObjectsWithTag("UIScore")[0];
         camera = GameObject.FindGameObjectsWithTag("MainCamera")[0];
+
+        // Music and Sound
+        musicController = GameObject.Find("MusicController");
 
         //Player Health
         playerHealthBarFill = statusParent.transform.Find("PlayerHealthBarRed");
@@ -606,6 +612,14 @@ public class UIController : MonoBehaviour
             bossHealthScale = 0.0f;
         }
         bossHealthBarFill.localScale = new Vector3(bossHealthScale, 1.0f, 1.0f);
+
+        if (health < (bossMaxHealth / 4))
+        {
+            if (musicController != null)
+            {
+                musicController.SendMessage("BossHalfway");
+            }
+        }
     }
 
     //Sets up a Boss entrance
@@ -618,6 +632,11 @@ public class UIController : MonoBehaviour
         bossHealthBarOutline.gameObject.SetActive(true);
         bossHealthBarFill.gameObject.SetActive(true);
         bossHealthBarFill.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        if (musicController != null)
+        {
+            musicController.SendMessage("BossAppear");
+        }
     }
 
     public void BossExit()
@@ -871,6 +890,11 @@ public class UIController : MonoBehaviour
      */
     private IEnumerator WaitForDeathRoutine()
     {
+        if (musicController != null)
+        {
+            musicController.SendMessage("Death");
+        }
+
         for(int i = 0; i < 50; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -982,9 +1006,23 @@ public class UIController : MonoBehaviour
     private IEnumerator TransitionRoutine()
     {
         player.Celebrate();
-        for (int i = 0; i < 150; i++)
+        if (musicController != null)
+        {
+            musicController.SendMessage("Victory");
+        }
+
+        for (int i = 0; i < 250; i++)
         {
             yield return new WaitForFixedUpdate();
+        }
+
+        // Credits needs more time for the longer jingle!
+        if (transitionScene == "Credits")
+        {
+            for (int i = 0; i < 250; i++)
+            {
+                yield return new WaitForFixedUpdate();
+            }
         }
 
         string sceneName = SceneManager.GetActiveScene().name;

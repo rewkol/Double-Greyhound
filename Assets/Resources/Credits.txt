@@ -1,17 +1,3 @@
-Audio
-
-Mitchell Golding
-
-
-
-
-Backgrounds
-
-Mitchell Golding
-
-
-
-
 Concept
 
 Mitchell Golding
@@ -20,6 +6,34 @@ Mitchell Golding
 
 
 Design
+
+Mitchell Golding
+
+
+
+
+Programming
+
+Mitchell Golding
+
+
+
+
+Audio
+
+Mitchell Golding
+
+
+
+
+Music
+
+Mitchell Golding
+
+
+
+
+Backgrounds
 
 Mitchell Golding
 
@@ -45,9 +59,7 @@ Karl Hubenthal
 
 
 
-Programming
-
-Mitchell Golding
+Sound Effects provided by ZapSplat Pty Ltd
 
 
 

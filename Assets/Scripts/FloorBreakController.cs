@@ -29,12 +29,15 @@ public class FloorBreakController : MonoBehaviour
     // Splash
     private Transform splash;
 
+    private GameObject musicController;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        musicController = GameObject.Find("MusicController");
 
         topLeft = transform.Find("SJHSGymPoolArena - RubbleTopLeft");
         topRight = transform.Find("SJHSGymPoolArena - RubbleTopRight");
@@ -124,6 +127,10 @@ public class FloorBreakController : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
+            if (i == 80 && musicController != null)
+            {
+                musicController.SendMessage("StartNextSong");
+            }
             yield return new WaitForFixedUpdate();
         }
 

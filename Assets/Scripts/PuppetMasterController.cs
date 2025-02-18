@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PuppetMasterController : MonoBehaviour
 {
-    // TODO: public references to the three boss controllers (CHief, Queen, Supreme Saint)
-    // TODO: public references to prefabs for the puppets (vikingMale, vikingFemale, seabee, saint, greyhound)
     public PuppetVikingController maleViking;
     public PuppetVikingController femaleViking;
     public PuppetSeabeeController seabee;
@@ -19,6 +17,7 @@ public class PuppetMasterController : MonoBehaviour
     private PuppetMasterController master;
     private UIController ui;
     private PlayerController player;
+    private GameObject musicController;
 
     private List<IPuppet> allies;
     private List<IPuppet> enemies;
@@ -34,6 +33,7 @@ public class PuppetMasterController : MonoBehaviour
     void Start()
     {
         ui = GameObject.FindObjectsOfType<UIController>()[0];
+        musicController = GameObject.Find("MusicController");
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         allies = new List<IPuppet>();
         enemies = new List<IPuppet>();
@@ -72,8 +72,38 @@ public class PuppetMasterController : MonoBehaviour
                 {
                     ((PuppetShadowController) enemy).Victory();
                 }
-                bosses[this.special].Exit();
                 start = false;
+            }
+        }
+
+        if (player.IsDead())
+        {
+            // Keep trying to remove the bosses
+            if (bosses[1].Exit())
+            {
+                ExitMusic(1);
+            }
+            if (bosses[2].Exit())
+            {
+                ExitMusic(2);
+            }
+            if (bosses[3].Exit())
+            {
+                ExitMusic(3);
+            }
+
+            List<IPuppet> deadAllies = new List<IPuppet>();
+            foreach (IPuppet ally in allies)
+            {
+                if (Random.Range(0, 10) < 1)
+                {
+                    ally.Die();
+                    deadAllies.Add(ally);
+                }
+            }
+            foreach (IPuppet ally in deadAllies)
+            {
+                RemoveAlly(ally);
             }
         }
     }
@@ -108,6 +138,7 @@ public class PuppetMasterController : MonoBehaviour
 
         PuppetBossController boss = this.bosses[specialSelected];
         boss.Enter();
+        EnterMusic(specialSelected);
         ui.StartManualCutscene();
         while (!boss.HasEntered())
         {
@@ -281,8 +312,10 @@ public class PuppetMasterController : MonoBehaviour
                         // Need to wait incase boss was trying to emote
                         yield return new WaitForFixedUpdate();
                     }
+                    ExitMusic(this.special);
                     this.special = specialFuture;
                     bosses[this.special].Enter();
+                    EnterMusic(this.special);
 
                     while (this.allies.Count < MAX_PUPPETS)
                     {
@@ -343,5 +376,47 @@ public class PuppetMasterController : MonoBehaviour
     public void RemoveEnemy(IPuppet enemy)
     {
         enemies.Remove(enemy);
+    }
+
+    private void EnterMusic(int boss)
+    {
+        if (musicController == null)
+        {
+            return;
+        }
+
+        if (boss == 1)
+        {
+            musicController.SendMessage("ChiefAppear");
+        }
+        else if (boss == 2)
+        {
+            musicController.SendMessage("QueenAppear");
+        }
+        else if (boss == 3)
+        {
+            musicController.SendMessage("SaintAppear");
+        }
+    }
+
+    private void ExitMusic(int boss)
+    {
+        if (musicController == null)
+        {
+            return;
+        }
+
+        if (boss == 1)
+        {
+            musicController.SendMessage("ChiefExit");
+        }
+        else if (boss == 2)
+        {
+            musicController.SendMessage("QueenExit");
+        }
+        else if (boss == 3)
+        {
+            musicController.SendMessage("SaintExit");
+        }
     }
 }

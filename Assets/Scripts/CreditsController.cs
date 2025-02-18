@@ -63,7 +63,7 @@ public class CreditsController : MonoBehaviour
 
     private IEnumerator CreditsScrollRoutine()
     {
-        for (int i = 0; i < 2500; i++)
+        for (int i = 0; i < 2900; i++)
         {
             if (Input.GetAxis("Fire1") > 0 && !buttonPressed)
             {
@@ -72,7 +72,8 @@ public class CreditsController : MonoBehaviour
             }
             creditsParent.transform.position += new Vector3(0.0f, 1.85f, 0.0f);
             yield return new WaitForFixedUpdate();
-            if (i == 2499)
+
+            if (i == 2899)
             {
                 for (int j = 0; j < 200; j++)
                 {
