@@ -218,6 +218,7 @@ public class UIController : MonoBehaviour
                     {
                         dialogueParent.SetActive(false);
                         UIMode = 0;
+                        camera.SendMessage("TextOver");
                     }
                     //Do next chunk
                     else
@@ -655,6 +656,8 @@ public class UIController : MonoBehaviour
         currentChunk = fullText;
         dialogueParent.SetActive(true);
         StartCoroutine(ChunkRoutine());
+
+        camera.SendMessage("TextStart");
     }
 
     private IEnumerator ChunkRoutine()
