@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private const float VOLUME_DELTA = 2.0f;
+    private const float DIALOGUE_VOLUME = 0.33333f;
+
     public PlayerController player;
     private ParallaxBGController[] parallaxes;
 
     private Transform transform;
+    private bool inTextDialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +19,8 @@ public class CameraController : MonoBehaviour
         transform = GetComponent<Transform>();
 
         parallaxes = GameObject.FindObjectsOfType<ParallaxBGController>();
+
+        inTextDialogue = false;
     }
 
     // Update is called once per frame
@@ -52,5 +58,45 @@ public class CameraController : MonoBehaviour
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public void TextStart()
+    {
+        this.inTextDialogue = true;
+        StartCoroutine(LowerVolumeRoutine());
+    }
+
+    public void TextOver()
+    {
+        this.inTextDialogue = false;
+        StartCoroutine(RaiseVolumeRoutine());
+    }
+
+    private IEnumerator RaiseVolumeRoutine()
+    {
+        while (AudioListener.volume < 1.0f && !this.inTextDialogue)
+        {
+            AudioListener.volume += (VOLUME_DELTA * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (AudioListener.volume > 1.0f)
+        {
+            AudioListener.volume = 1.0f;
+        }
+    }
+
+    private IEnumerator LowerVolumeRoutine()
+    {
+        while (AudioListener.volume > DIALOGUE_VOLUME && this.inTextDialogue)
+        {
+            AudioListener.volume -= (VOLUME_DELTA * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (AudioListener.volume < DIALOGUE_VOLUME)
+        {
+            AudioListener.volume = DIALOGUE_VOLUME;
+        }
     }
 }
