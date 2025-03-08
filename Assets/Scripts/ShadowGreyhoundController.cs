@@ -62,12 +62,14 @@ public class ShadowGreyhoundController : MonoBehaviour
     private bool punchHappy;
 
     private GameObject musicController;
+    private SFXController sfxController;
 
     // Start is called before the first frame update
     void Start()
     {
         ui = GameObject.FindObjectsOfType<UIController>()[0];
         musicController = GameObject.Find("MusicController");
+        sfxController = GameObject.FindObjectOfType<SFXController>();
         puppetMaster = GameObject.FindObjectsOfType<PuppetMasterController>()[0];
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -110,6 +112,8 @@ public class ShadowGreyhoundController : MonoBehaviour
 
         staleness = 0;
         punchHappy = false;
+
+        // TODO: Sound effects only play when in Battle State so that they don't double up in foyer
     }
 
 
@@ -649,6 +653,7 @@ public class ShadowGreyhoundController : MonoBehaviour
     {
         if (stun == 0 && ui.GameActive() && state >= 2)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 10, 0.15f, false);
             int damage = packet.getDamage();
 
             health -= damage;
@@ -731,6 +736,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         {
             musicController.SendMessage("StopCurrentSong");
         }
+        sfxController.PlaySFX2D("SJHS/Whistle_Short", 1.0f, 5, 0.0f, false);
         ui.EndManualCutscene();
         ui.DisplayDialogue("ShadowHeadshot", "Enough!|I am tired of this charade!");
         ui.BossExit();
@@ -762,6 +768,7 @@ public class ShadowGreyhoundController : MonoBehaviour
 
         renderer.material = lerpMaterial;
         float amount = 0.1f;
+        sfxController.PlaySFX2D("SJHS/Blip", 0.6f, 20, 0.2f, true);
         for (int i = 0; i < 10; i++)
         {
             renderer.material.SetFloat("_LerpAmount", amount);
@@ -961,6 +968,10 @@ public class ShadowGreyhoundController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         //Jumping
+        if (state >= 2)
+        {
+            sfxController.PlaySFX2D("General/Jump_modified", 1.0f, 20, 0.0f, false);
+        }
         for (int i = 0; i < 24; i++)
         {
             transform.position += new Vector3(0.07f * (facingLeft ? -1 : 1), 0.33f * (((float)(24 - i)) / 24), 0.0f);
@@ -981,6 +992,11 @@ public class ShadowGreyhoundController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         //Kick
+        if (state >= 2)
+        {
+            sfxController.PlaySFX2D("General/Kick_modified3", 1.0f, 20, 0.0f, false);
+        }
+        stun = 99999;
         CreateHitbox(new Vector3(0.0f * 6, -0.15742f * 6, 0.0f), 0.08799372f * 6, 0.2870359f * 6, 140, 1);
         for (int i = 0; i < 7; i++)
         {
@@ -997,6 +1013,7 @@ public class ShadowGreyhoundController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+        stun = 0;
         //Landing
         CreateHitbox(new Vector3(0.011f * 6, -0.241f * 6, 0.0f), 0.203804f * 6, 0.135036f * 6, 20, 2);
         for (int i = 0; i < 9; i++)
@@ -1025,7 +1042,11 @@ public class ShadowGreyhoundController : MonoBehaviour
     {
         CreateHitbox(new Vector3(1.1f, 0.63f, 0.0f), 1.2f, 0.8f, 180, 1);
         punchHappy = false;
-        staleness = 0; 
+        staleness = 0;
+        if (state >= 2)
+        {
+            sfxController.PlaySFX2D("General/Punch", 1.0f, 20, 0.15f, false);
+        }
     }
 
     // These two are only here to keep the Animation Controller from spewing errors

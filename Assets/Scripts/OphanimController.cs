@@ -19,6 +19,8 @@ public class OphanimController : MonoBehaviour
 
     private float speed;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +34,12 @@ public class OphanimController : MonoBehaviour
         // Annoyingly the animations are based on a cycle and breaking it could look weird so need to only change animations when animation one frame from completion
         // So that the execution logic does not try to act upon a new animation before the old one has finished playing through
         frameCounter = 0;
-        chaseTimer = Random.Range(50, 250);
+        chaseTimer = Random.Range(50, 150);
         // States: 0 initial wait, 1 fly toward, 2 encircle, 3 fly away
         state = 0;
         speed = 0.19f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
     }
 
@@ -59,6 +63,7 @@ public class OphanimController : MonoBehaviour
                 if (chaseTimer == 0 || transform.position.x - player.GetPosition().x < 11.0f)
                 {
                     StartCoroutine(OpenRoutine());
+                    sfxController.PlaySFX2D("STM/Wind_Rushing_Trimmed2", 0.3f, 20, 0.05f, false);
                 }
             }
         }
@@ -182,13 +187,19 @@ public class OphanimController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        chaseTimer = 0;
-        state = 3;
-        StartCoroutine(OpenRoutine());
+        if (state < 3)
+        {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
+            chaseTimer = 0;
+            state = 3;
+            StartCoroutine(OpenRoutine());
+            sfxController.PlaySFX2D("STM/Wind_Rushing_Trimmed2", 0.3f, 20, 0.05f, false);
+            sfxController.PlaySFX2D("STM/Death_Ophanim_modified", 0.7f, 20, 0.1f, false);
 
-        StartCoroutine(StunRoutine());
-        StartCoroutine(BlinkRoutine());
-        GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(2500L);
+            StartCoroutine(StunRoutine());
+            StartCoroutine(BlinkRoutine());
+            GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(2500L);
+        }
     }
 
     private IEnumerator OpenRoutine()
@@ -240,6 +251,10 @@ public class OphanimController : MonoBehaviour
             {
                 break;
             }
+            if (i % 75 == 0)
+            {
+                sfxController.PlaySFX2D("STM/Spin_modified", 0.6f, 10, 0.1f, false);
+            }
             if ((i + 1) % 75 == 0)
             {
                 HitboxController hit = Instantiate(hitbox, transform.position, transform.rotation);
@@ -254,6 +269,7 @@ public class OphanimController : MonoBehaviour
             {
                 chaseTimer = 0;
                 StartCoroutine(OpenRoutine());
+                sfxController.PlaySFX2D("STM/Wind_Rushing_Trimmed2", 0.3f, 20, 0.05f, false);
             }
         }
     }

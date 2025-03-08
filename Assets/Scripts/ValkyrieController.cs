@@ -32,6 +32,8 @@ public class ValkyrieController : MonoBehaviour
 
     private Transform forceLeft;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,8 @@ public class ValkyrieController : MonoBehaviour
         cutscene = true;
 
         forceLeft = GameObject.FindGameObjectsWithTag("Puppet")[0].GetComponent<Transform>();
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -213,6 +217,7 @@ public class ValkyrieController : MonoBehaviour
             {
                 hit.SetParent(transform);
             }
+            sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
         }
         // Instant reaction to give Valkyire the chance to block player from sneaking past her
         else if (transform.position.x - player.GetPosition().x < 0.3f && !chaseMode)
@@ -250,10 +255,12 @@ public class ValkyrieController : MonoBehaviour
             stun = 40;
             animator.SetTrigger("Stun");
             StartCoroutine(StunRoutine());
+            sfxController.PlaySFX2D("HVHS/Shield", 0.8f, 15, 0.15f, false);
         }
         // If in attack animation, interrupt attack and return to idle/chase mode or intiate death if hp remaining goes to 0
         else
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             chaseMode = true;
             cooldown = 0;
             //Prevent instant carma if too close to edge
@@ -270,6 +277,7 @@ public class ValkyrieController : MonoBehaviour
                 stun = 99999;
                 animator.SetTrigger("Die");
                 StartCoroutine(DeathRoutine());
+                sfxController.PlaySFX2D("HVHS/Death_VikingF", 1.0f, 20, 0.0f, false);
             }
             ui.BossHealthBar(health);
         }
@@ -392,6 +400,7 @@ public class ValkyrieController : MonoBehaviour
             {
                 hit.SetParent(transform);
             }
+            sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
         }
     }
 
@@ -399,6 +408,7 @@ public class ValkyrieController : MonoBehaviour
     {
         EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(-0.95f, 0.7f, 0.0f), transform.rotation);
         thrownAxe.SetDirection(true);
+        sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
     }
 
     private IEnumerator NuclearRoutine()
@@ -422,6 +432,7 @@ public class ValkyrieController : MonoBehaviour
         hit.SetY(10.0f);
         hit.SetTtl(200);
         hit.SetDamage(3);
+        sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
         if (player.GetPosition().x >= transform.position.x)
         {
             hit.SetParent(forceLeft);

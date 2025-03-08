@@ -17,6 +17,8 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
 
     private PuppetMasterController parent;
 
+    private SFXController sfxController;
+
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -26,6 +28,8 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
         timer = 0;
         health = 3;
         xBase = 0.0f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -128,6 +132,7 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
         {
             yield return new WaitForFixedUpdate();
         }
+        sfxController.PlaySFX2D("General/Halo", 0.2f, 200, 0.2f, false);
         state = 1;
     }
 
@@ -137,6 +142,7 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
         health--;
         if (health > 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 0.2f, 200, 0.15f, false);
             animator.SetTrigger("Hurt");
             for (int i = 0; i < 7; i++)
             {
@@ -147,12 +153,14 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
         }
         else
         {
+            // TODO: sfxController.PlaySFX2D("STM/Death_Saint", 0.2f, 200, 0.15f, false);
             StartCoroutine(DieRoutine());
         }
     }
 
     private IEnumerator DieRoutine()
     {
+        sfxController.PlaySFX2D("STM/Death_Saint", 0.2f, 200, 0.1f, false);
         timer = -99;
         animator.SetTrigger("Die");
         for (int i = 0; i < 70; i++)
@@ -172,6 +180,7 @@ public class PuppetSaintController : MonoBehaviour, IPuppet
         state = 0;
         renderer.material = lerpMaterial;
         float amount = 0.2f;
+        sfxController.PlaySFX2D("SJHS/Blip", 0.2f, 128, 0.2f, true);
         for (int i = 1; i <= 3; i++)
         {
             renderer.material.SetFloat("_LerpAmount", amount);

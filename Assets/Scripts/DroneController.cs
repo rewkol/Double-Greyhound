@@ -16,6 +16,8 @@ public class DroneController : MonoBehaviour
     //Constants
     private float DEFAULT_HEIGHT = 1.32f;
 
+    private SFXController sfxController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class DroneController : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         facingLeft = true;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     void FixedUpdate()
@@ -43,6 +47,7 @@ public class DroneController : MonoBehaviour
     public void Die()
     {
         StartCoroutine(DeathRoutine());
+        sfxController.PlaySFX2D("SHS/Death_Bee_Short", 1.0f, 20, 0.1f, false);
     }
 
     private IEnumerator BlinkRoutine()
@@ -67,5 +72,14 @@ public class DroneController : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void BuzzSound()
+    {
+        // Once again the original sound didn't work out at all lol. I understand TCRF so much now
+        if (!player.IsDead())
+        {
+            sfxController.PlaySFX2D("STM/Flap_Boosted", 0.8f, 30, 0.1f, false);
+        }
     }
 }

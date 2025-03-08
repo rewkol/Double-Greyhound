@@ -20,6 +20,8 @@ public class SupremeSaintController : MonoBehaviour
     private PlayerController player;
     private UIController ui;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,8 @@ public class SupremeSaintController : MonoBehaviour
         stun = 0;
         spacingX = 4.0f;
         health = 60;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
 
         StartCoroutine(EntranceRoutine());
@@ -98,6 +102,7 @@ public class SupremeSaintController : MonoBehaviour
 
     private IEnumerator PunchRoutine()
     {
+        sfxController.PlaySFX2D("STM/Charge_Trimmed", 0.8f, 10, 0.0f, false);
         for (int i = 0; i < 136; i++)
         {
             if (health <= 0)
@@ -167,7 +172,7 @@ public class SupremeSaintController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        // TODO: Update for Supreme Saint
+        sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
         cooldown = 0;
         health -= packet.getDamage();
         if (health > 0)
@@ -178,6 +183,7 @@ public class SupremeSaintController : MonoBehaviour
         else
         {
             //Start death sequence
+            sfxController.PlaySFX2D("STM/Death_Cherubim_Human_modified", 1.0f, 15, 0.0f, false);
             stun = 99999;
             animator.SetTrigger("Die");
             StartCoroutine(DeathRoutine());

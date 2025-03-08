@@ -81,6 +81,7 @@ public class UIController : MonoBehaviour
 
     // Music Variables
     private GameObject musicController;
+    private SFXController sfxController;
 
 
     // Start is called before the first frame update
@@ -104,6 +105,7 @@ public class UIController : MonoBehaviour
 
         // Music and Sound
         musicController = GameObject.Find("MusicController");
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         //Player Health
         playerHealthBarFill = statusParent.transform.Find("PlayerHealthBarRed");
@@ -247,7 +249,8 @@ public class UIController : MonoBehaviour
     void FixedUpdate()
     {
         this.collisionTransparency = false;
-        transform.position = camera.transform.position + new Vector3(-5.77f, 3.9f, 110.0f);
+        // I don't know why this code was here or what it was doing, but whatever it was solving seems to not matter at all (And leaving it in causes log errors on the menu)
+        //transform.position = camera.transform.position + new Vector3(-5.77f, 3.9f, 110.0f);
 
         //I want this in fixed update to guarantee the cursor can't spin too fast when selecting letters
         if (UIMode == 3)
@@ -430,6 +433,7 @@ public class UIController : MonoBehaviour
                 }
                 if (cursorCooldown == 0 && Input.GetAxis("Fire1") > 0)
                 {
+                    sfxController.CancelAllSounds();
                     string sceneName = SceneManager.GetActiveScene().name;
                     SceneManager.LoadScene("Menu");
                     SceneManager.UnloadSceneAsync(sceneName);
@@ -664,6 +668,7 @@ public class UIController : MonoBehaviour
     {
         //Add a few characters every frame to the displayed text
         isWriting = true;
+        int i = 0;
         while(dialogueText.text.Length < charLimit)
         {
             int remainder = charLimit - dialogueText.text.Length;
@@ -709,6 +714,11 @@ public class UIController : MonoBehaviour
                 dialogueText.text = dialogueText.text + chunk;
             }
 
+            if (i % 5 == 0)
+            {
+                sfxController.PlaySFX2D("General/Text_Beep", 0.5f, 0, 0.1f, true);
+            }
+            i++;
             //Wait for fixed update to make it slower like the old days, otherwise this would be lightning quick!
             yield return new WaitForFixedUpdate();
         }
@@ -1028,6 +1038,7 @@ public class UIController : MonoBehaviour
             }
         }
 
+        sfxController.CancelAllSounds();
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(transitionScene);
         SceneManager.UnloadSceneAsync(sceneName);
@@ -1111,5 +1122,15 @@ public class UIController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         this.specialCover.localScale = new Vector3(1.0f, 0.0f, 1.0f);
+    }
+
+    public void LowerVolume()
+    {
+        camera.SendMessage("TextStart");
+    }
+
+    public void RaiseVolume()
+    {
+        camera.SendMessage("TextOver");
     }
 }

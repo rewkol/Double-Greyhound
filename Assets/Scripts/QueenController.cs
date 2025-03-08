@@ -38,7 +38,9 @@ public class QueenController : MonoBehaviour
     private int pointTimer;
     private bool inAnimation;
 
-    private static float PLAYER_HEIGHT_ADJUSTMENT = 0.05f; 
+    private static float PLAYER_HEIGHT_ADJUSTMENT = 0.05f;
+
+    private SFXController sfxController;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +74,8 @@ public class QueenController : MonoBehaviour
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXMid = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -391,6 +395,7 @@ public class QueenController : MonoBehaviour
     {
         if (stun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             health -= packet.getDamage();
             if (health > 0)
             {
@@ -485,11 +490,18 @@ public class QueenController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("Land");
+        float volumeModifier = 0.0f;
         for (int i = 0; i < 150; i++)
         {
+            if (i == 25 || i == 40 || i == 45 || i == 48)
+            {
+                sfxController.PlaySFX2D("General/Ping", 0.4f - volumeModifier, 20, 0.1f, false);
+                volumeModifier += 0.1f;
+            }
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("RemoveDress");
+        sfxController.PlaySFX2D("SHS/Zip", 0.8f, 15, 0.0f, false);
         for (int i = 0; i < 100; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -606,6 +618,7 @@ public class QueenController : MonoBehaviour
             hit.SetDamage(1);
             hit.SetParent(transform);
         }
+        sfxController.PlaySFX2D("SHS/Punch_Queen", 0.7f, 10, 0.15f, false);
     }
 
     public void KickHitbox()
@@ -640,6 +653,7 @@ public class QueenController : MonoBehaviour
         {
             jumpDirection = -1;
         }
+        sfxController.PlaySFX2D("SHS/Jump_Queen", 0.8f, 10, 0.0f, false);
     }
 
     private IEnumerator JumpingRoutine()
@@ -709,6 +723,7 @@ public class QueenController : MonoBehaviour
         jumping = false;
         kicking = true;
         animator.SetTrigger("Kick");
+        sfxController.PlaySFX2D("SHS/Kick_Queen", 0.8f, 10, 0.0f, false);
         // Need to give player a warning and a chance (if was hovering)
         for (int i = 0; i < 8; i++)
         {
@@ -750,6 +765,7 @@ public class QueenController : MonoBehaviour
         {
             animator.SetTrigger("PointBottom");
         }
+        Point();
         for (int i = 0; i < 100; i++)
         {
             if (ui.GameActive())
@@ -785,6 +801,7 @@ public class QueenController : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
+        sfxController.PlaySFX2D("SHS/Death_Queen_modified", 1.0f, 10, 0.0f, false);
         animator.SetTrigger("Die");
         ui.UpdateScore(15000L);
         ui.StartManualCutscene();
@@ -849,5 +866,19 @@ public class QueenController : MonoBehaviour
     public void SpawnRandom()
     {
         // supresses errors
+    }
+
+    public void FlapWings()
+    {
+        // Need this check so that the flaps don't go on forever
+        if (!player.IsDead())
+        {
+            sfxController.PlaySFX2D("STM/Flap_Boosted", 0.9f, 30, 0.1f, false);
+        }
+    }
+
+    public void Point()
+    {
+        sfxController.PlaySFX2D("SHS/Queen_Shout", 0.7f, 10, 0.2f, false);
     }
 }

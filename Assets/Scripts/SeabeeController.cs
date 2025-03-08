@@ -42,6 +42,8 @@ public class SeabeeController : MonoBehaviour
     //Constants
     private float DEFAULT_HEIGHT = 1.32f;
 
+    private SFXController sfxController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +80,8 @@ public class SeabeeController : MonoBehaviour
 
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     void FixedUpdate()
@@ -337,6 +341,10 @@ public class SeabeeController : MonoBehaviour
     private IEnumerator SwoopRoutine()
     {
         int i = 0;
+        if (health > 0)
+        {
+            sfxController.PlaySFX2D("SHS/Bee_Swoosh", 0.8f, 15, 0.1f, false);
+        }
         while (attackDistance > 0)
         {
             if (stun > 0)
@@ -387,6 +395,10 @@ public class SeabeeController : MonoBehaviour
             transform.position += new Vector3(0.0f, 0.0f, -diffZ);
             height += diff;
         }
+        if (health > 0)
+        {
+            sfxController.PlaySFX2D("SHS/Bee_Swoosh", 0.8f, 15, 0.1f, false);
+        }
         while (attackDistance > 0)
         {
             if (stun > 0)
@@ -412,6 +424,7 @@ public class SeabeeController : MonoBehaviour
         }
         if (stun == 0)
         {
+            sfxController.PlaySFX2D("SHS/Stinger_Stuck_Short", 0.9f, 20, 0.1f, false);
             animator.SetTrigger("Stuck");
             stuck = true;
             if (freeWill)
@@ -440,6 +453,8 @@ public class SeabeeController : MonoBehaviour
         stuck = false;
         cooldown = 0;
         running = true;
+        // The sounds fit better for this than the original Pop audio
+        sfxController.PlaySFX2D("SHS/Stinger_Fire", 0.8f, 20, 0.1f, false);
     }
 
     public void KeepBarb()
@@ -473,7 +488,7 @@ public class SeabeeController : MonoBehaviour
     private void RunningTarget()
     {
         float midX = (limitXRight + limitXLeft) / 2.0f;
-        float midY = (limitYTop + limitYBottom ) / 2.0f;
+        float midY = (limitYTop + limitYBottom) / 2.0f;
         float targetY = 0.0f;
         if (player.GetPosition().x > midX)
         {
@@ -485,7 +500,7 @@ public class SeabeeController : MonoBehaviour
         }
         if (player.GetPosition().y > midY)
         {
-            targetY = limitYBottom ;
+            targetY = limitYBottom;
         }
         else
         {
@@ -520,6 +535,7 @@ public class SeabeeController : MonoBehaviour
     {
         if (stun == 0 && swarmStun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             if (freeWill)
             {
                 facingLeft = packet.getDirection();
@@ -547,6 +563,7 @@ public class SeabeeController : MonoBehaviour
                     ui.UpdateScore(100L + (running ? 0L : 300L));
                 }
                 StartCoroutine(DeathRoutine());
+                sfxController.PlaySFX2D("SHS/Death_Bee_Short", 1.0f, 20, 0.1f, false);
             }
             else
             {
@@ -575,6 +592,12 @@ public class SeabeeController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 0.0f, 0.0f, 1.0f);
         for (int i = 0; i < 7; i++)
         {
+            yield return new WaitForFixedUpdate();
+        }
+        for (int i = 0; i < 13; i++)
+        {
+            float ratio = i / 13.0f;
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, ratio, ratio, 1.0f);
             yield return new WaitForFixedUpdate();
         }
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);
@@ -611,7 +634,7 @@ public class SeabeeController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, zPos);
 
 
-        while(toFall > 0.0f || transform.position.y > limitYTop - 0.7f)
+        while (toFall > 0.0f || transform.position.y > limitYTop - 0.7f)
         {
             // If doing a safety adjustment to fall height also adjust the z axis
             transform.position = transform.position + new Vector3((facingLeft ? 1 : -1) * 0.0105f, (22 - i) / 205.0f, 0.0f);
@@ -693,5 +716,15 @@ public class SeabeeController : MonoBehaviour
     public void SpawnRandom()
     {
         // Does nothing
+        targetHeight += Random.value * 3.0f;
+    }
+
+    public void BuzzSound()
+    {
+        // Once again the original sound didn't work out at all lol. I understand TCRF so much now
+        if (!player.IsDead())
+        {
+            sfxController.PlaySFX2D("STM/Flap_Boosted", 0.9f, 30, 0.1f, false);
+        }
     }
 }

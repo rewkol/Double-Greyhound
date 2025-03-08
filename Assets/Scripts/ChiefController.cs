@@ -23,6 +23,8 @@ public class ChiefController : MonoBehaviour
     private PlayerController player;
     private UIController ui;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,8 @@ public class ChiefController : MonoBehaviour
         spawnTimer = 0;
         //Determines whether to play full death sequence or shortened death sequence
         longDefeat = true;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -182,6 +186,10 @@ public class ChiefController : MonoBehaviour
         animator.SetTrigger("Swing");
         for (int i = 0; i < 65; i++)
         {
+            if (i == 10)
+            {
+                sfxController.PlaySFX2D("HVHS/Chief_Windup", 1.0f, 15, 0.1f, false);
+            }
             yield return new WaitForFixedUpdate();
         }
         if (steps > 4)
@@ -190,6 +198,7 @@ public class ChiefController : MonoBehaviour
             for ( int j = 0; j < struggles; j++)
             {
                 animator.SetTrigger("Struggle");
+                sfxController.PlaySFX2D("HVHS/Chief_Struggle", 1.0f, 15, 0.1f, false);
                 cooldown = 25;
                 for (int i = 0; i < 25; i++)
                 {
@@ -198,6 +207,7 @@ public class ChiefController : MonoBehaviour
             }
         }
         animator.SetTrigger("Pull");
+        sfxController.PlaySFX2D("HVHS/Chief_Struggle", 1.0f, 15, 0.1f, false);
         cooldown = 60;
         for (int i = 0; i < 60; i++)
         {
@@ -215,6 +225,7 @@ public class ChiefController : MonoBehaviour
         hit.SetTtl(40);
         hit.SetDamage(1);
         hit.SetParent(transform);
+        sfxController.PlaySFX2D("HVHS/Stomp", 0.4f, 15, 0.2f, false);
     }
 
     private void RightLegHitbox()
@@ -226,6 +237,7 @@ public class ChiefController : MonoBehaviour
         hit.SetTtl(40);
         hit.SetDamage(1);
         hit.SetParent(transform);
+        sfxController.PlaySFX2D("HVHS/Stomp", 0.4f, 15, 0.2f, false);
     }
 
     private void BackLegHitbox()
@@ -236,6 +248,7 @@ public class ChiefController : MonoBehaviour
         hit.SetTtl(40);
         hit.SetDamage(1);
         hit.SetParent(transform);
+        sfxController.PlaySFX2D("HVHS/Stomp", 0.4f, 15, 0.2f, false);
     }
 
     private void AxeHitbox()
@@ -246,6 +259,7 @@ public class ChiefController : MonoBehaviour
         hit.SetTtl(50);
         hit.SetDamage(5);
         hit.SetParent(transform);
+        sfxController.PlaySFX2D("HVHS/Axe_Impact", 0.7f, 10, 0.1f, false);
     }
 
     private void MoveHurtbox(int pos)
@@ -273,6 +287,7 @@ public class ChiefController : MonoBehaviour
         //In chase mode get stunned and knockback into either attack pattern (long/normal swing, or throw on 1 hp remaining)
         if (stun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             cooldown = 0;
             health -= packet.getDamage();
             if (health > 0)
@@ -303,6 +318,7 @@ public class ChiefController : MonoBehaviour
                 hit.SetTtl(200);
                 hit.SetDamage(3);
                 hit.SetParent(transform);
+                sfxController.PlaySFX2D("HVHS/Axe_Impact", 0.7f, 10, 0.0f, false);
             }
             yield return new WaitForFixedUpdate();
         }
@@ -328,6 +344,11 @@ public class ChiefController : MonoBehaviour
         }
 
         animator.SetTrigger("Defeated");
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("ChiefDefeated"))
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        sfxController.PlaySFX2D("HVHS/Death_Chief", 1.0f, 10, 0.0f, false);
         for (int i = 0; i < 61; i++)
         {
             if (i == 60)

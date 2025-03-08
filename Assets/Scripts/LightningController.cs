@@ -11,6 +11,8 @@ public class LightningController : MonoBehaviour
 
     private int life;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,9 @@ public class LightningController : MonoBehaviour
         {
             animator.SetTrigger("Lightning3");
         }
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
+        sfxController.PlaySFX2D("STM/Thunder_Trimmed", 1.0f, 10, 0.05f, false);
     }
 
     void FixedUpdate()

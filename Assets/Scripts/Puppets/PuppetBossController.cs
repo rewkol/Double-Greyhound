@@ -15,6 +15,8 @@ public class PuppetBossController : MonoBehaviour, IPuppet
 
     private PuppetMasterController parent;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class PuppetBossController : MonoBehaviour, IPuppet
         renderer = GetComponent<SpriteRenderer>();
         state = 0;
         timer = Random.Range(50,450);
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     // Update is called once per frame
@@ -140,6 +144,7 @@ public class PuppetBossController : MonoBehaviour, IPuppet
         state = 0;
         renderer.material = lerpMaterial;
         float amount = 0.2f;
+        sfxController.PlaySFX2D("SJHS/Blip", 0.2f, 128, 0.2f, true);
         for (int i = 1; i <= 3; i++)
         {
             renderer.material.SetFloat("_LerpAmount", amount);
@@ -169,5 +174,21 @@ public class PuppetBossController : MonoBehaviour, IPuppet
     public void Disappear()
     {
         StartCoroutine(DisappearRoutine());
+    }
+
+    public void Stomp()
+    {
+        if (state >= 1)
+        {
+            sfxController.PlaySFX2D("HVHS/Stomp", 0.4f, 190, 0.0f, true);
+        }
+    }
+
+    public void FlapWings()
+    {
+        if (state >= 1)
+        {
+            sfxController.PlaySFX2D("STM/Flap_Boosted", 0.6f, 190, 0.0f, true);
+        }
     }
 }

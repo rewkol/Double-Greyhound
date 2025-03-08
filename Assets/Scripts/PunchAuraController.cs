@@ -7,6 +7,7 @@ public class PunchAuraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindObjectOfType<SFXController>().PlaySFX2D("STM/Fist_Swoosh_modified", 0.7f, 10, 0.0f, false);
     }
 
     // Update is called once per frame
