@@ -9,6 +9,8 @@ public class FlyingBarbController : MonoBehaviour
     private bool hit;
     private int count;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class FlyingBarbController : MonoBehaviour
         hit = false;
         count = 0;
 
+        sfxController = GameObject.FindObjectOfType<SFXController>();
+        sfxController.PlaySFX2D("SHS/Pop_Low", 0.7f, 10, 0.2f, false);
         TurnBarb(direction);
     }
 
@@ -48,6 +52,7 @@ public class FlyingBarbController : MonoBehaviour
             Destroy(hitbox.gameObject);
             transform.localScale = new Vector3(6.0f, 6.0f, 1.0f);
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f * (direction == -1 ? 3.0f : 1.0f));
+            sfxController.PlaySFX2D("General/Ping", 0.5f, 20, 0.05f, false);
         }
     }
 

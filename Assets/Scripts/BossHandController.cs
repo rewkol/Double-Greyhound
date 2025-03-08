@@ -41,6 +41,8 @@ public class BossHandController : MonoBehaviour
     private const float SPACING = 0.7f;
     private const float ELBOW_RANGE = 0.33f;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +74,8 @@ public class BossHandController : MonoBehaviour
 
         midpoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         edgepoint = Camera.main.ViewportToWorldPoint(new Vector3(0.0f + (rightHand ? 1.0f : 0.0f), 0.0f, transform.position.z - Camera.main.transform.position.z)).x + (rightHand ? -1.5f : 1.5f);
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -414,6 +418,7 @@ public class BossHandController : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
+        sfxController.PlaySFX2D("SJHS/Clap_Trimmed", 1.0f, 15, 0.05f, false);
         for (int i = 0; i < 30; i++)
         {
             if (dead)
@@ -588,7 +593,9 @@ public class BossHandController : MonoBehaviour
         hurtbox2.localScale = new Vector3(0.5354816f, 0.1017087f, 1.0f);
 
         hurtbox3.localPosition = new Vector3((rightHand ? -1 : 1) * -0.05598f, 0.24528f, 0.0f);
-        hurtbox3.localScale = new Vector3(0.5354816f, 0.1017087f, 1.0f);
+        hurtbox3.localScale = new Vector3(0.5354816f, 0.1017087f, 1.0f); 
+
+        sfxController.PlaySFX2D("SJHS/Slap", 0.3f, 15, 0.05f, false);
     }
 
     // Needs to be far back or it clips through the pool top
@@ -662,6 +669,8 @@ public class BossHandController : MonoBehaviour
 
         hurtbox3.localPosition = new Vector3((rightHand ? -1 : 1) * 0.22394f, -0.34359f, 0.0f);
         hurtbox3.localScale = new Vector3(0.1718516f, 0.2753911f, 1.0f);
+
+        sfxController.PlaySFX2D("SJHS/Slap", 1.0f, 15, 0.05f, false);
     }
 
     public void SlamCutscene()
@@ -680,6 +689,8 @@ public class BossHandController : MonoBehaviour
 
         hurtbox3.localPosition = new Vector3((rightHand ? -1 : 1) * 0.22394f, -0.34359f, 0.0f);
         hurtbox3.localScale = new Vector3(0.1718516f, 0.2753911f, 1.0f);
+
+        sfxController.PlaySFX2D("SJHS/Slap", 0.6f, 15, 0.05f, false);
     }
 
     public bool CanTurn()

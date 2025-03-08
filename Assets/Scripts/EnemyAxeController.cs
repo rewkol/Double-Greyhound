@@ -10,6 +10,8 @@ public class EnemyAxeController : MonoBehaviour
     private float rotateModifier;
     private bool facingLeft;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,8 @@ public class EnemyAxeController : MonoBehaviour
         count = 0;
         rotateModifier = 1.0f;
         animationDivider = 24;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         if (facingLeft)
         {
@@ -66,6 +70,7 @@ public class EnemyAxeController : MonoBehaviour
             Destroy(hitbox.gameObject);
             facingLeft = !facingLeft;
             rotateModifier = -1 * rotateModifier;
+            sfxController.PlaySFX2D("General/Ping", 0.5f, 20, 0.05f, false);
         }
     }
 

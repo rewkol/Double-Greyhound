@@ -27,6 +27,8 @@ public class StMalachyController : MonoBehaviour
     private Vector3 target;
     private int counter;
 
+    private SFXController sfxController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,8 @@ public class StMalachyController : MonoBehaviour
         health = 1000;
         target = new Vector3(0.0f, 0.0f, 0.0f);
         counter = Random.Range(40, 70);
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     // Update is called once per frame
@@ -93,6 +97,18 @@ public class StMalachyController : MonoBehaviour
                 else
                 {
                     animator.SetTrigger("BlessLong");
+                    if (Random.value < 0.5f)
+                    {
+                        sfxController.PlaySFX2D("STM/Malachy_Ave", 1.0f, 20, 0.0f, false);
+                    }
+                    else if (Random.value < 0.3f)
+                    {
+                        sfxController.PlaySFX2D("STM/Malachy_Lamb", 1.0f, 20, 0.0f, false);
+                    }
+                    else
+                    {
+                        sfxController.PlaySFX2D("STM/Malachy_Blessing", 1.0f, 20, 0.0f, false);
+                    }
                 }
                 counter = Random.Range(20, 50);
             }
@@ -129,6 +145,7 @@ public class StMalachyController : MonoBehaviour
             if (i == 50 && !triggeredBattle)
             {
                 animator.SetTrigger("BlessLong");
+                sfxController.PlaySFX2D("STM/Malachy_Blessing", 1.0f, 20, 0.0f, false);
             }
             yield return new WaitForFixedUpdate();
         }
@@ -145,6 +162,7 @@ public class StMalachyController : MonoBehaviour
     private IEnumerator AscensionRoutine()
     {
         ui.StartManualCutscene();
+        ui.LowerVolume();
         for (int i = 0; i < 30; i++)
         {
             // Wait for lightning
@@ -153,6 +171,7 @@ public class StMalachyController : MonoBehaviour
 
         Instantiate(lightning, player.GetPosition() + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.1f, 0.1f) + Y_OFFSET, 0.0f), transform.rotation);
         player.KnockbackAnimation(true);
+        gameObject.tag = "Boss";
 
         bool hellEvent = Random.Range(0.0f, 1.0f) < 0.05f;
 
@@ -165,9 +184,11 @@ public class StMalachyController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        sfxController.PlaySFXLooping3D("STM/Seagulls", new Vector3(0.0f, 22.0f, 0.0f), 10.0f, 17.0f, 0.8f, 30, 0.0f, true, schoolLayer.transform);
         // Hell Diversion
         if (hellEvent)
-        { 
+        {
+            sfxController.PlaySFXLooping3D("STM/Hell", new Vector3(0.0f, -10.0f, 0.0f), 10.0f, 17.0f, 1.0f, 30, 0.0f, true, schoolLayer.transform);
             for (int i = 0; i < 1100; i++)
             {
                 // Accidentally fall toward Hell
@@ -198,6 +219,7 @@ public class StMalachyController : MonoBehaviour
                         yield return new WaitForFixedUpdate();
                     }
                     ui.StartManualCutscene();
+                    ui.LowerVolume();
                 }
                 // Ascend out of school slowly
                 else if (220 <= i && i < 245)
@@ -225,6 +247,10 @@ public class StMalachyController : MonoBehaviour
                 // Speed back up toward Heaven
                 else if (750 <= i && i < 900)
                 {
+                    if (i == 880)
+                    {
+                        sfxController.PlaySFX2D("STM/Wind_Rushing_Trimmed", 1.0f, 30, 0.0f, true);
+                    }
                     float modifier = ((i - 749) / 50.0f);
                     schoolLayer.transform.position += new Vector3(0.0f, modifier * -0.12f, 0.0f);
                     uptownLayer.transform.position += new Vector3(0.0f, modifier * -0.09f, 0.0f);
@@ -279,6 +305,10 @@ public class StMalachyController : MonoBehaviour
                 // Speed back up toward Heaven
                 else if (470 <= i && i < 620)
                 {
+                    if (i == 600)
+                    {
+                        sfxController.PlaySFX2D("STM/Wind_Rushing_Trimmed", 1.0f, 30, 0.0f, true);
+                    }
                     float modifier = ((i - 469) / 50.0f);
                     schoolLayer.transform.position += new Vector3(0.0f, modifier * -0.12f, 0.0f);
                     uptownLayer.transform.position += new Vector3(0.0f, modifier * -0.09f, 0.0f);
@@ -323,6 +353,7 @@ public class StMalachyController : MonoBehaviour
     {
         if (triggeredBlessing && !triggeredAscension)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             triggeredBattle = true;
             triggeredBlessing = false;
             counter = Random.Range(40, 70);
@@ -334,6 +365,7 @@ public class StMalachyController : MonoBehaviour
         }
         if (triggeredBattle)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             health -= packet.getDamage();
             if (health > 0)
             {
@@ -348,6 +380,7 @@ public class StMalachyController : MonoBehaviour
         }
         if (ascensionOver && camera.GetPosition().x < 55.0f)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             StartCoroutine(BlinkRoutine());
             if (health > 999)
             {

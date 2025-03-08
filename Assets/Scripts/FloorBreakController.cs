@@ -30,6 +30,7 @@ public class FloorBreakController : MonoBehaviour
     private Transform splash;
 
     private GameObject musicController;
+    private SFXController sfxController;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class FloorBreakController : MonoBehaviour
         player = GameObject.FindObjectsOfType<PlayerController>()[0];
         ui = GameObject.FindObjectsOfType<UIController>()[0];
         musicController = GameObject.Find("MusicController");
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         topLeft = transform.Find("SJHSGymPoolArena - RubbleTopLeft");
         topRight = transform.Find("SJHSGymPoolArena - RubbleTopRight");
@@ -67,6 +69,12 @@ public class FloorBreakController : MonoBehaviour
         animator.SetTrigger("Break");
         for (int i = 0; i < 100; i++)
         {
+            if (i == 0 || i == 3 || i == 7)
+            {
+                sfxController.PlaySFX2D("SJHS/Floor_Break", 1.0f, 10, 0.2f, true);
+                sfxController.PlaySFX2D("SJHS/Floor_Break", 1.0f, 10, 0.2f, true);
+            }
+
             float frontSpeed = 0.4f - ((i / 5) * 0.01f);
             float backSpeed = frontSpeed * (0.33f + ((i/10) * 0.067f));
             topLeft.position += new Vector3(-frontSpeed, frontSpeed, 0.0f);
@@ -89,8 +97,14 @@ public class FloorBreakController : MonoBehaviour
                 poolTop.position += new Vector3(0.0f, panSpeed, 0.0f);
                 poolBottom.position += new Vector3(0.0f, panSpeed, 0.0f);
 
-                if ( i > 50)
-                splash.position += new Vector3(0.0f, panSpeed * 4.0f, 0.0f);
+                if (i > 50)
+                {
+                    splash.position += new Vector3(0.0f, panSpeed * 4.0f, 0.0f);
+                }
+                else if (i == 50)
+                {
+                    sfxController.PlaySFX2D("SJHS/Splash", 1.0f, 10, 0.0f, true);
+                }
             }
             yield return new WaitForFixedUpdate();
         }
@@ -127,6 +141,10 @@ public class FloorBreakController : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
+            if (i == 65)
+            {
+                sfxController.PlaySFX2D("SJHS/Rain_modified", 1.0f, 10, 0.0f, true);
+            }
             if (i == 80 && musicController != null)
             {
                 musicController.SendMessage("StartNextSong");

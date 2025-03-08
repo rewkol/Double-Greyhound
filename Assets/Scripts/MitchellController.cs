@@ -24,6 +24,7 @@ public class MitchellController : MonoBehaviour
     private bool facingLeft;
 
     private GameObject musicController;
+    private SFXController sfxController;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class MitchellController : MonoBehaviour
 
         ui = GameObject.FindObjectsOfType<UIController>()[0];
         musicController = GameObject.Find("MusicController");
+        sfxController = GameObject.FindObjectOfType<SFXController>();
         destroyer = GameObject.FindObjectsOfType<FloorBreakController>()[0];
 
         health = 9999;
@@ -90,12 +92,19 @@ public class MitchellController : MonoBehaviour
             transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
         }
         // Float down
+        bool laughed = false;
         while (transform.position.y > -1.9f)
         {
             transform.position += new Vector3(0.0f, -0.04f, 0.0f);
+            if (transform.position.y < 4.5f && !laughed)
+            {
+                sfxController.PlaySFX2D("SJHS/Mitchell_Laugh", 1.0f, 10, 0.0f, false);
+                laughed = true;
+            }
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("Land");
+        sfxController.PlaySFX2D("SJHS/Footstep_Mitchell", 1.0f, 20, 0.0f, false);
         for (int i = 0; i < 26; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -116,6 +125,7 @@ public class MitchellController : MonoBehaviour
         int prevState = state;
         state = 0;
         animator.SetTrigger("Turn");
+        sfxController.PlaySFX2D("SJHS/Swoosh_Matrix", 0.6f, 20, 0.0f, false);
         bool direction = facingLeft;
         float dist = (limitXRight - limitXLeft) / 13.0f;
         for (int i = 0; i < 13; i++)
@@ -250,10 +260,12 @@ public class MitchellController : MonoBehaviour
                 {
                     if (i < 80 && i % 20 == 0)
                     {
+                        sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.6f, 30, 0.2f, false);
                         ThrowAxe();
                     }
                     if (i < 80 && Random.value < 0.5f && (i + 10) % 20 == 0)
                     {
+                        sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.6f, 30, 0.2f, false);
                         ThrowAxe();
                     }
                 }
@@ -335,6 +347,7 @@ public class MitchellController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        sfxController.PlaySFX2D("SJHS/Transform", 0.8f, 10, 0.0f, true);
         for (int i = 0; i < 20; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -372,5 +385,10 @@ public class MitchellController : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void Snap()
+    {
+        sfxController.PlaySFX2D("SJHS/Snap", 1.0f, 20, 0.05f, false);
     }
 }

@@ -12,6 +12,8 @@ public class FjellriverController : MonoBehaviour
 
     private PlayerController player;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class FjellriverController : MonoBehaviour
         count = 0;
         rotateModifier = 1.0f;
         animationDivider = 48;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         if (facingLeft)
         {
@@ -50,6 +54,7 @@ public class FjellriverController : MonoBehaviour
         {
             GetComponent<Transform>().Find("Hit1").gameObject.SetActive(true);
             GetComponent<Transform>().Find("Hit2").gameObject.SetActive(true);
+            sfxController.PlaySFX2D("General/Axe_Woosh_Large", 0.5f, 20, 0.05f, false);
         }
 
         if (count >= 42)
@@ -57,6 +62,7 @@ public class FjellriverController : MonoBehaviour
             if ((count - 42) % animationDivider == 0)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateModifier * -90.0f);
+                sfxController.PlaySFX2D("General/Axe_Woosh_Large", 0.5f, 20, 0.05f, false);
             }
             else if ((count - 42) % animationDivider == animationDivider / 8)
             {
@@ -65,6 +71,7 @@ public class FjellriverController : MonoBehaviour
             else if ((count - 42) % animationDivider == animationDivider / 4)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateModifier * -180.0f);
+                sfxController.PlaySFX2D("General/Axe_Woosh_Large", 0.5f, 20, 0.05f, false);
             }
             else if ((count - 42) % animationDivider == (3 * animationDivider) / 8)
             {
@@ -73,6 +80,7 @@ public class FjellriverController : MonoBehaviour
             else if ((count - 42) % animationDivider == animationDivider / 2)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateModifier * -270.0f);
+                sfxController.PlaySFX2D("General/Axe_Woosh_Large", 0.5f, 20, 0.05f, false);
             }
             else if ((count - 42) % animationDivider == (5 * animationDivider) / 8)
             {
@@ -81,6 +89,7 @@ public class FjellriverController : MonoBehaviour
             else if ((count - 42) % animationDivider == (3 * animationDivider) / 4)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                sfxController.PlaySFX2D("General/Axe_Woosh_Large", 0.5f, 20, 0.05f, false);
             }
             else if ((count - 42) % animationDivider == (7 * animationDivider) / 8)
             {

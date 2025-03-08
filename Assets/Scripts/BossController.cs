@@ -34,12 +34,14 @@ public class BossController : MonoBehaviour
     private float midpoint;
 
     private GameObject musicController;
+    private SFXController sfxController;
 
     // Start is called before the first frame update
     void Start()
     {
         ui = GameObject.FindObjectsOfType<UIController>()[0];
         musicController = GameObject.Find("MusicController");
+        sfxController = GameObject.FindObjectOfType<SFXController>();
         animator = GetComponent<Animator>();
         transform = GetComponent<Transform>();
 
@@ -96,9 +98,15 @@ public class BossController : MonoBehaviour
         }
 
         animator.SetTrigger("Fire");
+        sfxController.PlaySFX2D("SJHS/Flame_Breath_Inhale_Boosted", 1.0f, 15, 0.05f, false);
 
         for (int i = 0; i < 450; i++)
         {
+            if (i == 50)
+            {
+                sfxController.PlaySFX2D("SJHS/Roar", 1.0f, 15, 0.05f, false);
+                sfxController.PlaySFX2D("SJHS/Flame_Breath", 0.6f, 15, 0.05f, false);
+            }
             yield return new WaitForFixedUpdate();
         }
 
@@ -139,6 +147,8 @@ public class BossController : MonoBehaviour
             float chance = Random.Range(0.0f, 1.0f);
             bool attacked = false;
 
+            // TODO: Somehow this code allowed the hands to turn into a clap, but then a second later go into the fire breath routine
+                // TODO: It feels like "turned" and "justTurned" should prevent that, but they did not
             if (turned)
             {
                 if (chance < 0.25f && !justTurned)
@@ -275,11 +285,17 @@ public class BossController : MonoBehaviour
             yield break;
         }
         animator.SetTrigger("Fire");
+        sfxController.PlaySFX2D("SJHS/Flame_Breath_Inhale_Boosted", 1.0f, 15, 0.05f, false);
         for (int i = 0; i < 500; i++)
         {
             if (health <= 0)
             {
                 yield break;
+            }
+            if (i == 50)
+            {
+                sfxController.PlaySFX2D("SJHS/Roar", 1.0f, 15, 0.05f, false);
+                sfxController.PlaySFX2D("SJHS/Flame_Breath", 0.6f, 15, 0.05f, false);
             }
             yield return new WaitForFixedUpdate();
         }
@@ -395,6 +411,7 @@ public class BossController : MonoBehaviour
     {
         if (ui.GameActive() && stun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             int damage = packet.getDamage();
             health -= damage;
             if (health <= 0)
@@ -438,6 +455,10 @@ public class BossController : MonoBehaviour
         {
             musicController.SendMessage("StopCurrentSong");
         }
+
+        // Kill the sounds in case a long sound effect is playing over the death
+        sfxController.CancelAllSounds();
+        sfxController.PlaySFX2D("SJHS/Death_Monster_modified", 1.0f, 1, 0.0f, true);
 
         state = 0;
         animator.SetTrigger("Pain");

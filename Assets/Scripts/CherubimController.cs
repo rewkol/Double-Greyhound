@@ -23,6 +23,10 @@ public class CherubimController : MonoBehaviour
     private const float SPACING_X = 7.2f;
     private const float SPACING_Y = 3.7f;
 
+    private SFXController sfxController;
+    private bool playSounds;
+    private int currentHead;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +39,14 @@ public class CherubimController : MonoBehaviour
         facingLeft = true;
         hit = false;
         turning = false;
+        playSounds = true;
         attackTimer = Random.Range(40, 80);
         attacks = Random.Range(1, 4);
         primedTurns = Random.Range(0, 3);
+        currentHead = 0;
         speed = 0.06f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         if (primedTurns > 0)
         {
@@ -122,6 +130,10 @@ public class CherubimController : MonoBehaviour
             {
                 attackTimer--;
                 transform.position = transform.position + (new Vector3(-1.0f, 1.0f, 0.0f) * speed);
+                if (transform.position.y > 7.0f)
+                {
+                    this.playSounds = false;
+                }
             }
             else
             {
@@ -150,11 +162,32 @@ public class CherubimController : MonoBehaviour
     // Hurt routine attacks immediately equals 0 and run away!
     public void Hurt(DamagePacket packet)
     {
-        attacks = 0;
-        attackTimer = 250;
-        StartCoroutine(StunRoutine());
-        StartCoroutine(BlinkRoutine());
-        GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(1500L);
+        if (attacks > 0)
+        {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
+            attacks = 0;
+            attackTimer = 250;
+            StartCoroutine(StunRoutine());
+            StartCoroutine(BlinkRoutine());
+            GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(1500L);
+
+            if (currentHead == 1)
+            {
+                sfxController.PlaySFX2D("STM/Death_Cherubim_Bull", 0.6f, 15, 0.0f, false);
+            }
+            else if (currentHead == 2)
+            {
+                sfxController.PlaySFX2D("STM/Death_Cherubim_Eagle", 0.6f, 15, 0.0f, false);
+            }
+            else if (currentHead == 3)
+            {
+                sfxController.PlaySFX2D("STM/Death_Cherubim_Lion", 0.6f, 15, 0.0f, false);
+            }
+            else
+            {
+                sfxController.PlaySFX2D("STM/Death_Cherubim_Human_modified", 0.6f, 15, 0.0f, false);
+            }
+        }
     }
 
     private IEnumerator HeadTurnRoutine()
@@ -172,6 +205,7 @@ public class CherubimController : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
             }
+            currentHead = (currentHead + 1) % 4;
             primedTurns--;
         }
         turning = false;
@@ -185,6 +219,7 @@ public class CherubimController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         Instantiate(fire, transform.position + new Vector3(0.01f * (facingLeft ? -1 : 1), 0.67f, 0.0f), transform.rotation);
+        sfxController.PlaySFX2D("STM/Fireball_Spawn", 0.7f, 15, 0.15f, false);
         for (int i = 0; i < 20; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -252,6 +287,10 @@ public class CherubimController : MonoBehaviour
                 if (i == 16)
                 {
                     transform.position += new Vector3(0.0f, -0.025f, 0.0f);
+                    if (playSounds)
+                    {
+                        sfxController.PlaySFX2D("STM/Flap_Boosted", 1.0f, 15, 0.1f, false);
+                    }
                 }
                 if (i == 20)
                 {

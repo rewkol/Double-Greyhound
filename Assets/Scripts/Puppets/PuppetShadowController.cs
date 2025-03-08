@@ -17,6 +17,8 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
 
     private PuppetMasterController parent;
 
+    private SFXController sfxController;
+
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -26,6 +28,8 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
         timer = 0;
         health = 3;
         xBase = 0.0f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -124,6 +128,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
     {
         state = 0;
         animator.SetTrigger("Attack");
+        sfxController.PlaySFX2D("General/Punch", 0.2f, 200, 0.15f, false);
         for (int i = 0; i < 24; i++)
         {
             yield return new WaitForFixedUpdate();
@@ -137,6 +142,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
         health--;
         if (health > 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 0.2f, 200, 0.15f, false);
             animator.SetTrigger("Hurt");
             for (int i = 0; i < 7; i++)
             {
@@ -147,6 +153,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
         }
         else
         {
+            sfxController.PlaySFX2D("General/Death", 0.1f, 200, 0.15f, false);
             StartCoroutine(DieRoutine());
         }
     }
@@ -172,6 +179,7 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
         state = 0;
         renderer.material = lerpMaterial;
         float amount = 0.2f;
+        sfxController.PlaySFX2D("SJHS/Blip", 0.2f, 128, 0.2f, true);
         for (int i = 1; i <= 3; i++)
         {
             renderer.material.SetFloat("_LerpAmount", amount);
@@ -190,6 +198,10 @@ public class PuppetShadowController : MonoBehaviour, IPuppet
         for (int i = 1; i < wait; i++)
         {
             yield return new WaitForFixedUpdate();
+        }
+        if (Random.value < 0.1f)
+        {
+            sfxController.PlaySFX2D("SJHS/Puppet_Cheer", 0.2f, 210, 0.1f, false);
         }
         animator.SetTrigger("Victory");
     }

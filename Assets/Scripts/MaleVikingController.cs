@@ -32,6 +32,8 @@ public class MaleVikingController : MonoBehaviour
     private float SPACE_SWING_X = 1.8f;
     private float SPACE_THROW_X = 3.5f;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,8 @@ public class MaleVikingController : MonoBehaviour
             nextAttackSwing = true;
             spacingX = SPACE_SWING_X;
         }
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     void FixedUpdate()
@@ -211,7 +215,8 @@ public class MaleVikingController : MonoBehaviour
 			hit.SetTtl(200);
 			hit.SetDamage(2);
 			hit.SetParent(transform);
-		}
+            sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
+        }
     }
 
     void Throw()
@@ -224,12 +229,14 @@ public class MaleVikingController : MonoBehaviour
     {
         EnemyAxeController thrownAxe = Instantiate(axe, transform.position + new Vector3(0.8f * (facingLeft ? -1 : 1), 0.7f, 0.0f), transform.rotation);
         thrownAxe.SetDirection(facingLeft);
+        sfxController.PlaySFX2D("HVHS/Axe_Woosh_Small", 0.7f, 10, 0.2f, false);
     }
 
     public void Hurt(DamagePacket packet)
     {
         if (stun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             facingLeft = packet.getDirection();
             transform.localScale = new Vector3((facingLeft ? -1.0f : 1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
             stun = 20;
@@ -242,6 +249,7 @@ public class MaleVikingController : MonoBehaviour
                 animator.SetTrigger("Knockback"); 
                 GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(200L);
                 StartCoroutine(DeathRoutine());
+                sfxController.PlaySFX2D("HVHS/Death_VikingM", 1.0f, 20, 0.1f, false);
             }
             else
             {
@@ -257,6 +265,12 @@ public class MaleVikingController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 0.0f, 0.0f, 1.0f);
         for (int i = 0; i < 7; i++)
         {
+            yield return new WaitForFixedUpdate();
+        }
+        for (int i = 0; i < 13; i++)
+        {
+            float ratio = i / 13.0f;
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, ratio, ratio, 1.0f);
             yield return new WaitForFixedUpdate();
         }
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);

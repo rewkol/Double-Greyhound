@@ -30,6 +30,8 @@ public class SuperSaintController : MonoBehaviour
     private float limitXRight;
     private bool onScreen;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,8 @@ public class SuperSaintController : MonoBehaviour
         //Get camera position to limit x movement
         limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
         limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
     void FixedUpdate()
@@ -195,6 +199,7 @@ public class SuperSaintController : MonoBehaviour
     {
         if (stun == 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             facingLeft = packet.getDirection();
             transform.localScale = new Vector3((facingLeft ? -1.0f : 1.0f) * 6.0f, transform.localScale.y, transform.localScale.z);
             stun = 20;
@@ -208,6 +213,7 @@ public class SuperSaintController : MonoBehaviour
                 animator.SetTrigger("Dead");
                 GameObject.FindObjectsOfType<UIController>()[0].UpdateScore(900L);
                 StartCoroutine(DeathRoutine());
+                sfxController.PlaySFX2D("STM/Death_Saint", 1.0f, 20, 0.1f, false);
             }
             else
             {
@@ -223,6 +229,12 @@ public class SuperSaintController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 0.0f, 0.0f, 1.0f);
         for (int i = 0; i < 7; i++)
         {
+            yield return new WaitForFixedUpdate();
+        }
+        for (int i = 0; i < 13; i++)
+        {
+            float ratio = i / 13.0f;
+            GetComponent<SpriteRenderer>().color = new Color(1.0f, ratio, ratio, 1.0f);
             yield return new WaitForFixedUpdate();
         }
         GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 255.0f, 1.0f);

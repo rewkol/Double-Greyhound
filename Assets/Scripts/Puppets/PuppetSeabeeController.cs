@@ -17,6 +17,8 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
 
     private PuppetMasterController parent;
 
+    private SFXController sfxController;
+
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -26,6 +28,8 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
         timer = 0;
         health = 2;
         xBase = 0.0f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         StartCoroutine(EntranceRoutine());
     }
@@ -118,6 +122,7 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
             yield return new WaitForFixedUpdate();
         }
         animator.SetTrigger("Attack");
+        sfxController.PlaySFX2D("SHS/Bee_Swoosh", 0.25f, 200, 0.1f, false);
         for (int i = 0; i < 27; i++)
         {
             if (i >= 13)
@@ -161,6 +166,7 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
         health--;
         if (health > 0)
         {
+            sfxController.PlaySFX2D("General/Hit_LowPitch", 0.2f, 200, 0.15f, false);
             animator.SetTrigger("Hurt");
             for (int i = 0; i < 7; i++)
             {
@@ -178,6 +184,7 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
 
     private IEnumerator DieRoutine()
     {
+        sfxController.PlaySFX2D("SHS/Death_Bee_Short", 0.2f, 200, 0.15f, false);
         timer = -99;
         animator.SetTrigger("Die");
         for (int i = 0; i < 70; i++)
@@ -197,6 +204,7 @@ public class PuppetSeabeeController : MonoBehaviour, IPuppet
         state = 0;
         renderer.material = lerpMaterial;
         float amount = 0.2f;
+        sfxController.PlaySFX2D("SJHS/Blip", 0.2f, 128, 0.2f, true);
         for (int i = 1; i <= 3; i++)
         {
             renderer.material.SetFloat("_LerpAmount", amount);

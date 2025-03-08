@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private HaloController haloInstance;
     private bool haloWindup;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         transform.position = new Vector3(transform.position.x, limitYTop, -1.0f);
+        sfxController = GameObject.FindObjectOfType<SFXController>();
 
         //Initialize all the flags, timers, etc.
         facingLeft = false;
@@ -246,6 +249,10 @@ public class PlayerController : MonoBehaviour
             }
             specialChangePushed = true;
             ui.UpdateSpecial(special);
+            if (specialUnlocked > 1)
+            {
+                sfxController.PlaySFX2D("General/Text_Beep", 0.3f, 5, 0.0f, true);
+            }
         }
         if (Input.GetAxis("Jump") == 0)
         {
@@ -278,6 +285,7 @@ public class PlayerController : MonoBehaviour
     private void Punch()
     {
         CreateHitbox(new Vector3(1.1f, 0.63f, 0.0f), 1.2f, 0.8f, 180, 1);
+        sfxController.PlaySFX2D("General/Punch", 1.0f, 20, 0.15f, false);
     }
 
     public void CreateHitbox(Vector3 vector, float x, float y, int ttl, int damage)
@@ -339,6 +347,14 @@ public class PlayerController : MonoBehaviour
         if (stun == 0 && ui.GameActive() && !downed)
         {
             int damage = packet.getDamage();
+            if (damage >= 0)
+            {
+                sfxController.PlaySFX2D("General/Hit_HighPitch", 1.0f, 10, 0.15f, false);
+            }
+            else
+            {
+                sfxController.PlaySFX2D("General/Heal_modified", 0.5f, 10, 0.05f, false);
+            }
             if (doStun)
             {
                 //Clear cooldown so user can act immediately out of stun in case they used a move with huge cooldown before being stunned
@@ -382,6 +398,7 @@ public class PlayerController : MonoBehaviour
                 ui.SaveHighScore();
                 health = 0;
                 ui.PlayerHealthBar(health);
+                sfxController.PlaySFX2D("General/Death", 1.0f, 1, 0.0f, false);
             }
             else if (health > 20)
             {
@@ -398,6 +415,7 @@ public class PlayerController : MonoBehaviour
                     comboCounter += damage;
                     if (comboCounter >= 3.0f && doStun)
                     {
+                        sfxController.PlaySFX2D("General/Knockback", 1.0f, 20, 0.0f, false);
                         animator.SetTrigger("Knockback");
                         StartCoroutine(KnockbackRoutine(false));
                         cooldown = 60;
@@ -492,6 +510,7 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position += new Vector3(0.0f, -0.85f, -0.0085f);
             }
+            sfxController.PlaySFX2D("General/Fall", 1.0f, 10, 0.0f, false);
             // Yes the cooldown goes beyond this so they can sit and contemplate their failures
         }
         // This should only trigger if player is dead while jumping
@@ -550,6 +569,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         //Jumping
+        sfxController.PlaySFX2D("General/Jump_modified", 1.0f, 20, 0.0f, false);
         for (int i = 0; i < 24; i++)
         {
             if (health <= 0)
@@ -581,6 +601,11 @@ public class PlayerController : MonoBehaviour
         }
 
         //Kick
+        sfxController.PlaySFX2D("General/Kick_modified3", 1.0f, 20, 0.0f, false);
+
+        // This needs a buff, and buffing this actually nerfs the player in the Shadow Greyhound fight
+        stun = 99999;
+
         CreateHitbox(new Vector3(0.0f * 6, -0.15742f * 6, 0.0f), 0.08799372f * 6, 0.2870359f * 6, 140, 1);
         for (int i = 0; i < 7; i++)
         {
@@ -607,6 +632,7 @@ public class PlayerController : MonoBehaviour
         {
             yield break;
         }
+        stun = 0;
 
         //Landing
         CreateHitbox(new Vector3(0.011f * 6, -0.241f * 6, 0.0f), 0.203804f * 6, 0.135036f * 6, 20, 2);
@@ -785,6 +811,7 @@ public class PlayerController : MonoBehaviour
     public void LandingAnimation()
     {
         animator.SetTrigger("Downed");
+        sfxController.PlaySFX2D("General/Fall", 1.0f, 10, 0.0f, true);
         if (transform.position.y - 0.85f >= limitYBottom)
         {
             transform.position += new Vector3(0.0f, -0.85f, -0.0085f);

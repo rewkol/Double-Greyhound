@@ -10,12 +10,17 @@ public class HaloController : MonoBehaviour
     private int count;
     private float speed;
 
+    private SFXController sfxController;
+
     // Start is called before the first frame update
     void Start()
     {
         transform = GetComponent<Transform>();
         count = 0;
         speed = 0.23f;
+
+        sfxController = GameObject.FindObjectOfType<SFXController>();
+        sfxController.PlaySFX2D("General/Halo", 1.0f, 10, 0.1f, false);
     }
 
     void FixedUpdate()
@@ -38,6 +43,7 @@ public class HaloController : MonoBehaviour
             Destroy(hitbox.gameObject);
             facingLeft = !facingLeft;
             speed = speed * 1.25f;
+            sfxController.PlaySFX2D("General/Ping", 0.5f, 20, 0.05f, false);
         }
     }
 
