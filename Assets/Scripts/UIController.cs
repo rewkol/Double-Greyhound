@@ -98,6 +98,12 @@ public class UIController : MonoBehaviour
         {
             player = players[0];
         }
+
+        if (GameObject.FindGameObjectsWithTag("UIStatus").Length == 0)
+        {
+            return;
+        }
+
         statusParent = GameObject.FindGameObjectsWithTag("UIStatus")[0];
         dialogueParent = GameObject.FindGameObjectsWithTag("UITextBox")[0];
         scoreParent = GameObject.FindGameObjectsWithTag("UIScore")[0];
