@@ -32,6 +32,7 @@ public class BossController : MonoBehaviour
     private bool turned;
     private bool justTurned;
     private float midpoint;
+    private int handSlams;
 
     private GameObject musicController;
     private SFXController sfxController;
@@ -65,6 +66,7 @@ public class BossController : MonoBehaviour
         timer = 100;
         turned = false;
         justTurned = false;
+        handSlams = 0;
 
 
         midpoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
@@ -77,6 +79,8 @@ public class BossController : MonoBehaviour
     {
         stun = 9999;
         bool debugFlag = false;
+        transform.Find("Hitbox1").gameObject.SetActive(false);
+        transform.Find("Hitbox2").gameObject.SetActive(false);
         for (int i = 0; i < 878; i++)
         {
             // Leave time for hands to rise up before the head is visible
@@ -93,6 +97,14 @@ public class BossController : MonoBehaviour
             {
                 ui.BossEntrance(health, "THE FINAL BOSS");
                 stun = 0;
+            }
+            if (i == 175)
+            {
+                transform.Find("Hitbox1").gameObject.SetActive(true);
+            }
+            if (i == 325)
+            {
+                transform.Find("Hitbox2").gameObject.SetActive(true);
             }
             yield return new WaitForFixedUpdate();
         }
@@ -147,11 +159,11 @@ public class BossController : MonoBehaviour
             float chance = Random.Range(0.0f, 1.0f);
             bool attacked = false;
 
-            // TODO: Somehow this code allowed the hands to turn into a clap, but then a second later go into the fire breath routine
-                // TODO: It feels like "turned" and "justTurned" should prevent that, but they did not
             if (turned)
             {
-                if (chance < 0.25f && !justTurned)
+                // Turn chance decreases over time so more claps the less health he has
+                float turnChance = 0.4f - (((750 - health) / 750.0f) * 0.15f);
+                if (chance < turnChance && !justTurned)
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -161,17 +173,28 @@ public class BossController : MonoBehaviour
                         justTurned = true;
                     }
                 }
-                else
+                else if (leftHand.CanTurn() && rightHand.CanTurn())
                 {
                     rightHand.PrimeAttack();
                     leftHand.PrimeAttack();
-                    justTurned = false;
+                    // If both hands weren't ready to attack must try again next frame continuously until both can act as one
+                    if (!rightHand.AttackPrimed() || !leftHand.AttackPrimed())
+                    {
+                        timer = 0;
+                        rightHand.RescindAttack();
+                        leftHand.RescindAttack();
+                    }
+                    else
+                    {
+                        justTurned = false;
+                    }
                 }
             }
             // In centre
             else if (bias == 1 && !turned)
             {
-                if (chance < 0.4f || justTurned)
+                // 50/50 shot he will fire breath out of clap, 40% otherwise
+                if (chance < 0.4f || (justTurned && chance > 0.5f))
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -179,16 +202,18 @@ public class BossController : MonoBehaviour
                         leftHand.FireAttack();
                         StartCoroutine(CrouchRoutine());
                         justTurned = false;
+                        handSlams = 0;
                     }
                 }
                 else
                 {
-                    if (leftHand.CanTurn() && rightHand.CanTurn())
+                    if (!justTurned && leftHand.CanTurn() && rightHand.CanTurn())
                     {
                         rightHand.Turn();
                         leftHand.Turn();
                         turned = true;
                         justTurned = true;
+                        handSlams = 0;
                     }
                 }
             }
@@ -203,6 +228,7 @@ public class BossController : MonoBehaviour
                         StartCoroutine(CrouchRoutine());
                         attacked = true;
                         justTurned = false;
+                        handSlams = 0;
                     }
                 }
                 else if (chance > 0.7f && !justTurned)
@@ -214,6 +240,7 @@ public class BossController : MonoBehaviour
                         turned = true;
                         attacked = true;
                         justTurned = true;
+                        handSlams = 0;
                     }
                 }
 
@@ -221,6 +248,10 @@ public class BossController : MonoBehaviour
                 if (!attacked)
                 {
                     float handed = Random.Range(0.0f, 1.0f);
+                    // In opposite terms, the chance to not attack increases as number of continuous hand slams increases
+                    // Basically to make it so when cooldown is so quick that there is a higher chance to break out of endless pattern where
+                    // one hand is slamming and the other primes before it recovers so both are not available to turn/fire breath
+                    float otherHandChance = 0.5f + ((handSlams/3) * 0.1f);
                     if (handed > 0.8f && leftHand.CanTurn() && rightHand.CanTurn())
                     {
                         rightHand.PrimeAttack();
@@ -230,17 +261,25 @@ public class BossController : MonoBehaviour
                     {
                         rightHand.PrimeAttack();
                         // If attmepted attack failed, try the other with random chance
-                        if (!rightHand.AttackPrimed() && handed > 0.5f)
+                        if (!rightHand.AttackPrimed() && handed > otherHandChance)
                         {
                             leftHand.PrimeAttack();
+                        }
+                        else if (rightHand.AttackPrimed())
+                        {
+                            handSlams++;
                         }
                     }
                     else if (bias == 0 || (handed < 0.2f && bias == 2))
                     {
                         leftHand.PrimeAttack();
-                        if (!leftHand.AttackPrimed() && handed > 0.5f)
+                        if (!leftHand.AttackPrimed() && handed > otherHandChance)
                         {
                             rightHand.PrimeAttack();
+                        }
+                        else if (leftHand.AttackPrimed())
+                        {
+                            handSlams++;
                         }
                     }
                     justTurned = false;
@@ -413,6 +452,7 @@ public class BossController : MonoBehaviour
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             int damage = packet.getDamage();
+            int prevHealth = health;
             health -= damage;
             if (health <= 0)
             {
@@ -424,6 +464,43 @@ public class BossController : MonoBehaviour
             {
                 StartCoroutine(BlinkRoutine());
                 ui.BossHealthBar(health);
+
+                // Reduce cooldown on hands as health decreases
+                if (prevHealth > 600 && health <= 600)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 450 && health <= 450)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 300 && health <= 300)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 150 && health <= 150)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 100 && health <= 100)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 50 && health <= 50)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
+                else if (prevHealth > 25 && health <= 25)
+                {
+                    leftHand.ReduceCooldown();
+                    rightHand.ReduceCooldown();
+                }
             }
         }
     }

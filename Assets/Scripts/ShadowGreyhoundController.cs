@@ -91,7 +91,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         specialChangePushed = false;
         stun = 0;
         inPos = false;
-        health = 70;
+        health = 5;// 70;
         doAnimation = false;
 
 
@@ -564,7 +564,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
 
         // Punch player if they get too close
-        if (cooldown == 0 && Mathf.Abs(playerPos.x - transform.position.x) < 2.45f && !player.StopChasing())
+        if (health > 0 && cooldown == 0 && Mathf.Abs(playerPos.x - transform.position.x) < 2.45f && !player.StopChasing())
         {
             cooldown = 25;
             animator.SetTrigger("Punch");
@@ -724,6 +724,7 @@ public class ShadowGreyhoundController : MonoBehaviour
 
     private IEnumerator EndRoutine()
     {
+        animator.ResetTrigger("Punch");
         animator.SetTrigger("Idle");
         state = 0;
         ui.StartManualCutscene();
@@ -760,6 +761,7 @@ public class ShadowGreyhoundController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        ui.StartManualCutscene();
 
         for (int i = 0; i < 15; i++)
         {
@@ -777,6 +779,7 @@ public class ShadowGreyhoundController : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        ui.EndManualCutscene();
         Instantiate(mitchell, new Vector3(transform.position.x, 12.0f, -1.017f), transform.rotation);
 
         Destroy(gameObject);
@@ -883,7 +886,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
 
         //Attack code
-        if (cooldown == 0 && stun == 0 && !punchPushed && Input.GetAxis("Fire1") > 0)
+        if (health > 0 && cooldown == 0 && stun == 0 && !punchPushed && Input.GetAxis("Fire1") > 0)
         {
             cooldown = 14;
             animator.SetTrigger("Punch");

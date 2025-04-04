@@ -36,6 +36,7 @@ public class BossHandController : MonoBehaviour
     private int cooldown;
     private float midpoint;
     private float edgepoint;
+    private int cooldownModifier;
 
     private const float MAX_SPEED = 0.2f;
     private const float SPACING = 0.7f;
@@ -64,6 +65,7 @@ public class BossHandController : MonoBehaviour
         attackReady = false;
         primeAttack = false;
         cooldown = 0;
+        cooldownModifier = 15;
         idle = true;
         stun = 0;
         dead = false;
@@ -235,10 +237,21 @@ public class BossHandController : MonoBehaviour
 
     public void PrimeAttack()
     {
+        // For the slams it is fine to prime attack and wait to be ready
         if (state && cooldown == 0)
         {
             this.primeAttack = true;
         }
+        // For claps both hands need to act as one so can only go if both hands are ready
+        if (this.primeAttack && turned && !attackReady)
+        {
+            this.primeAttack = false;
+        }
+    }
+
+    public void RescindAttack()
+    {
+        this.primeAttack = false;
     }
 
     public bool AttackPrimed()
@@ -433,7 +446,7 @@ public class BossHandController : MonoBehaviour
         }
         Dangle();
         state = true;
-        cooldown = 200;
+        cooldown = 150;
     }
 
     private IEnumerator SlamRoutine()
@@ -494,7 +507,7 @@ public class BossHandController : MonoBehaviour
         }
         Dangle();
         state = true;
-        cooldown = 200;
+        cooldown = 120;
     }
 
     private IEnumerator FireRoutine()
@@ -554,7 +567,7 @@ public class BossHandController : MonoBehaviour
         }
         Dangle();
         state = true;
-        cooldown = 300;
+        cooldown = 150;
     }
 
     public void HorizontalHitbox()
@@ -852,5 +865,10 @@ public class BossHandController : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    public void ReduceCooldown()
+    {
+        this.cooldownModifier -= 5;
     }
 }

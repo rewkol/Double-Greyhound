@@ -106,6 +106,7 @@ public class PuppetBossController : MonoBehaviour, IPuppet
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("PChiefForward"))
                 {
                     animator.SetTrigger("Forward");
+
                 }
             }
             else

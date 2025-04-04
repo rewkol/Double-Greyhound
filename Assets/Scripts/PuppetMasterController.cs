@@ -314,7 +314,17 @@ public class PuppetMasterController : MonoBehaviour
                     }
                     ExitMusic(this.special);
                     this.special = specialFuture;
-                    bosses[this.special].Enter();
+                    while (this.special == specialFuture && !bosses[this.special].Enter())
+                    {
+                        // Need to wait incase player switched real fast and Viking hasn't exited yet
+                        yield return new WaitForFixedUpdate();
+                    }
+
+                    // if the above loop broke (should be impossible) and a new boss wants to enter, break out of this and let them
+                    if (this.special != specialFuture)
+                    {
+                        yield break;
+                    }
                     EnterMusic(this.special);
 
                     while (this.allies.Count < MAX_PUPPETS)
