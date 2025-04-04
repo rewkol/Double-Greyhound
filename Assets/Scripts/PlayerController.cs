@@ -113,6 +113,9 @@ public class PlayerController : MonoBehaviour
         if (!ui.GameActive())
         {
             animator.SetTrigger("Idle");
+            // This is to prevent punching after dialogue ends
+            cooldown = 1;
+            punchPushed = true;
             return;
         }
 
@@ -400,12 +403,6 @@ public class PlayerController : MonoBehaviour
                 ui.PlayerHealthBar(health);
                 sfxController.PlaySFX2D("General/Death", 1.0f, 1, 0.0f, false);
             }
-            else if (health > 20)
-            {
-                StartCoroutine(HealthBlinkRoutine());
-                stun = 10;
-                health = 20;
-            }
             else
             {
                 // Allow 0 damage to cause stun too so that you can scare players
@@ -436,6 +433,10 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(HealthBlinkRoutine());
                     stun = 10;
+                    if (health > 20)
+                    {
+                        health = 20;
+                    }
                 }
                 ui.PlayerHealthBar(health);
             }

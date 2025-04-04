@@ -255,8 +255,11 @@ public class UIController : MonoBehaviour
     void FixedUpdate()
     {
         this.collisionTransparency = false;
-        // I don't know why this code was here or what it was doing, but whatever it was solving seems to not matter at all (And leaving it in causes log errors on the menu)
-        //transform.position = camera.transform.position + new Vector3(-5.77f, 3.9f, 110.0f);
+        // This logic moves the collision detector for making the UI transparent when objects pass underneath, but it is only valid on actual game levels
+        if (transform != null && camera != null)
+        {
+            transform.position = camera.transform.position + new Vector3(-5.77f, 3.9f, 110.0f);
+        }
 
         //I want this in fixed update to guarantee the cursor can't spin too fast when selecting letters
         if (UIMode == 3)
