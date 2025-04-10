@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 291999172359259191, guid: 74aab2e4af27f8a41a3e92b8646ff385, type: 3}
       propertyPath: m_Name
-      value: MaleVikingNoThrow
+      value: MaleVikingNoThrow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 692896692075294611, guid: 74aab2e4af27f8a41a3e92b8646ff385, type: 3}
       propertyPath: m_RootOrder

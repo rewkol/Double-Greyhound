@@ -91,7 +91,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         specialChangePushed = false;
         stun = 0;
         inPos = false;
-        health = 5;// 70;
+        health = 70;
         doAnimation = false;
 
 
@@ -657,8 +657,9 @@ public class ShadowGreyhoundController : MonoBehaviour
             int damage = packet.getDamage();
 
             health -= damage;
-            if (health <= 0)
+            if (health <= 0 && !player.IsDead())
             {
+                //Start death sequence
                 ui.UpdateScore(15000L);
                 StartCoroutine(EndRoutine());
             }

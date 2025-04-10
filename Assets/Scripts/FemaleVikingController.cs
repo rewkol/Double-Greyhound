@@ -28,6 +28,9 @@ public class FemaleVikingController : MonoBehaviour
     private PlayerController player;
     private bool nextAttackSwing;
 
+    private float limitXLeft;
+    private float limitXRight;
+
     //Constants
     private float SPACE_SWING_X = 2.0f;
     private float SPACE_THROW_X = 3.7f;
@@ -61,6 +64,9 @@ public class FemaleVikingController : MonoBehaviour
             nextAttackSwing = true;
             spacingX = SPACE_SWING_X;
         }
+
+        limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x - 2.0f;
+        limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x + 2.0f;
 
         sfxController = GameObject.FindObjectOfType<SFXController>();
     }
@@ -234,7 +240,7 @@ public class FemaleVikingController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (stun == 0)
+        if (stun == 0 && transform.position.x > limitXLeft && transform.position.x < limitXRight)
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             facingLeft = packet.getDirection();

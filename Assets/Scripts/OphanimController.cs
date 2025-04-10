@@ -17,6 +17,9 @@ public class OphanimController : MonoBehaviour
     private int chaseTimer;
     private int state;
 
+    private float limitXLeft;
+    private float limitXRight;
+
     private float speed;
 
     private SFXController sfxController;
@@ -38,6 +41,9 @@ public class OphanimController : MonoBehaviour
         // States: 0 initial wait, 1 fly toward, 2 encircle, 3 fly away
         state = 0;
         speed = 0.19f;
+
+        limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x - 2.0f;
+        limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x + 2.0f;
 
         sfxController = GameObject.FindObjectOfType<SFXController>();
 
@@ -187,7 +193,7 @@ public class OphanimController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (state < 3)
+        if (state < 3 && transform.position.x > limitXLeft - 2.0f && transform.position.x < limitXRight + 2.0f)
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             chaseTimer = 0;

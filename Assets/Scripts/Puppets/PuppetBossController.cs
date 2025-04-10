@@ -181,7 +181,7 @@ public class PuppetBossController : MonoBehaviour, IPuppet
     {
         if (state >= 1)
         {
-            sfxController.PlaySFX2D("HVHS/Stomp", 0.4f, 190, 0.0f, true);
+            sfxController.PlaySFX2D("HVHS/Stomp", 0.3f, 190, 0.0f, true);
         }
     }
 
