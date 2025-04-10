@@ -20,6 +20,9 @@ public class CherubimController : MonoBehaviour
     private int primedTurns;
     private float speed;
 
+    private float limitXLeft;
+    private float limitXRight;
+
     private const float SPACING_X = 7.2f;
     private const float SPACING_Y = 3.7f;
 
@@ -45,6 +48,9 @@ public class CherubimController : MonoBehaviour
         primedTurns = Random.Range(0, 3);
         currentHead = 0;
         speed = 0.06f;
+
+        limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x - 2.0f;
+        limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x + 2.0f;
 
         sfxController = GameObject.FindObjectOfType<SFXController>();
 
@@ -162,7 +168,7 @@ public class CherubimController : MonoBehaviour
     // Hurt routine attacks immediately equals 0 and run away!
     public void Hurt(DamagePacket packet)
     {
-        if (attacks > 0)
+        if (attacks > 0 && transform.position.x > limitXLeft - 2.0f && transform.position.x < limitXRight + 2.0f)
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             attacks = 0;

@@ -533,7 +533,7 @@ public class SeabeeController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (stun == 0 && swarmStun == 0)
+        if (stun == 0 && swarmStun == 0 && transform.position.x > limitXLeft - 2.0f && transform.position.x < limitXRight + 2.0f)
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             if (freeWill)

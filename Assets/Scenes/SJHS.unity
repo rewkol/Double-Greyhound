@@ -587,7 +587,7 @@ MonoBehaviour:
   levelThemeVolume: 1
   greyhoundThemeVolume: 0.8
   mitchellThemeVolume: 0.8
-  bossThemeVolume: 0.8
+  bossThemeVolume: 1
   chiefThemeVolume: 0.8
   queenThemeVolume: 0.8
   saintThemeVolume: 0.8

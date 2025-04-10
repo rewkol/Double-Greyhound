@@ -180,7 +180,7 @@ public class SupremeSaintController : MonoBehaviour
             animator.SetTrigger("Completed");
             StartCoroutine(BlinkRoutine());
         }
-        else
+        else if (!player.IsDead())
         {
             //Start death sequence
             sfxController.PlaySFX2D("STM/Death_Cherubim_Human_modified", 1.0f, 15, 0.0f, false);

@@ -22,6 +22,7 @@ public class ChiefController : MonoBehaviour
     private bool longDefeat;
     private PlayerController player;
     private UIController ui;
+    private bool isAttacking;
 
     private SFXController sfxController;
 
@@ -47,6 +48,8 @@ public class ChiefController : MonoBehaviour
         spawnTimer = 0;
         //Determines whether to play full death sequence or shortened death sequence
         longDefeat = true;
+        //Used to hopefully prevent attack SFX from stacking up
+        isAttacking = false;
 
         sfxController = GameObject.FindObjectOfType<SFXController>();
 
@@ -92,10 +95,10 @@ public class ChiefController : MonoBehaviour
                     actionChance = 0.01f;
                     chance = Random.Range(0.0f, 1.0f);
                     //If in attacking range, can attack
-                    if (chance < attackChance && dist < 5.0f)
+                    if (!isAttacking && chance < attackChance && dist < 5.0f)
                     {
                         StartCoroutine(AttackRoutine());
-                        cooldown = 65;
+                        cooldown = 66;
                         attackChance = 0.25f;
                     }
                     else
@@ -183,6 +186,7 @@ public class ChiefController : MonoBehaviour
 
     private IEnumerator AttackRoutine()
     {
+        isAttacking = true;
         animator.SetTrigger("Swing");
         for (int i = 0; i < 65; i++)
         {
@@ -208,11 +212,12 @@ public class ChiefController : MonoBehaviour
         }
         animator.SetTrigger("Pull");
         sfxController.PlaySFX2D("HVHS/Chief_Struggle", 1.0f, 15, 0.1f, false);
-        cooldown = 60;
-        for (int i = 0; i < 60; i++)
+        cooldown = 62;
+        for (int i = 0; i < 62; i++)
         {
             yield return new WaitForFixedUpdate();
         }
+        isAttacking = false;
     }
 
     private void LeftLegHitbox()
@@ -353,7 +358,7 @@ public class ChiefController : MonoBehaviour
         {
             if (i == 60)
             {
-                //TODO: Initiate Death dialogue
+                //Initiate Death dialogue
                 ui.UpdateScore(10000L);
                 ui.DisplayDialogue("ChiefHeadshot", "You're good.|I never expected you to best me.|Perhaps you have the strength|you need for the coming battle.");
                 while (!ui.GameActive())

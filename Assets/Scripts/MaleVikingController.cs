@@ -28,6 +28,9 @@ public class MaleVikingController : MonoBehaviour
     private PlayerController player;
     private bool nextAttackSwing;
 
+    private float limitXLeft;
+    private float limitXRight;
+
     //Constants
     private float SPACE_SWING_X = 1.8f;
     private float SPACE_THROW_X = 3.5f;
@@ -62,6 +65,16 @@ public class MaleVikingController : MonoBehaviour
             spacingX = SPACE_SWING_X;
         }
 
+        limitXLeft = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x - 2.0f;
+        limitXRight = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x + 2.0f;
+
+        // This prevents killing the enemies the Chief spawns when they are off-screen so if throwChance >= 1.0f limitXLeft becomes irrelevant
+        // I don't care if you use your halo to kill them lol
+        if (throwChance >= 1.0f)
+        {
+            limitXLeft = 0.0f;
+        }
+
         sfxController = GameObject.FindObjectOfType<SFXController>();
     }
 
@@ -72,12 +85,25 @@ public class MaleVikingController : MonoBehaviour
             animator.SetTrigger("Walk");
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("MaleVikingWalk"))
             {
-                transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
-                cooldown++;
-                if (cooldown < 1000)
+                if (throwChance < 1.0f)
                 {
-                    transform.position += new Vector3(speed, 0.0f, 0.0f);
-                    //Don't despawn because despawning moves the camera around
+                    transform.localScale = new Vector3(6.0f, transform.localScale.y, transform.localScale.z);
+                    cooldown++;
+                    if (cooldown < 1000)
+                    {
+                        transform.position += new Vector3(speed, 0.0f, 0.0f);
+                        //Don't despawn because despawning moves the camera around
+                    }
+                }
+                else
+                {
+                    transform.localScale = new Vector3(-6.0f, transform.localScale.y, transform.localScale.z);
+                    cooldown++;
+                    if (cooldown < 1000)
+                    {
+                        transform.position += new Vector3(-speed, 0.0f, 0.0f);
+                        //Don't despawn because despawning moves the camera around
+                    }
                 }
             }
             return;
@@ -234,7 +260,7 @@ public class MaleVikingController : MonoBehaviour
 
     public void Hurt(DamagePacket packet)
     {
-        if (stun == 0)
+        if (stun == 0 && transform.position.x > limitXLeft && transform.position.x < limitXRight)
         {
             sfxController.PlaySFX2D("General/Hit_LowPitch", 1.0f, 15, 0.15f, false);
             facingLeft = packet.getDirection();

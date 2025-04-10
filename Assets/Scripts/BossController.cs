@@ -33,6 +33,7 @@ public class BossController : MonoBehaviour
     private bool justTurned;
     private float midpoint;
     private int handSlams;
+    private float turnChanceModifier;
 
     private GameObject musicController;
     private SFXController sfxController;
@@ -67,6 +68,7 @@ public class BossController : MonoBehaviour
         turned = false;
         justTurned = false;
         handSlams = 0;
+        turnChanceModifier = 0.0f;
 
 
         midpoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, transform.position.z - Camera.main.transform.position.z)).x;
@@ -229,9 +231,11 @@ public class BossController : MonoBehaviour
                         attacked = true;
                         justTurned = false;
                         handSlams = 0;
+                        turnChanceModifier += 0.05f;
                     }
                 }
-                else if (chance > 0.7f && !justTurned)
+                // Needed to add the turnChanceModifier because he was just hitting this supposed 30% chance like 5 times in a row which should be < 0.1% but it kept happening
+                else if (chance > (0.7f + turnChanceModifier) && !justTurned)
                 {
                     if (leftHand.CanTurn() && rightHand.CanTurn())
                     {
@@ -241,6 +245,7 @@ public class BossController : MonoBehaviour
                         attacked = true;
                         justTurned = true;
                         handSlams = 0;
+                        turnChanceModifier += 0.05f;
                     }
                 }
 
@@ -282,7 +287,12 @@ public class BossController : MonoBehaviour
                             handSlams++;
                         }
                     }
-                    justTurned = false;
+
+                    if (rightHand.AttackPrimed() || leftHand.AttackPrimed())
+                    {
+                        justTurned = false;
+                        turnChanceModifier = 0.0f;
+                    }
                 }
             }
 
@@ -454,8 +464,9 @@ public class BossController : MonoBehaviour
             int damage = packet.getDamage();
             int prevHealth = health;
             health -= damage;
-            if (health <= 0)
+            if (health <= 0 && !player.IsDead())
             {
+                //Start death sequence
                 ui.UpdateScore(100000L);
                 stun = 99999999;
                 StartCoroutine(DeathRoutine());
