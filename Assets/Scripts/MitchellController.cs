@@ -251,7 +251,7 @@ public class MitchellController : MonoBehaviour
 
     private IEnumerator AxeRoutine()
     {
-        while (ui.GameActive())
+        while (ui.GameActive() && !player.StopChasing())
         {
             // Spawn axes like Bowser
             for (int i = 0; i < 100; i++)
@@ -281,7 +281,7 @@ public class MitchellController : MonoBehaviour
     private IEnumerator RingRoutine()
     {
         bool up = Random.value > 0.5f;
-        while (ui.GameActive())
+        while (ui.GameActive() && !player.StopChasing())
         {
             for (int i = 0; i < 40; i++)
             {

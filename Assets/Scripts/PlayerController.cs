@@ -110,6 +110,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Input.GetButton("Cancel"))
+        {
+            Application.Quit();
+        }
+
         if (!ui.GameActive())
         {
             animator.SetTrigger("Idle");

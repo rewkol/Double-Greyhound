@@ -162,6 +162,17 @@ public class FemaleVikingController : MonoBehaviour
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
+        // Cancel early if already in swing (for some reason rarely likes to move around in non-movement poses)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("FemaleVikingWalk") && !animator.GetCurrentAnimatorStateInfo(0).IsName("FemaleVikingIdle"))
+        {
+            return;
+        }
+
+        // Stop movement during their knockback animation
+        if (player.StopChasing())
+        {
+            movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
 
         if (movement != new Vector3(0.0f, 0.0f, 0.0f))
         {

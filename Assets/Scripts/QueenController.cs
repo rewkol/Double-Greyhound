@@ -277,7 +277,7 @@ public class QueenController : MonoBehaviour
 
                 float strikeZone = transform.position.x + (jumpDirection * (Mathf.Abs(0.15f * ((transform.position.y - player.GetPosition().y + PLAYER_HEIGHT_ADJUSTMENT) / 0.32f))));
                 // If player in strike zone, land
-                if (cooldown == 0 && !pointing && player.GetPosition().x > strikeZone - 0.15f && player.GetPosition().x < strikeZone + 0.15f)
+                if (cooldown == 0 && !pointing && player.GetPosition().x > strikeZone - 0.15f && player.GetPosition().x < strikeZone + 0.15f && !player.StopChasing())
                 {
                     StartCoroutine(LandRoutine());
                 }
@@ -313,7 +313,7 @@ public class QueenController : MonoBehaviour
                 }
 
                 //Timer only decreases when in position
-                if (targetY == transform.position.y && pointTimer > 0)
+                if (targetY == transform.position.y && pointTimer > 0 && !player.StopChasing())
                 {
                     pointTimer--;
                 }
@@ -329,7 +329,7 @@ public class QueenController : MonoBehaviour
                 transform.position = transform.position + (movement * speed);
             }
 
-            if (cooldown > 0)
+            if (cooldown > 0 && !player.StopChasing())
             {
                 cooldown--;
             }
@@ -434,6 +434,10 @@ public class QueenController : MonoBehaviour
         for (int i = 0; i < wait; i++)
         {
             yield return new WaitForFixedUpdate();
+        }
+        if (player.StopChasing())
+        {
+            yield break;
         }
         //Don't need to check this because it can't trigger any animations after done flying
         pointing = true;

@@ -86,7 +86,7 @@ public class SeabeeController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.IsDead() && health > 0 && cooldown == 0)
+        if (player.IsDead() && health > 0 && cooldown == 0 && freeWill)
         {
             if (!running)
             {
@@ -170,7 +170,10 @@ public class SeabeeController : MonoBehaviour
         //If in position choose new target or do attack
         if (freeWill && movement == new Vector3(0.0f, 0.0f, 0.0f))
         {
-            untilAttack--;
+            if (!player.StopChasing())
+            {
+                untilAttack--;
+            }
             if (untilAttack == 0 && !running)
             {
                 //Shoot then run

@@ -60,6 +60,11 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Cancel"))
+        {
+            Application.Quit();
+        }
+
         if (!buttonPressed)
         {
             if (state >= 2 && Input.GetAxis("Fire1") != 0)

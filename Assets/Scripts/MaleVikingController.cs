@@ -108,6 +108,7 @@ public class MaleVikingController : MonoBehaviour
             }
             return;
         }
+
         //Movement code
         float moveHorizontal = player.GetPosition().x - transform.position.x;
         float moveVertical = player.GetPosition().y - transform.position.y;
@@ -179,6 +180,18 @@ public class MaleVikingController : MonoBehaviour
         if (stun > 0)
         {
             stun--;
+            movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+
+        // Cancel early if already in swing (for some reason rarely likes to move around in non-movement poses)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MaleVikingWalk") && !animator.GetCurrentAnimatorStateInfo(0).IsName("MaleVikingIdle"))
+        {
+            return;
+        }
+
+        // Stop movement during their knockback animation
+        if (player.StopChasing())
+        {
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
 

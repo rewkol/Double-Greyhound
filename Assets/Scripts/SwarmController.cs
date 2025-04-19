@@ -152,7 +152,8 @@ public class SwarmController : MonoBehaviour
                 break;
             }
         }
-        return ready;
+        // Because they can only kill player during attack, this will hold the swarm indefinitely off screen
+        return ready && !player.IsDead() && !player.StopChasing();
     }
 
     private void PrepAttack()

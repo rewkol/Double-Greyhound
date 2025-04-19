@@ -543,6 +543,8 @@ public class ShadowGreyhoundController : MonoBehaviour
         if (player.StopChasing())
         {
             staleness = 0;
+            // Otherwise he will hit you when you get up if you are too close
+            cooldown = 10;
         }
 
         if (player.StopChasing() && !animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
@@ -551,7 +553,7 @@ public class ShadowGreyhoundController : MonoBehaviour
         }
 
         // If in position to attack do so
-        if (inPos && cooldown == 0 && specialCooldown == 0)
+        if (inPos && cooldown == 0 && specialCooldown == 0 && !player.StopChasing())
         {
             staleness++;
             if (staleness > Random.Range(7, 13))
