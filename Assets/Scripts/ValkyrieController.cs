@@ -162,6 +162,11 @@ public class ValkyrieController : MonoBehaviour
             moveVertical = limitYBottom - transform.position.y;
         }
 
+        if (player.StopChasing())
+        {
+            moveVertical = 0.0f;
+        }
+
         float moveZ = 0.01f * moveVertical;
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, moveZ);
@@ -181,9 +186,19 @@ public class ValkyrieController : MonoBehaviour
         {
             safety--;
         }
+        if (!chaseMode)
+        {
+            movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
 
         //Don't move while captain greyhound is downed
         if (player.StopChasing())
+        {
+            movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+
+        // Don't move while animating
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ValkyrieWalk") && !animator.GetCurrentAnimatorStateInfo(0).IsName("ValkyrieIdle"))
         {
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
@@ -252,7 +267,6 @@ public class ValkyrieController : MonoBehaviour
         if (chaseMode)
         {
             chaseMode = false;
-            stun = 40;
             animator.SetTrigger("Stun");
             StartCoroutine(StunRoutine());
             sfxController.PlaySFX2D("HVHS/Shield", 0.8f, 15, 0.15f, false);
@@ -300,28 +314,27 @@ public class ValkyrieController : MonoBehaviour
             if (limitXRight - transform.position.x < 1.0f || Random.Range(0.0f, 1.0f) < 0.4f)
             {
                 animator.SetTrigger("ShortSwing");
+                animator.ResetTrigger("LongSwing");
                 StartCoroutine(ShortSwingRoutine());
-                cooldown = 26;
             }
             else
             {
                 animator.SetTrigger("LongSwing");
+                animator.ResetTrigger("ShortSwing");
                 StartCoroutine(LongSwingRoutine());
-                cooldown = 60;
             }
         }
         else
         {
             animator.SetTrigger("Throw");
             StartCoroutine(ThrowRoutine());
-            cooldown = 50;
         }
     }
 
     //Pauses before swinging. Meant to attack at this one
     private IEnumerator LongSwingRoutine()
     {
-        for(int i = 0; i < 48; i++)
+        for(int i = 0; i < 50; i++)
         {   
             yield return new WaitForFixedUpdate();
         }
@@ -331,7 +344,7 @@ public class ValkyrieController : MonoBehaviour
     //Swings immediately out of stun. Meant to dodge this one
     private IEnumerator ShortSwingRoutine()
     {
-        for (int i = 0; i < 17; i++)
+        for (int i = 0; i < 20; i++)
         {
             yield return new WaitForFixedUpdate();
         }
@@ -340,7 +353,7 @@ public class ValkyrieController : MonoBehaviour
 
     private IEnumerator ThrowRoutine()
     {
-        for (int i = 0; i < 38; i++)
+        for (int i = 0; i < 40; i++)
         {
             yield return new WaitForFixedUpdate();
         }

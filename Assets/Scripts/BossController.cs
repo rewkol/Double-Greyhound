@@ -153,7 +153,7 @@ public class BossController : MonoBehaviour
         }
 
         timer--;
-        if (timer <= 0)
+        if (timer <= 0 && !player.StopChasing())
         {
             int correction = (int) (((750 - health) / 750.0f) * 5);
             timer = Random.Range(25 - correction, 50 - (correction * 4));

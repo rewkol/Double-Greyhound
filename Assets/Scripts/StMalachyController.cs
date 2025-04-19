@@ -82,7 +82,7 @@ public class StMalachyController : MonoBehaviour
         if (triggeredBattle && ui.GameActive())
         {
             // Count down if not animating
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("MalachyIdle"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("MalachyIdle") && !player.StopChasing())
             {
                 counter--;
             }

@@ -53,12 +53,10 @@ public class CreditsController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        // TODO: On fire1 press, chunk each part of the victory text
-
-        // TODO: Once text is done displaying, hide and load High Scores like the UI does with current score highlighted in list under name "CURRENT"
-
-        // TODO: After high score screen load HVHS scene again to replay game
+        if (Input.GetButton("Cancel"))
+        {
+            Application.Quit();
+        }
     }
 
     private IEnumerator CreditsScrollRoutine()

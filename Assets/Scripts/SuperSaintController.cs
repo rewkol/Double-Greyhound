@@ -167,6 +167,11 @@ public class SuperSaintController : MonoBehaviour
             movement = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
+        // Stop movement during their knockback animation
+        if (player.StopChasing())
+        {
+            movement = new Vector3(0.0f, 0.0f, 0.0f);
+        }
 
         if (movement != new Vector3(0.0f, 0.0f, 0.0f))
         {
